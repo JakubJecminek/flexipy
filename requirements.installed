@@ -1,0 +1,3 @@
+Sphinx==1.1.3
+pytest
+requests==0.14.2

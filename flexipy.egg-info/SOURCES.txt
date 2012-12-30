@@ -1,0 +1,9 @@
+setup.py
+flexipy/__init__.py
+flexipy/config.py
+flexipy/main.py
+flexipy.egg-info/PKG-INFO
+flexipy.egg-info/SOURCES.txt
+flexipy.egg-info/dependency_links.txt
+flexipy.egg-info/requires.txt
+flexipy.egg-info/top_level.txt

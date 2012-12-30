@@ -1,0 +1,8 @@
+# Documentation system
+Sphinx==1.1.3
+
+# Requestest - library for easy work with HTTP
+requests==0.14.2
+
+# Testing 
+pytest
