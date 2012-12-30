@@ -26,3 +26,5 @@ def __constraint_string_size(name,min,max):
 
 #checking if kod is ok
 kod_constraint_check = __constraint_string_size('kod',0,20)
+
+common_string_constraint_check = __constraint_string_size('',0,255)

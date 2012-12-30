@@ -13,3 +13,6 @@ url=host+'/c/'+firma+'/'
 username='winstrom'
 password='winstrom' 
 
+#tuple contains all evidences which are supported by flexipy
+evidence_list = ('faktura-vydana', 'banka', 'interni-doklad','pohledavka',
+	'adresar','cenik','interni-doklad')

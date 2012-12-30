@@ -4,5 +4,10 @@ Sphinx==1.1.3
 # Requestest - library for easy work with HTTP
 requests==0.14.2
 
+# Micromodels - A simple library for building model classes based on dictionaries of data.
+# Perfect for (amongst other things) wrapping Python objects around JSON data returned from web-based APIs.
+micromodels
+
 # Testing 
 pytest
+

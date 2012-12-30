@@ -5,3 +5,5 @@ This module implements the flexipy API.
 :license: BSD, see LICENSE for more details.
 """
 
+
+def create_invoice
