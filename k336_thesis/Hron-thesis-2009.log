@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2012.12.27)  28 DEC 2012 22:51
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2012.12.27)  1 JAN 2013 10:38
 entering extended mode
  %&-line parsing enabled.
 **Hron-thesis-2009.tex
@@ -498,7 +498,7 @@ Title: Developing an accounting component for a car-sharing support information
  system
 Supervisor: Ing. Martin Kom\IeC {\'a}rek
 ***************************************************
-<figures/LogoCVUT.pdf, id=107, 93.34875pt x 70.2625pt>
+<figures/LogoCVUT.pdf, id=111, 93.34875pt x 70.2625pt>
 File: figures/LogoCVUT.pdf Graphic file (type pdf)
 
 <use figures/LogoCVUT.pdf> [3
@@ -523,17 +523,17 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <8> on input line 4.
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <6> on input line 4.
-)
+ [11])
 \tf@toc=\write4
 \openout4 = `Hron-thesis-2009.toc'.
 
- [11] [12
-
-] (./Hron-thesis-2009.lof)
+ [12] (./Hron-thesis-2009.lof)
 \tf@lof=\write5
 \openout5 = `Hron-thesis-2009.lof'.
 
- [13] [14
+ [13
+
+] [14
 
 ]
 (./Hron-thesis-2009.lot)
@@ -544,10 +544,6 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 
 ]
 Chapter 1.
-
-Package natbib Warning: Citation `assembla' on page 1 undefined on input line 2
-97.
-
 [1
 
 ] [2]
@@ -561,86 +557,138 @@ LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10.95> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 314.
  [3
 
-] [4]
-Chapter 3.
-[5
+]
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <9> on input line 331.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <5> on input line 331.
 
-] [6
+
+Package natbib Warning: Citation `hombanking' on page 4 undefined on input line
+ 334.
+
+[4]
+
+Package natbib Warning: Citation `rfb' on page 5 undefined on input line 355.
+
+
+Package natbib Warning: Citation `rfb' on page 5 undefined on input line 365.
+
+[5] [6
 
 ]
-Chapter 4.
+Chapter 3.
 [7] [8
 
 ]
-Chapter 5.
+Chapter 4.
 [9] [10
 
 ]
-Chapter 6.
-(./Hron-thesis-2009.bbl [11] [12
+Chapter 5.
+[11] [12
 
 ]
-LaTeX Font Info:    Try loading font information for T1+cmtt on input line 35.
+Chapter 6.
+(./Hron-thesis-2009.bbl [13] [14
+
+]
+LaTeX Font Info:    Try loading font information for T1+cmtt on input line 12.
 
 (/usr/share/texmf-texlive/tex/latex/base/t1cmtt.fd
 File: t1cmtt.fd 1999/05/25 v2.5h Standard LaTeX font definitions
-) [13]) [14]
+)) [15] [16
+
+]
 Appendix A.
-[15
-
-] [16] [17] [18]
+[17] [18] [19] [20]
 Appendix B.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <9> on input line 445.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <5> on input line 445.
+
+Package natbib Warning: Citation `CSTUG' on page 21 undefined on input line 478
+.
+
+
+Package natbib Warning: Citation `latexdocweb' on page 21 undefined on input li
+ne 478.
+
+
+Package natbib Warning: Citation `latexwiki' on page 21 undefined on input line
+ 478.
+
 File: figures/LogoCVUT.pdf Graphic file (type pdf)
-<use figures/LogoCVUT.pdf> [19
+<use figures/LogoCVUT.pdf> [21
 
-] [20] [21] [22]
+]
 
-Package natbib Warning: Citation `wiki:orm' on page 23 undefined on input line 
-618.
+Package natbib Warning: Citation `ipe' on page 22 undefined on input line 510.
 
-[23] [24]
+[22] [23] [24]
+
+Package natbib Warning: Citation `kniha' on page 25 undefined on input line 657
+.
+
+
+Package natbib Warning: Citation `clanek' on page 25 undefined on input line 65
+7.
+
+
+Package natbib Warning: Citation `sbornik' on page 25 undefined on input line 6
+57.
+
+
+Package natbib Warning: Citation `www' on page 25 undefined on input line 657.
+
+
+Package natbib Warning: Citation `wiki:framework' on page 25 undefined on input
+ line 659.
+
+
+Package natbib Warning: Citation `wiki:orm' on page 25 undefined on input line 
+659.
+
+[25] [26]
 Appendix C.
-[25
+[27
 
-] [26
+] [28
 
 ]
 Appendix D.
-[27] [28
-
-]
-Appendix E.
 [29] [30
 
 ]
+Appendix E.
+[31] [32
+
+]
 Appendix F.
-<figures/seznamcd.pdf, id=398, 793.96625pt x 539.01375pt>
+
+Package natbib Warning: Citation `infodp' on page 33 undefined on input line 75
+2.
+
+<figures/seznamcd.pdf, id=400, 793.96625pt x 539.01375pt>
 File: figures/seznamcd.pdf Graphic file (type pdf)
 
-<use figures/seznamcd.pdf> [31 <./figures/seznamcd.pdf>] [32]
+<use figures/seznamcd.pdf> [33 <./figures/seznamcd.pdf>] [34]
 
 Package natbib Warning: There were undefined citations.
 
 (./Hron-thesis-2009.aux) ) 
 Here is how much of TeX's memory you used:
- 6758 strings out of 495027
- 89543 string characters out of 1181418
+ 6746 strings out of 495027
+ 89343 string characters out of 1181418
  164499 words of memory out of 3000000
- 9716 multiletter control sequences out of 15000+50000
+ 9707 multiletter control sequences out of 15000+50000
  21222 words of font info for 46 fonts, out of 3000000 for 9000
  42 hyphenation exceptions out of 8191
  38i,9n,36p,967b,480s stack positions out of 5000i,500n,10000p,200000b,50000s
  </home/kuba/.texmf-var/fonts/pk/ljfour/jknappen/ec/e
 ctt0900.600pk> </home/kuba/.texmf-var/fonts/pk/ljfour/jknappen/ec/ectt1000.600p
-k> </home/kuba/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm0900.600pk> </home/ku
-ba/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1200.600pk> </home/kuba/.texmf-va
-r/fonts/pk/ljfour/jknappen/ec/ecrm0800.600pk> </home/kuba/.texmf-var/fonts/pk/l
-jfour/jknappen/ec/ectt1095.600pk> </home/kuba/.texmf-var/fonts/pk/ljfour/jknapp
-en/ec/ecti1095.600pk> </home/kuba/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecsl10
+k> </home/kuba/.texmf-var/fonts/pk/ljfour/jknappen/ec/ectt1095.600pk> </home/ku
+ba/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecti1095.600pk> </home/kuba/.texmf-va
+r/fonts/pk/ljfour/jknappen/ec/ecrm0900.600pk> </home/kuba/.texmf-var/fonts/pk/l
+jfour/jknappen/ec/ecrm0800.600pk> </home/kuba/.texmf-var/fonts/pk/ljfour/jknapp
+en/ec/ecbx1200.600pk> </home/kuba/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecsl10
 95.600pk> </home/kuba/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1095.600pk> </
 home/kuba/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx2488.600pk> </home/kuba/.t
 exmf-var/fonts/pk/ljfour/jknappen/ec/ecrm0600.600pk> </home/kuba/.texmf-var/fon
@@ -652,9 +700,9 @@ are/texmf-texlive/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texmf-t
 exlive/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-texlive/fonts
 /type1/public/amsfonts/cm/cmr8.pfb></usr/share/texmf-texlive/fonts/type1/public
 /amsfonts/cm/cmsy10.pfb>
-Output written on Hron-thesis-2009.pdf (46 pages, 478571 bytes).
+Output written on Hron-thesis-2009.pdf (48 pages, 478447 bytes).
 PDF statistics:
- 1224 PDF objects out of 1440 (max. 8388607)
- 103 named destinations out of 1000 (max. 500000)
- 219 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1218 PDF objects out of 1440 (max. 8388607)
+ 100 named destinations out of 1000 (max. 500000)
+ 227 words of extra memory for PDF output out of 10000 (max. 10000000)
 

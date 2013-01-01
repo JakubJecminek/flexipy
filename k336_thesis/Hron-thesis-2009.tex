@@ -309,7 +309,7 @@ aprocha would probably fail for a larger group of users. Therefore it was decide
 has to be improved.
 \section{Goal specification}
 Design and implement application that provides connection of system Metrocar[1] to accounting software Flexibee[2]. Systems Metrocar and Flexibee will use this application for communication and exchange of data. This application will use REST API, which is provided by Flexibee[3]
-Goal specification is as follows:
+Official goal specification is as follows:
 \begin{itemize}
 \item Identify requirements for the application.
 \item Create UML models of proposed application.
@@ -318,12 +318,53 @@ Goal specification is as follows:
 \item Create documentation for the application.
 \end{itemize}
 
+Before we decided to use for our project Flexibee as an accounting system, I was doing as a par of the subject 
+A7B16PRO a research about possibilities how to connect system Metrocar to hombanking solution and accounting system.
+As a result of this research, it was decided that we will use Flexibee. I've decided to attach the otuput oh my research about hombanking systems and accounting systems on Czech market to this report, because it served as a foundation for a decision to 
+choose Flexibee. 
 
+\subsection{Online banking}
+Originally was system Metrocar without any kind of connection to company's bank account. Therefore, manager of company would 
+have to manually check incoming payments and then change the status of appropriate invoice. This is very bad solution and it 
+would be very time consuming for manager. The team that was working on the project in the year 2010 started to work on the solution, that would require create python script that would manually parse the informations about payment from email or sms that woudl be sent from bank\cite{reserse2010}. As a part of my research I found only this article about there ideas for this solution, but I wasn't capable to found any source code. Therefore I suppose they didn't impement this idea. 
+
+At first I thought that this solution would be great for system Metrocar. I also found out that owner of the Roští.cz\footnote{company that is providing hosting for project Metrocar(autonapul.cz)} Adam Štrauch created Python project that provides similar solution. His script is capable to log in to online banking system of mBank company and from there parse and download informations about incoming payments. His project is released under BSD license and is publicly available on github\cite{python-mbank}. This solution is not optimal for out project, because as even author has stated, if mBank change some part of their 
+online banking system, the script will simply stop to work. This is also not exactly recomended aproach to obtain this kind of 
+informations. Typically every bank istituion have their own system, which allowes clients to download certain informations about payments, account status etc. These systems are called hombanking systems. There are several standard formats which 
+these systems usually use. The complete list can be found here\cite{hombanking}. From my experience in these days the most used ones are Gemini, MultiCash and ABO. The basic functionality of these systems is usually same, therefore I will further describe only what Gemini in version 5.0 provides, other format support this too. 
+Banking operations:
 \begin{itemize}
-\item Popis řešeného problému, vymezení cílů DP/BP a požadavků na implementovaný systém.
-\item Popis struktury DP/BP ve vztahu k vytyčeným cílům.
-\item Rešeršní zpracování existujících implementací, pokud jsou známy.
+ \item Domestic payments and direct debit orders.
+ \item International payments.
+ \item Domestic and international payments with future value date.
+ \item Urgent payments.
+ \item Permanent payment orders with automatic creation of a pre-set payment calendar.
+ \item Time deposits.
 \end{itemize}
+
+Security features:
+\begin{itemize}
+	\item Password for electronic signature.
+	\item Individual user passwords and access rights.
+	\item Authorization before sending payment orders to the bank.
+	\item Private and public RSA key.
+	\item Electronic signatures are automaticly checked by bank institution.
+\end{itemize}
+
+Gemini has other usefull features but not all of them are supported by every hombanking system. 
+The most resourcefull documentation about Gemini has Raiffeisen Bank\cite{rfb} from which I learned about this format.
+Therefore these other special features might be implemented only in Raiffeisen Bank homebanking system. 
+
+Other features of Gemini:
+\begin{itemize}
+	\item Export/import of payment orders to/from accounting system.
+	\item Template of payment orders.
+	\item Automatic communication with bank.
+	\item Current exchange rates Raiffeisenbank Inc. and ČNB.
+\end{itemize}
+There are also other featuers, for complete list visit\cite{rfb}. When I joined the Metrocar team as a part of the A7B16PRO
+subject, it was not yet decided which bank company will be used for Metrocar company's bank account. Therefore it was decided 
+that my next assigment will be to select suitable accounting system for system Metrocar, which will already support communication and infromation exchange with homebanking system and that this communication will be using Gemini format and other fotmat too if possible. 
 
 %*****************************************************************************
 \chapter{Analýza a návrh řešení}

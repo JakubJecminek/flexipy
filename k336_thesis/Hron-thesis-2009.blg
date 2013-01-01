@@ -2,61 +2,65 @@ This is BibTeX, Version 0.99c (TeX Live 2009/Debian)
 The top-level auxiliary file: Hron-thesis-2009.aux
 The style file: csplainnat.bst
 Database file #1: reference.bib
+Warning--I didn't find a database entry for "hombanking"
+Warning--I didn't find a database entry for "CSTUG"
+Warning--I didn't find a database entry for "latexdocweb"
+Warning--I didn't find a database entry for "latexwiki"
+Warning--I didn't find a database entry for "ipe"
+Warning--I didn't find a database entry for "kniha"
+Warning--I didn't find a database entry for "clanek"
+Warning--I didn't find a database entry for "sbornik"
+Warning--I didn't find a database entry for "www"
+Warning--I didn't find a database entry for "wiki:framework"
 Warning--I didn't find a database entry for "wiki:orm"
+Warning--I didn't find a database entry for "infodp"
+Warning--empty year in assembla
 `address' is a missing field, not a string, for entry Nebes09
 while executing---line 1484 of file csplainnat.bst
 `address' is a missing field, not a string, for entry Varech10
 while executing---line 1484 of file csplainnat.bst
 Warning--empty year in brno
-Warning--empty year in CSTUG
-Warning--empty year in infodp
-Warning--empty year in www
-Warning--empty year in ipe
-Warning--empty year in latexdocweb
-Warning--empty year in latexwiki
 `address' is a missing field, not a string, for entry WagneJan
 while executing---line 1484 of file csplainnat.bst
-`address' is a missing field, not a string, for entry kniha
-while executing---line 1484 of file csplainnat.bst
-You've used 15 entries,
+You've used 8 entries,
             2899 wiz_defined-function locations,
-            696 strings with 6774 characters,
-and the built_in function-call counts, 4624 in all, are:
-= -- 444
-> -- 128
-< -- 7
-+ -- 51
-- -- 36
-* -- 279
-:= -- 654
-add.period$ -- 52
-call.type$ -- 15
-change.case$ -- 47
-chr.to.int$ -- 15
-cite$ -- 37
-duplicate$ -- 266
-empty$ -- 495
-format.name$ -- 56
-if$ -- 1042
+            670 strings with 5934 characters,
+and the built_in function-call counts, 2289 in all, are:
+= -- 225
+> -- 66
+< -- 6
++ -- 26
+- -- 18
+* -- 132
+:= -- 367
+add.period$ -- 29
+call.type$ -- 8
+change.case$ -- 22
+chr.to.int$ -- 8
+cite$ -- 18
+duplicate$ -- 133
+empty$ -- 216
+format.name$ -- 30
+if$ -- 494
 int.to.chr$ -- 1
 int.to.str$ -- 1
-missing$ -- 16
-newline$ -- 84
-num.names$ -- 40
-pop$ -- 170
+missing$ -- 15
+newline$ -- 47
+num.names$ -- 30
+pop$ -- 70
 preamble$ -- 1
-purify$ -- 34
+purify$ -- 16
 quote$ -- 0
-skip$ -- 181
+skip$ -- 91
 stack$ -- 0
-substring$ -- 79
-swap$ -- 23
-text.length$ -- 1
+substring$ -- 16
+swap$ -- 8
+text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 145
-warning$ -- 7
-while$ -- 29
+type$ -- 73
+warning$ -- 2
+while$ -- 18
 width$ -- 0
-write$ -- 188
-(There were 4 error messages)
+write$ -- 102
+(There were 3 error messages)
