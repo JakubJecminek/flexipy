@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 #this is configuration module for global settings
 #here you have to set certain variables
 #this is canonical way to share information across modules within a single program

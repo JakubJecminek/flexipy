@@ -1,4 +1,4 @@
-\begin{thebibliography}{8}
+\begin{thebibliography}{12}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -15,6 +15,11 @@
 Assembla.
 \newblock \\ \verb|https://www.assembla.com/spaces/wagnejan_metrocar/wiki|.
 
+\bibitem[Flexibee()]{flexibee}
+Flexibee.
+\newblock Flexibee accounting system.
+\newblock \\ \verb|http://www.flexibee.eu/|.
+
 \bibitem[{Metrocar team 2010}(2010)]{reserse2010}
 {Metrocar team 2010}.
 \newblock \emph{eBanking a SMS} [online]. 2010. [cit.~26.\,12.\,2012].
@@ -26,6 +31,23 @@ NEBESKý, O.
 \newblock \emph{Bakalářská práce: Rezervační systém carsharingové
   společnosti.}
 \newblock KP FEL ČVUT, 2009.
+
+\bibitem[Pohoda({\natexlab{a}})]{pohoda}
+Pohoda.
+\newblock Accounting system Pohoda, {\natexlab{a}}.
+\newblock \\ \verb|http://www.ucto-pohoda.cz/|.
+
+\bibitem[Pohoda({\natexlab{b}})]{xmlPohoda}
+Pohoda.
+\newblock XML communication with accounting system Pohoda, {\natexlab{b}}.
+\newblock \\ \verb|http://www.stormware.cz/xml/|.
+
+\bibitem[{Raiffeisen Bank}(2012)]{rfb}
+{Raiffeisen Bank}.
+\newblock \emph{Gemini 5.0} [online]. 2012. [cit.~23.\,12.\,2012].
+\newblock Dostupn{\'{e}} z:
+  \url{http://www.rb.cz/firemni-finance/velke-podniky/platebni-styk-a-cash-man%
+agement/elektronicke-bankovnictvi/gemini-5-0/}.
 
 \bibitem[Vařecha(2010)]{Varech10}
 VAřECHA, F.

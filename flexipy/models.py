@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 """
 In this file are definitions of models which are used by Flexibee. This module is 
 using great library micromodels which makes extremely easy to work with json and serialize
@@ -72,9 +74,9 @@ class Faktura(micromodels.Model):
 	konSym = micromodels.CharField()
 	#dulezita relace, nutne uvest pro idealni vypleni ost. polozek
 	firma = micromodels.CharField()
-	stat
-	faStat
-	mistUrc
+	stat = micromodels.CharField()
+	faStat = micromodels.CharField()
+	mistUrc = micromodels.CharField()
 	#ucet odberatele
 	banSpojDod = micromodels.CharField()
 	bankovniUcet = micromodels.CharField()
@@ -111,8 +113,8 @@ class Faktura(micromodels.Model):
 	#stav mailu mozne hodnoty v stavMailVal
 	stavMailK = micromodels.CharField()
 	#muze byt nekolik polozek faktury
-	polozkyFaktury = micromodels.ModelCollectionField(PolozkaFaktury)
+	#polozkyFaktury = micromodels.ModelCollectionField(PolozkaFaktury)
 
 
 class PolozkaFaktury(micromodels.Model):
-	
+	pass

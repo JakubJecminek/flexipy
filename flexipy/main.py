@@ -1,9 +1,11 @@
+# -*- coding: utf-8 -*-
+
 import requests
 import json
 import config
 import re
 
-
+from .models import Faktura
 
 
 def __send_request(method, endUrl, payload=''):
@@ -22,6 +24,14 @@ def __send_request(method, endUrl, payload=''):
 		print 'Timeout for request'	
 	else:
 		return r
+
+def __prepare_data(evidence, data):
+	'''This function will add importent parts to data that 
+	are required by Flexibee protocol and then returns them as JSON.
+	'''		
+	winstrom = {'winstrom':{evidence:[data]}}
+	return json.dumps(winstrom)
+
 
 def __get_all_records(evidence):
 	'''Construct and send request for list of all records in specific evidence.
@@ -78,8 +88,9 @@ def __create_evidence_item(evidence, data):
 	created for purpose of refactoring
 	Returns :tuple consisting of (success, result, error_message)
 	:param evidence: evidence for new item
-	:param data: data of created item
-	"""
+	:param data: JSON representation of data of created item
+	"""	
+	data = __prepare_data(evidence, data)
 	r = __send_request(method='put', endUrl=evidence+'.json', payload=data)
 	d = __process_response(r)
 	if d['winstrom']['success'] == 'true':
@@ -118,7 +129,9 @@ def create_issued_invoice(data):
 	result = id of invoice in FLexibee or None if success = False
 	error_message = List of error messages if success=False else error_message=None
 	"""	
-	return __create_evidence_item('faktura-vydana',data)
+	faktura = Faktura.from_dict(data)
+	d = faktura.to_dict()
+	return __create_evidence_item('faktura-vydana',d)
 	
 
 def create_received_invoice(data):
@@ -128,7 +141,9 @@ def create_received_invoice(data):
 	result = id of invoice in FLexibee or None if success = False
 	error_message = Error message if success=False else error_message=None
 	"""	
-	return __create_evidence_item('faktura-vydana',data)	
+	faktura = Faktura.from_dict(data)
+	d = faktura.to_dict()	
+	return __create_evidence_item('faktura-vydana',d)
 
 def delete_issued_invoice(id):
 	"""Delete issued invoice specifeid by id.
