@@ -7,6 +7,9 @@ import re
 
 from .models import Faktura
 
+class FlexipyException(Exception):
+	pass
+
 
 def __send_request(method, endUrl, payload=''):
 	"""Top level function for sending requests. It takes configuration from config and creates
@@ -17,11 +20,17 @@ def __send_request(method, endUrl, payload=''):
 	:param payload: Data in request
 	"""
 	try:
-		r = requests.request(method=method, url=config.url+endUrl, data=payload, auth=(config.username,config.password))		
+		r = requests.request(method=method, url=config.url+endUrl, data=payload, auth=(config.username,config.password))	
+		if r.status_code = 401:
+			raise FlexipyException("You're not authorized for this operation, you must be authenticated.")
+		elif r.status_code = 402:
+			raise FlexipyException("Payment required, the REST API is not active.")
+		elif r.status_code = 403:
+			raise FlexipyException("Forbidden operation. You're license probably do not allow this operation.")	
+		elif r.status_code = 500:
+			raise FlexipyException("Server error, something went wrong in Flexibee. Please check the state of Flexibee server.")							
 	except requests.exceptions.ConnectionError:
-		print 'Problem with connection' 
-	except requests.exceptions.Timeout :
-		print 'Timeout for request'	
+		raise FlexipyException("Connection error")
 	else:
 		return r
 
@@ -44,33 +53,48 @@ def __get_all_records(evidence):
 	if evidence not in config.evidence_list:
 		raise ValueError('evidence arg is valid only for' +str(config.evidence_list))		
 	r = __send_request(method='get', endUrl=evidence+'.json')
-	dictionary = r.json
-	result = dictionary['winstrom'][evidence]
-	return result
+	return __process_response(r, evidence)
 
-def __prepare_error_messages(e):
-	
+def __prepare_error_messages(e):	
 	error_messages = []
 	for error in e:
 		error_messages.append(e['message'])
 	return error_messages	
 
-def __process_response(r):
+def __process_response(response, evidence=None):
 	"""After Flexibee created new evidence item it returns response with 
 	certain informations. This function process this response and returns it 
-	as dictionary.	And removes unnecessary parts
-	:param r: Response object returned from Flexibee
+	as dictionary.	And removes unnecessary parts. With parametr evidence it 
+	als serve for processing returned evidence item. If response contains only 
+	one item(one specific evidence item) than it returns clean dictionary
+	containing only information of that item. It response contains mote irems 
+	it will return list of evidence item.
+	:param response: Response object returned from Flexibee
 	"""
-	d = r.json
-	dictionary = d['winstrom']
-	return d
+	if evidence = None:
+		d = response.json
+		dictionary = d['winstrom']
+		return dictionary
+	else:
+		d = response.json
+		if len(d['winstrom'][evidence])	== 1:	
+			dictionary = d['winstrom'][evidence][0]	
+			return dictionary
+		else:
+			list_of_items = d['winstrom'][evidence]
+			return list_of_items	
 
 def __delete_item(id, evidence):
 	"""Delte item defined by id and evidence
 	:param id: identifies item to delete
 	:param evidence: identifies what type of item to delete
 	"""
-	__send_request(method='delete', endUrl=evidence+'/'+id+'.json')
+	r = __send_request(method='delete', endUrl=evidence+'/'+id+'.json')
+	if r.status_code not in (200,201):
+		if r.status_code = 404:
+			raise FlexipyException("The record with id="+id+" was not found")			
+		else:
+			raise FlexipyException("Uknown error")								
 
 def __get_evidence_item(id, evidence):
 	"""Get item from evidence and return it as dictionary.
@@ -79,7 +103,7 @@ def __get_evidence_item(id, evidence):
 	:param evidence: type of evidence	
 	"""		
 	r = __send_request(method='get', endUrl=evidence+'/'+id+'.json')
-	dictionary = __process_response(r)
+	dictionary = __process_response(r, evidence=evidence)
 	return dictionary
 
 
@@ -93,11 +117,11 @@ def __create_evidence_item(evidence, data):
 	data = __prepare_data(evidence, data)
 	r = __send_request(method='put', endUrl=evidence+'.json', payload=data)
 	d = __process_response(r)
-	if d['winstrom']['success'] == 'true':
-		invoice_id = int(d['winstrom']['results'][0]['id'])
+	if d['success'] == 'true':
+		invoice_id = int(d['results'][0]['id'])
 		return (True, invoice_id, None)
 	else:
-		e = d['winstrom']['results'][0]['errors']
+		e = d['results'][0]['errors']
 		error_mesages = __prepare_error_messages(e)
 		return (False, None, error_messages) 
 

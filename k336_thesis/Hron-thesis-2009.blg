@@ -3,17 +3,6 @@ The top-level auxiliary file: Hron-thesis-2009.aux
 The style file: csplainnat.bst
 Database file #1: reference.bib
 Warning--I didn't find a database entry for "hombanking"
-Warning--I didn't find a database entry for "CSTUG"
-Warning--I didn't find a database entry for "latexdocweb"
-Warning--I didn't find a database entry for "latexwiki"
-Warning--I didn't find a database entry for "ipe"
-Warning--I didn't find a database entry for "kniha"
-Warning--I didn't find a database entry for "clanek"
-Warning--I didn't find a database entry for "sbornik"
-Warning--I didn't find a database entry for "www"
-Warning--I didn't find a database entry for "wiki:framework"
-Warning--I didn't find a database entry for "wiki:orm"
-Warning--I didn't find a database entry for "infodp"
 Warning--empty year in assembla
 Warning--empty year in flexibee
 `address' is a missing field, not a string, for entry Nebes09
@@ -25,45 +14,45 @@ while executing---line 1484 of file csplainnat.bst
 Warning--empty year in brno
 `address' is a missing field, not a string, for entry WagneJan
 while executing---line 1484 of file csplainnat.bst
-You've used 12 entries,
+You've used 13 entries,
             2899 wiz_defined-function locations,
-            686 strings with 6330 characters,
-and the built_in function-call counts, 3303 in all, are:
-= -- 337
-> -- 77
-< -- 7
-+ -- 34
-- -- 21
-* -- 191
-:= -- 487
-add.period$ -- 43
-call.type$ -- 12
-change.case$ -- 31
+            677 strings with 6391 characters,
+and the built_in function-call counts, 3613 in all, are:
+= -- 375
+> -- 88
+< -- 8
++ -- 39
+- -- 24
+* -- 215
+:= -- 542
+add.period$ -- 48
+call.type$ -- 13
+change.case$ -- 34
 chr.to.int$ -- 11
-cite$ -- 29
-duplicate$ -- 190
-empty$ -- 336
-format.name$ -- 35
-if$ -- 738
-int.to.chr$ -- 2
+cite$ -- 31
+duplicate$ -- 205
+empty$ -- 354
+format.name$ -- 40
+if$ -- 803
+int.to.chr$ -- 3
 int.to.str$ -- 1
-missing$ -- 18
-newline$ -- 67
-num.names$ -- 35
-pop$ -- 113
+missing$ -- 21
+newline$ -- 72
+num.names$ -- 40
+pop$ -- 116
 preamble$ -- 1
-purify$ -- 24
+purify$ -- 26
 quote$ -- 0
-skip$ -- 132
+skip$ -- 140
 stack$ -- 0
-substring$ -- 24
-swap$ -- 14
+substring$ -- 26
+swap$ -- 17
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 117
+type$ -- 128
 warning$ -- 5
-while$ -- 21
+while$ -- 24
 width$ -- 0
-write$ -- 150
+write$ -- 163
 (There were 3 error messages)
