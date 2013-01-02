@@ -8,27 +8,31 @@ This module implements the flexipy API.
 """
 from . import main
 
-def create_issued_invoice(data):
+def create_issued_invoice(invoice, invoice_items):
 	"""This function creates new issued invoice in Flexibee. 
 	Returns :tuple consisting of (success, result, error_message)
 	where success = True/False
 	result = id of invoice in FLexibee or None if success = False
 	error_message = List of error messages if success=False else error_message=None
-	:param kwargs: dictionary that contains data for new invoice. The schema of invoice is 
-	in models.Faktura. 
+	:param invoice: dictionary that contains data for new invoice. The schema of invoice is 
+	in models.FakturaVydana. 
+	:param invoice_items: list of invoice items(every inv. item is dictionary). Schema of invoice item 
+	is in models.FakturaVydanaPolozka
 	"""	
-	return main.create_issued_invoice(data)
+	return main.create_issued_invoice(invoice, invoice_items)
 
-def create_received_invoice(data):
+def create_received_invoice(invoice, invoice_items):
 	"""This function creates new issued invoice in Flexibee. 
 	Returns :tuple consisting of (success, result, error_message)
 	where success = True/False
 	result = id of invoice in FLexibee or None if success = False
 	error_message = Error message if success=False else error_message=None
-	:param kwargs: dictionary that contains data for new invoice. The schema of invoice is 
-	in models.Faktura. 
+	:param invoice: dictionary that contains data for new invoice. The schema of invoice is 
+	in models.FakturaVydana. 
+	:param invoice_items: list of invoice items(every inv. item is dictionary). Schema of invoice item 
+	is in models.FakturaVydanaPolozka 
 	"""	
-	return main.create_received_invoice(data)
+	return main.create_received_invoice(invoice, invoice_items)
 
 def get_all_bank_items():
 	return main.get_all_bank_items()

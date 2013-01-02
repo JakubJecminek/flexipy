@@ -143,7 +143,8 @@ def __update_evidence_item(id, evidence, data):
 
 def get_all_bank_items():
 	d = __get_all_records('banka')
-	return d
+	list_of_items = __process_response(d)
+	return list_of_items
 
 def get_all_issued_invoices():
 	d = __get_all_records('faktura-vydana')
@@ -154,28 +155,38 @@ def get_all_received_invoices():
 	return d
 
 
-def create_issued_invoice(data):
+def create_issued_invoice(invoice, invoice_items):
 	"""This function creates new issued invoice in Flexibee. 
 	Returns :tuple consisting of (success, result, error_message)
 	where success = True/False
 	result = id of invoice in FLexibee or None if success = False
 	error_message = List of error messages if success=False else error_message=None
 	"""	
-	faktura = Faktura.from_dict(data)
+	faktura = FakturaVydana.from_dict(data)
+	inv_items = []
+	for it in invoice_items:
+		item = FakturaVydanaPolozka.from_dict(it)
+		inv_items.append(item.to_dict)
 	d = faktura.to_dict()
+	d['polozkyFaktury']= inv_items
 	return __create_evidence_item('faktura-vydana',d)
 	
 
-def create_received_invoice(data):
+def create_received_invoice(invoice, invoice_items):
 	"""This function creates new received invoice in Flexibee. 
 	Returns :tuple consisting of (success, result, error_message)
 	where success = True/False
 	result = id of invoice in FLexibee or None if success = False
 	error_message = Error message if success=False else error_message=None
 	"""	
-	faktura = Faktura.from_dict(data)
-	d = faktura.to_dict()	
-	return __create_evidence_item('faktura-vydana',d)
+	faktura = FakturaPrijata.from_dict(data)
+	inv_items = []
+	for it in invoice_items:
+		item = FakturaPrijataPolozka.from_dict(it)
+		inv_items.append(item.to_dict)
+	d = faktura.to_dict()
+	d['polozkyFaktury']= inv_items
+	return __create_evidence_item('faktura-prijata',d)
 
 def delete_issued_invoice(id):
 	"""Delete issued invoice specifeid by id.
