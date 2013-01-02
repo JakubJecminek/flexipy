@@ -6,14 +6,15 @@
 \contentsline {chapter}{\numberline {2}Problem description, goal specification}{3}{chapter.2}
 \contentsline {section}{\numberline {2.1}Problem description}{3}{section.2.1}
 \contentsline {section}{\numberline {2.2}Goal specification}{3}{section.2.2}
-\contentsline {subsection}{\numberline {2.2.1}Online banking}{4}{subsection.2.2.1}
+\contentsline {subsection}{\numberline {2.2.1}On-line banking}{4}{subsection.2.2.1}
 \contentsline {subsection}{\numberline {2.2.2}Accounting system}{5}{subsection.2.2.2}
 \contentsline {chapter}{\numberline {3}Analysis and Solution Proposal}{7}{chapter.3}
 \contentsline {section}{\numberline {3.1}Invoices application}{7}{section.3.1}
 \contentsline {section}{\numberline {3.2}Accounting module}{8}{section.3.2}
 \contentsline {section}{\numberline {3.3}Flexipy}{8}{section.3.3}
-\contentsline {chapter}{\numberline {4}Implementation}{9}{chapter.4}
-\contentsline {chapter}{\numberline {5}Testing}{11}{chapter.5}
-\contentsline {chapter}{\numberline {6}Summary}{13}{chapter.6}
-\contentsline {chapter}{\numberline {A}Seznam pou\IeC {\v z}it\IeC {\'y}ch zkratek}{17}{appendix.A}
-\contentsline {chapter}{\numberline {B}UML diagramy}{19}{appendix.B}
+\contentsline {chapter}{\numberline {4}Implementation}{11}{chapter.4}
+\contentsline {chapter}{\numberline {5}Testing}{13}{chapter.5}
+\contentsline {chapter}{\numberline {6}Summary}{15}{chapter.6}
+\contentsline {section}{\numberline {6.1}Summary of semestral project}{15}{section.6.1}
+\contentsline {chapter}{\numberline {A}Seznam pou\IeC {\v z}it\IeC {\'y}ch zkratek}{19}{appendix.A}
+\contentsline {chapter}{\numberline {B}UML diagramy}{21}{appendix.B}

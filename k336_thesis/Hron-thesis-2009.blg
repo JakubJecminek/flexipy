@@ -4,7 +4,6 @@ The style file: csplainnat.bst
 Database file #1: reference.bib
 Warning--I didn't find a database entry for "hombanking"
 Warning--empty year in assembla
-Warning--empty year in flexibee
 `address' is a missing field, not a string, for entry Nebes09
 while executing---line 1484 of file csplainnat.bst
 Warning--empty year in pohoda
@@ -14,45 +13,45 @@ while executing---line 1484 of file csplainnat.bst
 Warning--empty year in brno
 `address' is a missing field, not a string, for entry WagneJan
 while executing---line 1484 of file csplainnat.bst
-You've used 13 entries,
+You've used 16 entries,
             2899 wiz_defined-function locations,
-            677 strings with 6391 characters,
-and the built_in function-call counts, 3613 in all, are:
-= -- 375
-> -- 88
-< -- 8
-+ -- 39
-- -- 24
-* -- 215
-:= -- 542
-add.period$ -- 48
-call.type$ -- 13
-change.case$ -- 34
-chr.to.int$ -- 11
-cite$ -- 31
-duplicate$ -- 205
-empty$ -- 354
-format.name$ -- 40
-if$ -- 803
-int.to.chr$ -- 3
+            690 strings with 6698 characters,
+and the built_in function-call counts, 4613 in all, are:
+= -- 503
+> -- 132
+< -- 12
++ -- 56
+- -- 36
+* -- 292
+:= -- 741
+add.period$ -- 65
+call.type$ -- 16
+change.case$ -- 44
+chr.to.int$ -- 12
+cite$ -- 36
+duplicate$ -- 251
+empty$ -- 392
+format.name$ -- 60
+if$ -- 1004
+int.to.chr$ -- 5
 int.to.str$ -- 1
-missing$ -- 21
-newline$ -- 72
-num.names$ -- 40
-pop$ -- 116
+missing$ -- 33
+newline$ -- 87
+num.names$ -- 60
+pop$ -- 114
 preamble$ -- 1
-purify$ -- 26
+purify$ -- 32
 quote$ -- 0
-skip$ -- 140
+skip$ -- 167
 stack$ -- 0
-substring$ -- 26
-swap$ -- 17
+substring$ -- 32
+swap$ -- 24
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 128
-warning$ -- 5
-while$ -- 24
+type$ -- 161
+warning$ -- 4
+while$ -- 36
 width$ -- 0
-write$ -- 163
+write$ -- 204
 (There were 3 error messages)

@@ -267,44 +267,43 @@ REST API, které je součástí systému Flexibee.
 %*****************************************************************************
 \chapter{Introduction} \section{Carsharing definition} Carsharing is model of
 renting cars where group of people is sharing car  for a short periods of
-time. This is especially  usefull for people who use car only occasinally. The
+time. This is especially  useful for people who use car only occasinally. The
 organization that provides carsharing service don't have to be necessarily
 comercial company, it can be cooperative, public agency or ad hoc grouping\cite{wiki:carsharing}. 
 
 Carsharing model of renting cars is today common in North and Western Europe. In Czech Republic 
-there is one company that provides this kind of services for city Brno\cite{brno}. Therefore there is still markateplace 
+there is one company that provides this kind of services for city Brno\cite{brno}. Therefore there is still marketplace 
 for another company that would provide carsharing services. 
 \section{History of the project}
-Project Metrocar is under development sicne year 2008. Original implementation of the project was part 
+Project Metrocar is under development since year 2008. Original implementation of the project was part 
 of a bachelor thesis by Bc. Ondřej Nebeský. His solution was implemented in PHP and CMS Drupal. This implementation 
-allowed users to view cars on the map, create reservation for car and monitor their journeys. It also provided mechanisms 
+allowed users to view cars on the map, create reservation for cars and monitor their journeys. It also provided mechanisms 
 for creating and managing carsharing subsidiaries\cite{Nebes09}. 
 
 The final result didn't met all the requirements and also chosen architecture
 wasn't optimal for the planned deployment of  the system. These shortcomings
 where addressed in the master's thesis of Ing. Filip Vařecha. His goal was to
-improve and transform this system.  The main goal was to create public API fot
+improve and transform this system.  The main goal was to create public API for
 the system. As the result, the whole system was rewritten  from scratch.
-Python and Django web framework were used as primary technoliges for the
-resulting system. The complete list  of changes and new features cna be found
+Python and Django web framework were used as primary technologies for the
+resulting system. The complete list  of changes and new features can be found
 in the thesis of Filip Vařecha\cite{Varech10}. 
 
 Next development on the project was done as part of bachelor thesis by Bc. Jan Wágner. His main goal was to 
-finish system for reservations and user managment. He was also responsible for selecting hosting for the application. 
+finish the system for reservations and user management. He was also responsible for selecting hosting for the application. 
 Further details about his work on the project can be found in the resulting thesis\cite{WagneJan}. There were also some 
-small contributions to the project by students of the subject Y36SI2. The complete list of their work and changes can be found 
-website of the project in the final reports\cite{assembla}. 
+small contributions to the project by students of the subject Y36SI2. The complete list of their work and changes can be found on the website of the project in the final reports\cite{assembla}. 
 
-Last contributor to the project was Bc. Petr Pokorný. He was primarly focused on the comunication between the server side of the application and car units. He was also responsible for extreme improvment in documentation of the project and updating 
-project's dependecies. Thansk to his vast knowledge of Python and Django he has become importent figure of the project 
-and excelent advisor. 
+Last contributor to the project was Bc. Petr Pokorný. He was primarily focused on the communication between the server side of the application and car units. He was also responsible for extreme improvement in documentation of the project and updating 
+project's dependencies. Thanks to his vast knowledge of Python and Django he has become important figure of the project 
+and great advisor. 
 
 %*****************************************************************************
 \chapter{Problem description, goal specification}
 \section{Problem description}
-When I joined the Metrocar project, there was only partial solution for accounting in the system. The solution was capable only to create invoices and invoice items. For printing to PDF files and sending invoices to users, there was small Python script that was supposed be running periodicly by cron and check if some invoices are supposed to be sent to the users. Also there was no way for users to gain creidt, which is basicaly curency in our system. There was alo no solution for checking 
-state of company's account. Therefore the state(active, overdue and paid) of every invoice would have to be changed manually by manager of the company. This would force manager to spend to much time doing just checking statuses of invoices. Also this 
-aprocha would probably fail for a larger group of users. Therefore it was decided, that system for accounting in the project 
+When I joined the Metrocar project, there was only partial solution for accounting in the system. The solution was capable only to create invoices and invoice items. For printing to PDF files and sending invoices to users, there was small Python script that was supposed be running periodically by cron\footnote{Cron is the time-based job scheduler in Unix-like computer operating systems.} and check if some invoices are supposed to be sent to the users. Also there was no way for users to gain credit, which is basically currency in our system. There was also no solution for checking 
+state of company's account. Therefore the state(active, overdue and paid) of every invoice would have to be changed manually by manager of the company. This would force manager to spend too much time doing just checking statuses of invoices. Also this 
+approach would probably fail for a larger group of users. Therefore it was decided, that system for accounting in the project 
 has to be improved.
 \section{Goal specification}
 Design and implement application that provides connection of system Metrocar[1] to accounting software Flexibee[2]. Systems Metrocar and Flexibee will use this application for communication and exchange of data. This application will use REST API, which is provided by Flexibee[3]
@@ -317,19 +316,19 @@ Official goal specification is as follows:
 \item Create documentation for the application.
 \end{itemize}
 
-Before we decided to use for our project Flexibee as an accounting system, I was doing as a par of the subject 
-A7B16PRO a research about possibilities how to connect system Metrocar to hombanking solution and accounting system.
-As a result of this research, it was decided that we will use Flexibee. I decided to attach the output of my research about hombanking systems and accounting systems on Czech market to this report, because it served as a foundation for a decision to 
+Before we decided to use for our project Flexibee as an accounting system, I was doing as a part of the subject 
+A7B16PRO a research about possibilities how to connect system Metrocar to homebanking solution and accounting system.
+As a result of this research, it was decided that we will use Flexibee. I decided to attach the output of my research about homebanking systems and accounting systems on Czech market to this report, because it served as a foundation for a decision to 
 choose Flexibee. 
 
-\subsection{Online banking}
+\subsection{On-line banking}
 Originally was system Metrocar without any kind of connection to company's bank account. Therefore, manager of company would 
 have to manually check incoming payments and then change the status of appropriate invoice. This is very bad solution and it 
-would be very time consuming for manager. The team that was working on the project in the year 2010 started to work on the solution, that would require create python script that would manually parse the informations about payment from email or sms that woudl be sent from bank\cite{reserse2010}. As a part of my research I found only this article about there ideas for this solution, but I wasn't capable to found any source code. Therefore I suppose they didn't impement this idea. 
+would be very time consuming for manager. The team that was working on the project in the year 2010 started to work on the solution, that would require to create python script that would manually parse the informations about payment from email or sms that would be sent from bank\cite{reserse2010}. As a part of my research I found only this article about their ideas for this solution, but I wasn't capable to found any source code. Therefore I suppose they didn't implement this idea. 
 
-At first I thought that this solution would be great for system Metrocar. I also found out that owner and founder of the Roští.cz\footnote{company that is providing hosting for project Metrocar(autonapul.cz)} Adam Štrauch created Python project that provides similar solution. His module is capable to log in to online banking system of mBank company and from there download informations about incoming payments in CSV format and then parse them into Python data structures. His project is released under BSD license and is publicly available on github\cite{python-mbank}. Article about the development of this module and the reasons for its creation can be found on his personal website\cite{mbank}. This solution is not optimal for out project, because as even author has stated, if mBank change some part of their 
-online banking system, the script will simply stop to work. This is also not exactly recomended aproach to obtain this kind of 
-informations. Typically every bank istituion have their own system, which allowes clients to download certain informations about payments, account status etc. These systems are called hombanking systems. There are several standard formats which 
+At first I thought that this solution would be great for system Metrocar. I also found out that owner and founder of the Roští.cz\footnote{company that is providing hosting for project Metrocar(autonapul.cz)} Adam Štrauch created Python project that provides similar solution. His module is capable to log in to on-line banking system of mBank company and from there download informations about incoming payments in CSV format and then parse them into Python data structures. His project is released under BSD license and is publicly available on github\cite{python-mbank}. Article about the development of this module and the reasons for its creation can be found on his personal website\cite{mbank}. This solution is not optimal for out project, because as even author has stated, if mBank change some part of their 
+online banking system, the script will simply stop to work. This is also not exactly recommended approach to obtain this kind of 
+informations. Typically every bank institution have their own system, which allows clients to download certain informations about payments, account status etc. These systems are called homebanking systems. There are several standard formats which 
 these systems usually use. The complete list can be found here\cite{hombanking}. From my experience in these days the most used ones are Gemini, MultiCash and ABO. The basic functionality of these systems is usually same, therefore I will further describe only what Gemini in version 5.0 provides, other format support this too. 
 Banking operations:
 \begin{itemize}
@@ -347,11 +346,11 @@ Security features:
 	\item Individual user passwords and access rights.
 	\item Authorization before sending payment orders to the bank.
 	\item Private and public RSA key.
-	\item Electronic signatures are automaticly checked by bank institution.
+	\item Electronic signatures are automatically checked by bank institution.
 \end{itemize}
 
-Gemini has other usefull features but not all of them are supported by every hombanking system. 
-The most resourcefull documentation about Gemini has Raiffeisen Bank\cite{rfb} from which I learned about this format.
+Gemini has other useful features but not all of them are supported by every homebanking system. 
+The most resourceful documentation about Gemini has Raiffeisen Bank\cite{rfb} from which I learned about this format.
 Therefore these other special features might be implemented only in Raiffeisen Bank homebanking system. 
 
 Other features of Gemini:
@@ -361,67 +360,69 @@ Other features of Gemini:
 	\item Automatic communication with bank.
 	\item Current exchange rates Raiffeisenbank Inc. and ČNB.
 \end{itemize}
-There are also other featuers, for complete list visit\cite{rfb}. When I joined the Metrocar team as a part of the A7B16PRO
-subject, it was not yet decided which bank company will be used for Metrocar company's bank account. Therefore it was decided 
-that my next assigment will be to select suitable accounting system for system Metrocar, which will already support communication and infromation exchange with homebanking system and that this communication will be using Gemini format and other formats too if possible. 
+There are also other features, for complete list visit\cite{rfb}. When I joined the Metrocar team as a part of the A7B16PRO
+subject, it was not yet decided which bank company will be used for Metrocar's company bank account. Therefore it was decided 
+that my next assignment will be to select suitable accounting system for system Metrocar, which will already support communication and information exchange with homebanking system and that this communication will be using Gemini format and other formats too if possible. 
 
 \subsection{Accounting system}
-I was responsible for selecting appropriate accounting system for our project by the superviser Ing. Martin Komárek. I created a list of requiremnets which we expected from the accounting system. 
+I was responsible for selecting appropriate accounting system for our project by the supervisor Ing. Martin Komárek. I created a list of requirements which we expected from the accounting system. 
 \begin{itemize}
-	\item Capability to comunicate and exchnge data with homebanking system.
+	\item Capability to communicate and exchange data with homebanking system.
 	\item The accounting system should have interface(for access from other systems).
+	\item This interface should be open and free if possible.
 	\item The accounting system should have sufficient documentation for developers of information systems.
 	\item The aforementioned documentation should be free of charge. 
 \end{itemize}
-After I had this specification about what kinf of we were looking for, I started to search for the system on Czech market. 
-A lot of people were telling about system Pohoda\cite{pohoda}. After small research I found that system Pohoda allows 
-imports and exports of data through exchange of XML files\cite{xmlPohoda}. XSD files and example XML files are publicly avaliable and free. There is also short documentation for developers, but I found it too simple. The biggest problem with system Pohoda was tha fact that for testing of my component, I would have to purchase a license for the system. Also a lot of people who are working in companies that are using system Pohoda told me that they have negative experience with the system. 
+After I had this specification about what kind of system we were looking for, I started to search on Czech market. 
+A lot of people were telling me about system Pohoda\cite{pohoda}. After small research I found out that system Pohoda allows 
+imports and exports of data through exchange of XML files\cite{xmlPohoda}. XSD files and example XML files are publicly available and free. There is also short documentation for developers, but I found it to be too simple. The biggest problem with system Pohoda was the fact that for testing of my component, I would have to purchase a license for the system. Also a lot of people who are working in companies that are using system Pohoda told me that they have negative experience with the system. 
 
 So I started to look for other systems, until I spoke with teammate Petr
 Pokrný, who recommended me accounting system Flexibee\cite{flexibee}. After some research I found out that Flexibee is 
-the only accounting system on Czech market that offers completely open REST API for developers with extensive documentation, examples and tutorials. They also provide publicly available cloud version of Flexibee which developers can use for testing of their applications. Other possibility of testing is to register on their website as a developer and then they will provide full version of their system for free. They also have mailing list which they use to announce new releases and changes in their system. This is perfect ecosystem for developers. The REST API supports both XML import/export or JSON. Strongest side of Flexibee is documentation for developers. 
+the only accounting system on Czech market that offers completely open REST API for developers with extensive documentation, examples and tutorials. They also provide publicly available cloud version of Flexibee which developers can use for testing of their applications. Other possibility of testing is to register on their website as a developer and then they will provide full version of their system for free for period of three months. They also have mailing list which they use to announce new releases and changes in their system. This is perfect ecosystem for developers. The REST API supports both XML import/export or JSON. Strongest side of Flexibee is documentation for developers. 
 
-After I familiarized myself with Flexibee adequately I presented it to the supervisor as a solution that I would recommend and that seemed to me as the most suitable to our project and our needs. Also after discussion with Petr Pokorný who already had experience with connecting information system to Flexibee, we suggested to use Flexibee in cloud insteadof deployment on our server. This was approved by our supervisor Ing. Martin Komárek and I began to analyse existing application\footnote{Application in terms of Django application https://docs.djangoproject.com/en/dev/intro/tutorial01/\#creating-models}Invoices and what would be the best approach for connection of accounting system Flexibee. 
+After I familiarized myself with Flexibee adequately I presented it to the supervisor as a solution that I would recommend and that seemed to me as the most suitable to our project and our needs. Also after discussion with Petr Pokorný who already had experience with connecting information system to Flexibee, we suggested to use Flexibee in cloud instead of deployment on our server. This was approved by our supervisor Ing. Martin Komárek and I began to analyse existing application\footnote{Application in terms of Django application https://docs.djangoproject.com/en/dev/intro/tutorial01/\#creating-models}Invoices and what would be the best approach for connection of accounting system Flexibee. 
 
 
 %*****************************************************************************
 \chapter{Analysis and Solution Proposal}
 In this chapter I will provide analysis of my solution on how to connect existing system Metrocar to an accounting system Flexibee. I will describe reasons for chosen approach and technologies.
 \section{Invoices application}
-Application invoices in project Metrocar has responsibilities for CRUD operations with invoices and other accounting documents.
+Application invoices in project Metrocar has responsibilities for CRUD\footnote{Create, read, update and delete.} operations with invoices and other accounting documents.
 It also contains tools for printing invoices and sending them to users(customers). This application was originally 
 created by Filip Vařecha and then maintained by Jan Wágner. As I mentioned before, this solution has many shortcomings. Therefore as a part of this project I am supposed to connect system Metrocar to system Flexibee. At first I planned to remove application Invoices and replaced it by new application that would be directly connected to Flexibee. However as it turned out 
-this application is very integrated into the Metrocar system. Also the standard things like managing invoices is well hnadled by the application. Flexibee is very good system and has a lot of happpy customers, but even systems like this expoerience from time to time poblems. Petr Pokorný expereinced a few server crashes while he was working on the project that involved Flexibee as an accounting system. At that point the whole system is inaccessible for users. because they can't create invoices or issue their bills. A this point keeping and old Invoices application could help. When a user create invoice, or issue a bill or just do some action that involves accounting and at this point Flexibee crashes, accounting module(later described) will notice this and set certain actions into motion. Accounting module will use old Invoices application and store the canges or new data in local database in apropriate tables. Also he notifes manager that server on which is Flexibee deployed has crashed. After server with Flexibee is running again, accounting module will resolve incosistences between local database and Flexibee's recors. This way we can say that old Invoices application will serve as some kind of fail-safe mechanism, which will be primarly used to serve users' requests while Flexibee is down. For this reasons I've decided to keep old application Invoices in the project Metrocar. It will be slightly modified and certian functionalities will be transfered on to Flexibee(for example printing of invoices and sending them to users). 	
+this application is very integrated into the Metrocar system. Also the standard things like managing invoices is well handled by the application. Flexibee is very good system and has a lot of satisfied customers, but even systems like this can experience from time to time problems. Petr Pokorný experienced a few server crashes while he was working on the project that involved Flexibee as an accounting system. At that point the whole system is inaccessible for users. because they can't create invoices or issue their bills. A this point keeping and old Invoices application could help. When a user creates invoice, or issue a bill or just do some action that involves accounting and at this point Flexibee crashes, accounting module(later described) will notice this and set certain actions into motion. Accounting module will use old Invoices application and store the changes or new data in local database in appropriate tables. Also he notifies administrator that the server on which is Flexibee deployed has crashed. After server with Flexibee is running again, accounting module will resolve inconsistencies between local database and Flexibee's records. This way we can say that old Invoices application will serve as some kind of fail-safe mechanism, which will be primarily used to serve users' requests while Flexibee is down. For this reasons I've decided to keep old application Invoices in the project Metrocar. It will be slightly modified and certain functionalities will be transfered on to Flexibee(for example printing of invoices and sending them to users). 	
 
 \section{Accounting module}
-As was metioned above, the accounting module will be responsible for handling situations in which Flexibee has crashed, but this will be only secondary purpose of this module. The main purpose of this module will be to act as intermidiate between Metrocar system and Flexibee. It will define interface for Metrocar system through which will system Metrocar interact with Flexibee. Thanks the nature of Python, this module can be easily replaced in the future with diffrent implementation of the same interface, so on the side of Metrocar system, it will look like that nothing has changed, but actually Metrocar system will now comunicate with completely diffrent accounting system on the other side. Therefore there will be no coupling between Metrocar system and Flexibee. This is very important because if the interface of accounting module was coupled with Flexibee it would extremely hard and tedious to change accounting system. 
+As was mentioned above, the accounting module will be responsible for handling situations in which Flexibee has crashed, but this will be only secondary purpose of this module. The main purpose of this module will be to act as intermediate between Metrocar system and Flexibee. It will define interface for Metrocar system through which will system Metrocar interact with Flexibee. Thanks the nature of Python, this module can be easily replaced in the future with different implementation of the same interface, so on the side of Metrocar system, it will look like that nothing has changed, but actually Metrocar system will now be communicating with completely different accounting system on the other side. Therefore there will be no coupling between Metrocar system and Flexibee. This is very important because if the interface of accounting module was coupled with Flexibee it would extremely hard and tedious to change accounting system. 
 
-On the side of Flexibee system, the accounting module will use library flexipy which will be described in the next section. This will also help to adhere separation of concerns pricniple\cite{wiki:soc}, because accounting module will simply call function from flexipy and passes data if needed. It will not know anything about Flexibee REST API or format of data in which Flexibee comunicate.  
+On the side of Flexibee system, the accounting module will use library flexipy which will be described in the next section. This will also help to adhere separation of concerns principle\cite{wiki:soc}, because accounting module will simply call function from flexipy and passes data if needed. It will not know anything about Flexibee REST API or format of data in which Flexibee communicate.  
 
 \section{Flexipy}
+Flexipy is a Python library that is being created as a part of this project by myself. The main goal of this library is to provide simple interface for other Python/Django projects that wants to use Flexibee as their accounting system. Therefore flexipy is not being developed just as a component of Metrocar system, but as a standalone library that can be easily used in other projects. Hopefully the library will be available from PyPI\footnote{PyPI -The Python Package Index is a repository of software for the Python programming language.} when the state of library will be optimal. Thanks to the fact that PyPI is central source for all third party Python libraries, flexipy would become available to other developers. 
+
+Design goal of flexipy is to be as simple as possible. It is powered by Requests library\cite{requests} which provides tools for working with HTTP protocol. The main advantage of Requests over traditional urllib2 is simplicity. With Requests I am capable to send request with just one line of code. Also it simplifies work with HTTP status codes, which are used in FLexibee's REST API as identifiers of operation results.
+
+Flexipy is using the fact that most of the fields of every evidence\footnote{In Flexibee the word evidence corresponds to one specific part of the system, for example issued invoices, or address book of companies etc.} item\footnote{By the word item is meant one specific document that belong to certain evidence, for example one concrete invoice.} are automatically populated by Flexibee during their creation, thanks to the mechanism of internal dependencies\cite{flexDep}. Therefore the number of fields that user of the flexipy has to specifically insert is not so big. Without this mechanism, creating new items in Flexibee would be very hard, for example if user would have to specify all attributes of invoice, he would have to manually insert about 100 values. 
+
 
 
 %*****************************************************************************
 \chapter{Implementation}
-Popis implementace/realizace se zaměřením na nestandardní části řešení.
+
 
 
 %*****************************************************************************
 \chapter{Testing}
 
-\begin{itemize}
- \item Způsob, průběh a výsledky testování.
- \item Srovnání s existujícími řešeními, pokud jsou známy.
-\end{itemize} 
-
 
 %*****************************************************************************
 \chapter{Summary}
+\section{Summary of semestral project}
+I've joined the team Metrocar as a part of semestral project, at first I started to familiarize myself with the newest 
+changes on the project made by Petr Pokorný. He started to apply best practices of Python development on the project, including thorough documentation, to which I added a tutorial on how to setup a local database on the developer's machine. At first I didn't know what exactly will be the topic of my the bachelor thesis or which part of the system will become my responsibility. Therefore at first I worked on fixing bugs and I also was tutoring other teammates, who never before programmed in Python or used Django framework. After discussion with supervisor, it was decided that my bachelor thesis and further work during semestral project will be focused on selecting an accounting system, that would also provide a way how to communicate with homebanking system. I also was helping other teammate, Petr Holeček who was writing functional and unit tests for the Metrocar system. This was great experience for me, same as the research of accounting systems and homebanking systems. 
 
-\begin{itemize}
-\item Zhodnocení splnění cílů DP/BP a  vlastního přínosu práce (při formulaci je třeba vzít v potaz zadání práce).
-\item Diskuse dalšího možného pokračování práce.
-\end{itemize} 
+ 
 
 %*****************************************************************************
 % Seznam literatury je v samostatnem souboru reference.bib. Ten

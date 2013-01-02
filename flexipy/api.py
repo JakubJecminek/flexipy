@@ -44,7 +44,7 @@ def get_all_received_invoices():
 	return main.get_all_received_invoices()
 
 def delete_issued_invoice(id):
-	pass
+	main.delete_issued_invoice(id)
 
 def delete_received_invoice(id):	
-	pass
+	main.delete_received_invoice(id)
