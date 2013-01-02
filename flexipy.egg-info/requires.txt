@@ -1,2 +1,0 @@
-setuptools>=0.6b1
-Paver==1.0.5

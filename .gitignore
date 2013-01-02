@@ -1,5 +1,4 @@
 *.pyc
-*.pdf
 *.egg-info
 requirements.installed
 
