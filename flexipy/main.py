@@ -58,7 +58,7 @@ def __get_all_records(evidence):
 def __prepare_error_messages(e):	
 	error_messages = []
 	for error in e:
-		error_messages.append(e['message'])
+		error_messages.append(error['message'])
 	return error_messages	
 
 def __process_response(response, evidence=None):
@@ -128,7 +128,7 @@ def __create_evidence_item(evidence, data):
 		return (True, invoice_id, None)
 	else:
 		e = d['results'][0]['errors']
-		error_mesages = __prepare_error_messages(e)
+		error_messages = __prepare_error_messages(e)
 		return (False, None, error_messages) 
 
 def __update_evidence_item(id, evidence, data):
@@ -162,11 +162,11 @@ def create_issued_invoice(invoice, invoice_items):
 	result = id of invoice in FLexibee or None if success = False
 	error_message = List of error messages if success=False else error_message=None
 	"""	
-	faktura = FakturaVydana.from_dict(data)
+	faktura = FakturaVydana.from_dict(invoice)
 	inv_items = []
 	for it in invoice_items:
 		item = FakturaVydanaPolozka.from_dict(it)
-		inv_items.append(item.to_dict)
+		inv_items.append(item.to_dict())
 	d = faktura.to_dict()
 	d['polozkyFaktury']= inv_items
 	return __create_evidence_item('faktura-vydana',d)
@@ -179,11 +179,11 @@ def create_received_invoice(invoice, invoice_items):
 	result = id of invoice in FLexibee or None if success = False
 	error_message = Error message if success=False else error_message=None
 	"""	
-	faktura = FakturaPrijata.from_dict(data)
+	faktura = FakturaVydana.from_dict(invoice)
 	inv_items = []
 	for it in invoice_items:
 		item = FakturaPrijataPolozka.from_dict(it)
-		inv_items.append(item.to_dict)
+		inv_items.append(item.to_dict())
 	d = faktura.to_dict()
 	d['polozkyFaktury']= inv_items
 	return __create_evidence_item('faktura-prijata',d)

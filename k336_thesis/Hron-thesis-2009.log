@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2012.12.27)  2 JAN 2013 17:50
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2012.12.27)  2 JAN 2013 19:49
 entering extended mode
  %&-line parsing enabled.
 **Hron-thesis-2009.tex
@@ -498,7 +498,7 @@ Title: Developing an accounting component for a car-sharing support information
  system
 Supervisor: Ing. Martin Kom\IeC {\'a}rek
 ***************************************************
-<figures/LogoCVUT.pdf, id=67, 93.34875pt x 70.2625pt>
+<figures/LogoCVUT.pdf, id=71, 93.34875pt x 70.2625pt>
 File: figures/LogoCVUT.pdf Graphic file (type pdf)
 
 <use figures/LogoCVUT.pdf> [3
@@ -577,11 +577,16 @@ djangoproject.com/en/dev/intro/tutorial01/#creating-
 Chapter 3.
 [7
 
-] [8
-
 ]
+
+Package natbib Warning: Citation `wiki:soc' on page 8 undefined on input line 3
+99.
+
+[8]
 Chapter 4.
-[9] [10
+[9
+
+] [10
 
 ]
 Chapter 5.
@@ -622,7 +627,7 @@ Appendix A.
 
 ]
 Appendix B.
-<figures/seznamcd.pdf, id=283, 793.96625pt x 539.01375pt>
+<figures/seznamcd.pdf, id=288, 793.96625pt x 539.01375pt>
 File: figures/seznamcd.pdf Graphic file (type pdf)
 
 <use figures/seznamcd.pdf> [19 <./figures/seznamcd.pdf>]
@@ -631,13 +636,13 @@ Package natbib Warning: There were undefined citations.
 
 (./Hron-thesis-2009.aux) ) 
 Here is how much of TeX's memory you used:
- 6698 strings out of 495027
- 88923 string characters out of 1181418
+ 6701 strings out of 495027
+ 88957 string characters out of 1181418
  161499 words of memory out of 3000000
- 9691 multiletter control sequences out of 15000+50000
+ 9693 multiletter control sequences out of 15000+50000
  19833 words of font info for 43 fonts, out of 3000000 for 9000
  42 hyphenation exceptions out of 8191
- 38i,8n,36p,859b,375s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 38i,8n,36p,1586b,375s stack positions out of 5000i,500n,10000p,200000b,50000s
  </home/kuba/.texmf-var/fonts/pk/ljfour/jknappen/ec/e
 ctt1095.600pk> </home/kuba/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecti1095.600p
 k> </home/kuba/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm0900.600pk> </home/ku
@@ -652,9 +657,9 @@ ts/pk/ljfour/jknappen/ec/ecti1440.600pk> </home/kuba/.texmf-var/fonts/pk/ljfour
 /jknappen/ec/ecbx1440.600pk> </home/kuba/.texmf-var/fonts/pk/ljfour/jknappen/ec
 /ecrm1200.600pk></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmsy10
 .pfb>
-Output written on Hron-thesis-2009.pdf (33 pages, 342391 bytes).
+Output written on Hron-thesis-2009.pdf (33 pages, 345837 bytes).
 PDF statistics:
- 850 PDF objects out of 1000 (max. 8388607)
- 71 named destinations out of 1000 (max. 500000)
- 139 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 857 PDF objects out of 1000 (max. 8388607)
+ 72 named destinations out of 1000 (max. 500000)
+ 147 words of extra memory for PDF output out of 10000 (max. 10000000)
 
