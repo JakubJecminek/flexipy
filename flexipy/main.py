@@ -71,7 +71,7 @@ def __process_response(response, evidence=None):
 	it will return list of evidence item.
 	:param response: Response object returned from Flexibee
 	"""
-	if evidence = None:
+	if evidence == None:
 		d = response.json
 		dictionary = d['winstrom']
 		return dictionary
@@ -91,7 +91,7 @@ def __delete_item(id, evidence):
 	"""
 	r = __send_request(method='delete', endUrl=evidence+'/'+id+'.json')
 	if r.status_code not in (200,201):
-		if r.status_code = 404:
+		if r.status_code == 404:
 			raise FlexipyException("The record with id="+id+" was not found")			
 		else:
 			raise FlexipyException("Uknown error")								
@@ -104,7 +104,7 @@ def __get_evidence_item(id, evidence):
 	"""		
 	r = __send_request(method='get', endUrl=evidence+'/'+id+'.json')
 	if r.status_code not in (200,201):
-		if r.status_code = 404:
+		if r.status_code == 404:
 			raise FlexipyException("The record with id="+id+" was not found")			
 		else:
 			raise FlexipyException("Uknown error")	
