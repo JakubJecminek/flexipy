@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2012.12.27)  2 JAN 2013 09:42
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2012.12.27)  2 JAN 2013 17:50
 entering extended mode
  %&-line parsing enabled.
 **Hron-thesis-2009.tex
@@ -637,7 +637,7 @@ Here is how much of TeX's memory you used:
  9691 multiletter control sequences out of 15000+50000
  19833 words of font info for 43 fonts, out of 3000000 for 9000
  42 hyphenation exceptions out of 8191
- 38i,8n,36p,764b,375s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 38i,8n,36p,859b,375s stack positions out of 5000i,500n,10000p,200000b,50000s
  </home/kuba/.texmf-var/fonts/pk/ljfour/jknappen/ec/e
 ctt1095.600pk> </home/kuba/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecti1095.600p
 k> </home/kuba/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm0900.600pk> </home/ku
@@ -652,9 +652,9 @@ ts/pk/ljfour/jknappen/ec/ecti1440.600pk> </home/kuba/.texmf-var/fonts/pk/ljfour
 /jknappen/ec/ecbx1440.600pk> </home/kuba/.texmf-var/fonts/pk/ljfour/jknappen/ec
 /ecrm1200.600pk></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmsy10
 .pfb>
-Output written on Hron-thesis-2009.pdf (33 pages, 339808 bytes).
+Output written on Hron-thesis-2009.pdf (33 pages, 342391 bytes).
 PDF statistics:
- 846 PDF objects out of 1000 (max. 8388607)
+ 850 PDF objects out of 1000 (max. 8388607)
  71 named destinations out of 1000 (max. 500000)
  139 words of extra memory for PDF output out of 10000 (max. 10000000)
 

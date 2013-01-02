@@ -379,17 +379,19 @@ imports and exports of data through exchange of XML files\cite{xmlPohoda}. XSD f
 
 So I started to look for other systems, until I spoke with teammate Petr
 Pokrný, who recommended me accounting system Flexibee\cite{flexibee}. After some research I found out that Flexibee is 
-the only accounting system on Czech market that offers completely open REST API for developers with extensive documentation, examples and tutorials. They also provide publicly available cloud version of Flexibee which developers can use for testing of their applications. Other possibility of testing is to register on their website as a developer and then they will provide full version of their system for free. They also have mailing list which they use to announce new releases and changes in their system. This is perfect eco system for developers. The REST API supports both XML import/export or JSON. Strongest side of Flexibee is documentation for developers. 
+the only accounting system on Czech market that offers completely open REST API for developers with extensive documentation, examples and tutorials. They also provide publicly available cloud version of Flexibee which developers can use for testing of their applications. Other possibility of testing is to register on their website as a developer and then they will provide full version of their system for free. They also have mailing list which they use to announce new releases and changes in their system. This is perfect ecosystem for developers. The REST API supports both XML import/export or JSON. Strongest side of Flexibee is documentation for developers. 
 
-After I familiarized myself with Flexibee adequately I presented it to the superviser as a solution that I would recommend and that seemed to me as the most suitable to our project and our needs. Also after discussion with Petr Pokorný who already had experience with connecting information system to Flexibee, we suggested to use Flexibee in cloud insteadof deployment on our server. This was approved by our superviser Ing. Martin Komárek and I began to analyse existing application\footnote{Application in terms of Django application https://docs.djangoproject.com/en/dev/intro/tutorial01/\#creating-models}Invoices and what would be the best approach for connection of accounting system Flexibee. 
+After I familiarized myself with Flexibee adequately I presented it to the supervisor as a solution that I would recommend and that seemed to me as the most suitable to our project and our needs. Also after discussion with Petr Pokorný who already had experience with connecting information system to Flexibee, we suggested to use Flexibee in cloud insteadof deployment on our server. This was approved by our supervisor Ing. Martin Komárek and I began to analyse existing application\footnote{Application in terms of Django application https://docs.djangoproject.com/en/dev/intro/tutorial01/\#creating-models}Invoices and what would be the best approach for connection of accounting system Flexibee. 
 
 
 %*****************************************************************************
 \chapter{Analysis and Solution Proposal}
-In this chapter I will provide analysis of my solution on how to connect existing system Metrocar to an accounting system Flexibee. I will describe reasons for chosen approach and technologies
+In this chapter I will provide analysis of my solution on how to connect existing system Metrocar to an accounting system Flexibee. I will describe reasons for chosen approach and technologies.
 \section{Invoices application}
-Application invoices in project Metrocar has responsibilities for CRUD opertions with invoices and other accounting documents. 
-
+Application invoices in project Metrocar has responsibilities for CRUD operations with invoices and other accounting documents.
+It also contains tools for printing invoices and sending them to users(customers). This application was originally 
+created by Filip Vařecha and then maintained by Jan Wágner. As I mentioned before, this solution has many shortcomings. Therefore as a part of this project I am supposed to connect system Metrocar to system Flexibee. At first I planned to remove application Invoices and replaced it by new application that would be directly connected to Flexibee. However as it turned out 
+this application is very integrated into the Metrocar system. Also the standard things like managing invoices is well hnadled by the application. Flexibee is very good system and has a lot of happpy customers, but even systems like this expoerience from time to time poblems. Petr Pokorný expereinced a few server crashes while he was working on the project that involved Flexibee as an accounting system. At that point the whole system is inaccessible for users. because they can't create invoices or issue their bills. 
 \section{Flexipy}
 
 

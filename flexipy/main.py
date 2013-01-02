@@ -21,13 +21,13 @@ def __send_request(method, endUrl, payload=''):
 	"""
 	try:
 		r = requests.request(method=method, url=config.url+endUrl, data=payload, auth=(config.username,config.password))	
-		if r.status_code = 401:
+		if r.status_code == 401:
 			raise FlexipyException("You're not authorized for this operation, you must be authenticated.")
-		elif r.status_code = 402:
+		elif r.status_code == 402:
 			raise FlexipyException("Payment required, the REST API is not active.")
-		elif r.status_code = 403:
+		elif r.status_code == 403:
 			raise FlexipyException("Forbidden operation. You're license probably do not allow this operation.")	
-		elif r.status_code = 500:
+		elif r.status_code == 500:
 			raise FlexipyException("Server error, something went wrong in Flexibee. Please check the state of Flexibee server.")							
 	except requests.exceptions.ConnectionError:
 		raise FlexipyException("Connection error")
@@ -138,7 +138,7 @@ def __update_evidence_item(id, evidence, data):
 	:param data: dictionary containing fields which we want to update
 	"""
 	data = __prepare_data(evidence, data)
-	r = __send_request(method='put', endUrl=evidence+'.json', payload=data)
+	r = __send_request(method='put', endUrl=evidence+'/'+id'.json', payload=data)
 
 
 def get_all_bank_items():
