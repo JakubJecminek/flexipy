@@ -138,7 +138,7 @@ def __update_evidence_item(id, evidence, data):
 	:param data: dictionary containing fields which we want to update
 	"""
 	data = __prepare_data(evidence, data)
-	r = __send_request(method='put', endUrl=evidence+'/'+id'.json', payload=data)
+	r = __send_request(method='put', endUrl=evidence+'/'+id+'.json', payload=data)
 
 
 def get_all_bank_items():
