@@ -17,4 +17,5 @@ password='winstrom'
 
 #tuple contains all evidences which are supported by flexipy
 evidence_list = ('faktura-vydana', 'banka', 'interni-doklad','pohledavka',
-	'adresar','cenik','interni-doklad')
+	'adresar','cenik','faktura-prijata','faktura-vydana-polozka',
+	'faktura-prijata-polozka')

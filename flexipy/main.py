@@ -5,7 +5,7 @@ import json
 import config
 import re
 
-from .models import Faktura
+from .models import FakturaVydana, Banka, FakturaPrijata, FakturaVydanaPolozka, FakturaPrijataPolozka
 
 class FlexipyException(Exception):
 	pass
@@ -103,8 +103,14 @@ def __get_evidence_item(id, evidence):
 	:param evidence: type of evidence	
 	"""		
 	r = __send_request(method='get', endUrl=evidence+'/'+id+'.json')
-	dictionary = __process_response(r, evidence=evidence)
-	return dictionary
+	if r.status_code not in (200,201):
+		if r.status_code = 404:
+			raise FlexipyException("The record with id="+id+" was not found")			
+		else:
+			raise FlexipyException("Uknown error")	
+	else:		
+		dictionary = __process_response(r, evidence=evidence)
+		return dictionary
 
 
 def __create_evidence_item(evidence, data):
@@ -131,6 +137,8 @@ def __update_evidence_item(id, evidence, data):
 	:param evidence: evidence containing item which we want to update
 	:param data: dictionary containing fields which we want to update
 	"""
+	data = __prepare_data(evidence, data)
+	r = __send_request(method='put', endUrl=evidence+'.json', payload=data)
 
 
 def get_all_bank_items():
