@@ -48,3 +48,9 @@ def delete_issued_invoice(id):
 
 def delete_received_invoice(id):	
 	main.delete_received_invoice(id)
+
+def get_issued_invoice(id):
+	main.get_issued_invoice(id)
+
+def get_received_invoice(id):
+	main.get_received_invoice(id)		

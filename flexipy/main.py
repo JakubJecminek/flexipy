@@ -89,10 +89,10 @@ def __delete_item(id, evidence):
 	:param id: identifies item to delete
 	:param evidence: identifies what type of item to delete
 	"""
-	r = __send_request(method='delete', endUrl=evidence+'/'+id+'.json')
+	r = __send_request(method='delete', endUrl=evidence+'/'+str(id)+'.json')
 	if r.status_code not in (200,201):
 		if r.status_code == 404:
-			raise FlexipyException("The record with id="+id+" was not found")			
+			raise FlexipyException("The record with id="+str(id)+" was not found")			
 		else:
 			raise FlexipyException("Uknown error")								
 
@@ -102,10 +102,10 @@ def __get_evidence_item(id, evidence):
 	:param id: id of item(Flexibee identificator)
 	:param evidence: type of evidence	
 	"""		
-	r = __send_request(method='get', endUrl=evidence+'/'+id+'.json')
+	r = __send_request(method='get', endUrl=evidence+'/'+str(id)+'.json')
 	if r.status_code not in (200,201):
 		if r.status_code == 404:
-			raise FlexipyException("The record with id="+id+" was not found")			
+			raise FlexipyException("The record with id="+str(id)+" was not found")			
 		else:
 			raise FlexipyException("Uknown error")	
 	else:		
@@ -199,7 +199,13 @@ def delete_received_invoice(id):
 	:param id: identifies invoice	
 	"""
 	__delete_item(id, 'faktura-prijata')	
+
+def get_issued_invoice(id):
+	return __get_evidence_item(id, 'faktura-vydana')
 		
+
+def get_received_invoice(id):
+	return __get_evidence_item(id, 'faktura-prijata')		
 
 def create_address_book_item(kod, nazev, nazevA=None, nazevB=None, nazevC=None, 
 	poznam=None, popis=None, platiOd=None, platiDo=None, ulice=None, mesto=None,
