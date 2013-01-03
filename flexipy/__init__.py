@@ -20,6 +20,6 @@ is at <TODO>.
 :copyright: (c) 2012 by Jakub Ječmínek.
 :license: BSD, see LICENSE for more details.
 """
-from .api import create_issued_invoice, get_all_bank_items, get_all_issued_invoices, get_all_received_invoices, create_received_invoice, delete_issued_invoice, delete_received_invoice
+from .api import create_issued_invoice, get_all_bank_items, get_all_issued_invoices, get_all_received_invoices, create_received_invoice, delete_issued_invoice, delete_received_invoice, get_issued_invoice, get_received_invoice
 
 from .utils import create_all_model_definitions
