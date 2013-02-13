@@ -15,9 +15,8 @@ def create_issued_invoice(invoice, invoice_items):
 	result = id of invoice in FLexibee or None if success = False
 	error_message = List of error messages if success=False else error_message=None
 	:param invoice: dictionary that contains data for new invoice. The schema of invoice is 
-	in models.FakturaVydana. 
-	:param invoice_items: list of invoice items(every inv. item is dictionary). Schema of invoice item 
-	is in models.FakturaVydanaPolozka
+	in described in documantation. 
+	:param invoice_items: list of invoice items(every inv. item is dictionary). 
 	"""	
 	return main.create_issued_invoice(invoice, invoice_items)
 
@@ -28,16 +27,21 @@ def create_received_invoice(invoice, invoice_items):
 	result = id of invoice in FLexibee or None if success = False
 	error_message = Error message if success=False else error_message=None
 	:param invoice: dictionary that contains data for new invoice. The schema of invoice is 
-	in models.FakturaVydana. 
-	:param invoice_items: list of invoice items(every inv. item is dictionary). Schema of invoice item 
-	is in models.FakturaVydanaPolozka 
+	in described in documantation. 
+	:param invoice_items: list of invoice items(every inv. item is dictionary).
 	"""	
 	return main.create_received_invoice(invoice, invoice_items)
 
 def get_all_bank_items():
+	"""This function obtains all bank items form Flexibee. 
+	Returns :dictionary that contains all bank items.
+	"""	
 	return main.get_all_bank_items()
 
 def get_all_issued_invoices():
+	"""This function obtains all issued invoices form Flexibee. 
+	Returns :dictionary that contains all issued invoices.
+	"""	
 	return main.get_all_issued_invoices()
 
 def get_all_received_invoices():

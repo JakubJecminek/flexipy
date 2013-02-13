@@ -5,8 +5,6 @@ import json
 import config
 import re
 
-from .models import FakturaVydana, Banka, FakturaPrijata, FakturaVydanaPolozka, FakturaPrijataPolozka
-
 class FlexipyException(Exception):
 	pass
 
@@ -162,14 +160,11 @@ def create_issued_invoice(invoice, invoice_items):
 	result = id of invoice in FLexibee or None if success = False
 	error_message = List of error messages if success=False else error_message=None
 	"""	
-	faktura = FakturaVydana.from_dict(invoice)
 	inv_items = []
 	for it in invoice_items:
-		item = FakturaVydanaPolozka.from_dict(it)
-		inv_items.append(item.to_dict())
-	d = faktura.to_dict()
-	d['polozkyFaktury']= inv_items
-	return __create_evidence_item('faktura-vydana',d)
+		inv_items.append(it)
+	invoice['polozkyFaktury']= inv_items
+	return __create_evidence_item('faktura-vydana',invoice)
 	
 
 def create_received_invoice(invoice, invoice_items):
@@ -179,14 +174,12 @@ def create_received_invoice(invoice, invoice_items):
 	result = id of invoice in FLexibee or None if success = False
 	error_message = Error message if success=False else error_message=None
 	"""	
-	faktura = FakturaVydana.from_dict(invoice)
 	inv_items = []
 	for it in invoice_items:
-		item = FakturaPrijataPolozka.from_dict(it)
-		inv_items.append(item.to_dict())
+		inv_items.append(it)
 	d = faktura.to_dict()
-	d['polozkyFaktury']= inv_items
-	return __create_evidence_item('faktura-prijata',d)
+	invoice['polozkyFaktury']= inv_items
+	return __create_evidence_item('faktura-prijata',invoice)
 
 def delete_issued_invoice(id):
 	"""Delete issued invoice specifeid by id.

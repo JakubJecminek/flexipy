@@ -1,9 +1,8 @@
 from setuptools import setup
-import flexipy
 
 setup(
     name='flexipy',
-    version=flexipy.__versionstr__,
+    version=0.1,
     description='A library for communication with accounting system Flexibee',
     packages=['flexipy'],
     license='BSD',
@@ -13,6 +12,6 @@ setup(
     install_requires=(
          'setuptools>=0.6b1',
          'Paver==1.0.5',
-         'requests==0.14.2',
+         'requests',
      ),
 )
