@@ -3,20 +3,67 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
+===================================
 Welcome to flexipy's documentation!
 ===================================
 
-Contents:
+Overview
+========
+The big picture
 
-.. toctree::
-   :maxdepth: 2
+* :doc:`overview/carsharing`
 
+* :doc:`overview/metrocar`
+
+* :doc:`overview/about`
+
+* :doc:`overview/people`
+
+
+
+Getting started
+===============
+
+* :doc:`gettingstarted/prerequisites` -- what you should know (take a look at) before you start,
+  Python/Django tutorials, etc.
+
+* :doc:`gettingstarted/installation` -- how to get the project up and running.
+
+* :doc:`gettingstarted/contributing` -- some hints to follow to not make a (*bigger than it already is*) mess of this project.
+
+  * :ref:`contributing-coding-style`
+  * :ref:`contributing-documentation`
+  * :ref:`Testing <contributing-testing>`
+
+
+How to...
+=========
+
+* :doc:`...work with Git <howto/git>`
+* :doc:`...run the test suite <howto/tests>`
 
 
 Indices and tables
 ==================
 
+* :doc:`Detailed table of contents <contents>`
 * :ref:`genindex`
 * :ref:`modindex`
 * :ref:`search`
 
+
+Full contents
+=============
+
+.. toctree::
+    :maxdepth: 1
+
+    index
+    about
+
+.. toctree::
+    :maxdepth: 3
+
+    overview/index
+    gettingstarted/index
+    howto/index
