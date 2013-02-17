@@ -70,12 +70,12 @@ def __process_response(response, evidence=None):
 	:param response: Response object returned from Flexibee
 	"""
 	if evidence == None:
-		d = response.json
+		d = response.json()
 		dictionary = d['winstrom']
 		return dictionary
 	else:
-		d = response.json
-		if len(d['winstrom'][evidence])	== 1:	
+		d = response.json()
+		if len(d['winstrom'][evidence])==1:
 			dictionary = d['winstrom'][evidence][0]	
 			return dictionary
 		else:
@@ -141,8 +141,7 @@ def __update_evidence_item(id, evidence, data):
 
 def get_all_bank_items():
 	d = __get_all_records('banka')
-	list_of_items = __process_response(d)
-	return list_of_items
+	return d
 
 def get_all_issued_invoices():
 	d = __get_all_records('faktura-vydana')

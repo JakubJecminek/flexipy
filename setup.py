@@ -6,7 +6,7 @@ setup(
     description='A library for communication with accounting system Flexibee',
     packages=['flexipy'],
     license='BSD',
-    url='',
+    url='https://www.assembla.com/spaces/flexipy/wiki',
     include_package_data=True,
 
     install_requires=(
