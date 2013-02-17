@@ -32,6 +32,9 @@ def create_received_invoice(invoice, invoice_items):
 	"""	
 	return main.create_received_invoice(invoice, invoice_items)
 
+def create_address_book_item(address_item):
+	return main.create_address_book_item(address_item)
+
 def get_all_bank_items():
 	"""This function obtains all bank items form Flexibee. 
 	Returns :dictionary that contains all bank items.
@@ -57,4 +60,11 @@ def get_issued_invoice(id):
 	return main.get_issued_invoice(id)
 
 def get_received_invoice(id):
-	return main.get_received_invoice(id)		
+	return main.get_received_invoice(id)	
+
+def get_address_book_item(id):
+	return main.get_address_book_item(id)		
+
+def get_template_dict(evidence):
+	return main.get_template_dict(evidence)
+

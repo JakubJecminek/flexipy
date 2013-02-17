@@ -53,6 +53,16 @@ def __get_all_records(evidence):
 	r = __send_request(method='get', endUrl=evidence+'.json')
 	return __process_response(r, evidence)
 
+def __get_evidence_property_list(evidence):
+	"""This function returns list of properties for evidence.
+	These properties are parsed from flexibee.
+	:param evidence: identifies evidence which properties are needed 
+	"""
+	result = {}
+	r = r = __send_request(method='get', endUrl=evidence+'/properties.json')
+	d = r.json()	
+	return d['properties']['property']		
+
 def __prepare_error_messages(e):	
 	error_messages = []
 	for error in e:
@@ -138,6 +148,24 @@ def __update_evidence_item(id, evidence, data):
 	data = __prepare_data(evidence, data)
 	r = __send_request(method='put', endUrl=evidence+'/'+id+'.json', payload=data)
 
+def get_template_dict(evidence):
+	"""This function creates tepmlate dictionary for evidence.
+	This is usefull for creation of evidence items.
+	:param evidence: evidence for which will be created template
+	"""
+	if evidence not in evidence_list:
+		raise ValueError('evidence arg is valid only for' +str(evidence_list))
+	#start parsing properties
+	property_list = __get_evidence_property_list(evidence)
+	result={}
+	for property in property_list:
+		#every property is dictionary
+		if property['isWritable'] == 'true':
+			property_name = property['propertyName']	
+			result[property_name] = ''
+
+	return result	
+
 
 def get_all_bank_items():
 	d = __get_all_records('banka')
@@ -197,20 +225,16 @@ def get_issued_invoice(id):
 		
 
 def get_received_invoice(id):
-	return __get_evidence_item(id, 'faktura-prijata')		
+	return __get_evidence_item(id, 'faktura-prijata')
 
-def create_address_book_item(kod, nazev, nazevA=None, nazevB=None, nazevC=None, 
-	poznam=None, popis=None, platiOd=None, platiDo=None, ulice=None, mesto=None,
-	psc=None,tel=None,mobil=None,fax=None,email=None,www=None,stat=None,eanKod=None,
-	ic=None,dic=None,postovniShodna=None,faEanKod=None,faJmenoFirmy=None,faUlice=None,
-	faMesto=None,faPsc=None,splatDny=None,limitFak=None,limitPoSplatDny=None,
-	limitPoSplatZakaz=None,platceDph=None,formExportK=None,typVztahuK=None,kodPojistovny=None,
-	nazevPojistovny=None,osloveni=None,slevaDokl=None,obpAutomHotovo=None,stitky=None,
-	skupFir=None,stredisko=None,faStat=None,zodpOsoba=None,skupCen=None):
+def get_address_book_item(id):
+	return __get_evidence_item(id, 'adresar')
+
+def create_address_book_item(address_item):
 	"""Creates new contact in address book, can be good for suppliers and
 	subscribers. Definition of all fields is here 
 	http://demo.flexibee.eu/c/demo/adresar/properties
 	"""	
-	return __create_evidence_item('adresar',data)
+	return __create_evidence_item('adresar',address_item)
 
 	
