@@ -19,7 +19,7 @@ is at <TODO>.
 from .api import create_issued_invoice, get_all_bank_items, get_all_issued_invoices, \
 get_all_received_invoices, create_received_invoice, delete_issued_invoice, \
 delete_received_invoice, get_issued_invoice, get_received_invoice,\
-create_validation_schema, get_template_dict, create_address_book_item,\
-get_address_book_item
+get_template_dict, create_address_book_item,\
+get_address_book_item, update_issued_invoice
 
 

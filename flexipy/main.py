@@ -26,7 +26,7 @@ def __send_request(method, endUrl, payload=''):
 		elif r.status_code == 403:
 			raise FlexipyException("Forbidden operation. You're license probably do not allow this operation.")	
 		elif r.status_code == 500:
-			raise FlexipyException("Server error, something went wrong in Flexibee. Please check the state of Flexibee server.")							
+			raise FlexipyException("Server error, something went probably wrong in Flexibee.")							
 	except requests.exceptions.ConnectionError:
 		raise FlexipyException("Connection error")
 	else:
@@ -124,7 +124,7 @@ def __get_evidence_item(id, evidence):
 def __create_evidence_item(evidence, data):
 	"""Function for creating evidence item, 
 	created for purpose of refactoring
-	Returns :tuple consisting of (success, result, error_message)
+	Returns :tuple consisting of (success, result_id, error_message)
 	:param evidence: evidence for new item
 	:param data: JSON representation of data of created item
 	"""	
@@ -132,8 +132,8 @@ def __create_evidence_item(evidence, data):
 	r = __send_request(method='put', endUrl=evidence+'.json', payload=data)
 	d = __process_response(r)
 	if d['success'] == 'true':
-		invoice_id = int(d['results'][0]['id'])
-		return (True, invoice_id, None)
+		id = int(d['results'][0]['id'])
+		return (True, id, None)
 	else:
 		e = d['results'][0]['errors']
 		error_messages = __prepare_error_messages(e)
@@ -141,28 +141,45 @@ def __create_evidence_item(evidence, data):
 
 def __update_evidence_item(id, evidence, data):
 	"""Function for updating already created evidence item.
-	"param id: id(Flexibee identificator) of item to be changed
-	:param evidence: evidence containing item which we want to update
+	Returns :tuple consisting of (success, result, error_message)
+	:param id: id(Flexibee identificator) of item to be changed
+	:param evidence: evidence containing item which we want to update(change)
 	:param data: dictionary containing fields which we want to update
 	"""
 	data = __prepare_data(evidence, data)
-	r = __send_request(method='put', endUrl=evidence+'/'+id+'.json', payload=data)
+	r = __send_request(method='put', endUrl=evidence+'/'+str(id)+'.json', payload=data)
+	d = __process_response(r)
+	if d['success'] == 'true':
+		id = int(d['results'][0]['id'])
+		return (True, id, None)
+	else:
+		e = d['results'][0]['errors']
+		error_messages = __prepare_error_messages(e)
+		return (False, None, error_messages) 
 
-def get_template_dict(evidence):
+def get_template_dict(evidence, complete=False):
 	"""This function creates tepmlate dictionary for evidence.
 	This is usefull for creation of evidence items.
 	:param evidence: evidence for which will be created template
+	:param complete: if True return dict with all params
 	"""
-	if evidence not in evidence_list:
-		raise ValueError('evidence arg is valid only for' +str(evidence_list))
+	if evidence not in config.evidence_list:
+		raise ValueError('evidence arg is valid only for' +str(config.evidence_list))
 	#start parsing properties
 	property_list = __get_evidence_property_list(evidence)
 	result={}
-	for property in property_list:
+	if complete == False:
+		for property in property_list:
 		#every property is dictionary
-		if property['isWritable'] == 'true':
-			property_name = property['propertyName']	
-			result[property_name] = ''
+			if property['isWritable'] == 'true' and property['mandatory']=='true':
+				property_name = property['propertyName']	
+				result[property_name] = ''
+	else:		
+		for property in property_list:
+			#every property is dictionary
+			if property['isWritable'] == 'true':
+				property_name = property['propertyName']	
+				result[property_name] = ''
 
 	return result	
 
@@ -207,6 +224,15 @@ def create_received_invoice(invoice, invoice_items):
 	d = faktura.to_dict()
 	invoice['polozkyFaktury']= inv_items
 	return __create_evidence_item('faktura-prijata',invoice)
+
+def update_issued_invoice(id, invoice):
+	"""This function update issued invoice that is already in the Flexibee.
+	For usage example see documentation.
+	Returns :tuple consisting of (success, result, error_message)
+	:param: id: id of invoice which you want to change
+	:param invoice: dictionary that contains changed data
+	"""
+	return __update_evidence_item(id, 'faktura-vydana', invoice)
 
 def delete_issued_invoice(id):
 	"""Delete issued invoice specifeid by id.
