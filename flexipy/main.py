@@ -10,53 +10,51 @@ class FlexipyException(Exception):
 
 
 def __send_request(method, endUrl, payload=''):
-	"""Top level function for sending requests. It takes configuration from config and creates
-	request which is further defined by arguments of this function. It catches the most problematic 
-	exceptions defined by library Requests and returns response object for further proccessing.
-	:param method: Type of HTTP method, possible values:(get,put,post,delete)
-	:param endUrl: ending part of target url 
-	:param payload: Data in request
+	"""Privatni funkce pro posilani requestu. Cast url se bere z nastaveni v config, 
+	zbytek se doplni dle pozadavku. Tato funkce chyta nejzavaznejsi vyjimky definovane
+	v knihovne Requests a vraci Response objekt pro dalsi zpracovani.
+	:param method: Typ HTTP metody, mozne hodnoty:(get,put,post,delete)
+	:param endUrl: koncova cast url, zavisla na konkretnim requestu 
+	:param payload: Data v requestu
 	"""
 	try:
 		r = requests.request(method=method, url=config.url+endUrl, data=payload, auth=(config.username,config.password))	
 		if r.status_code == 401:
-			raise FlexipyException("You're not authorized for this operation, you must be authenticated.")
+			raise FlexipyException("Nemate opravneni provest tuto operaci.")
 		elif r.status_code == 402:
-			raise FlexipyException("Payment required, the REST API is not active.")
+			raise FlexipyException("Platba vyzadovana, REST API neni aktivni.")
 		elif r.status_code == 403:
-			raise FlexipyException("Forbidden operation. You're license probably do not allow this operation.")	
+			raise FlexipyException("Zakazana operace. Vase licence zrejme neumoznuje tuto operaci.")	
 		elif r.status_code == 500:
-			raise FlexipyException("Server error, something went probably wrong in Flexibee.")							
+			raise FlexipyException("Server error, zrejme je neco spatne se serverem na kterem je Flexibee.")							
 	except requests.exceptions.ConnectionError:
 		raise FlexipyException("Connection error")
 	else:
 		return r
 
 def __prepare_data(evidence, data):
-	'''This function will add importent parts to data that 
-	are required by Flexibee protocol and then returns them as JSON.
+	'''Tato funkce pripravuje data na odeslani. Prida casti vyzadovane komunikacnim formatem 
+	Flexibee a vrati JSON k odeslani. 
 	'''		
 	winstrom = {'winstrom':{evidence:[data]}}
 	return json.dumps(winstrom)
 
 
 def __get_all_records(evidence):
-	'''Construct and send request for list of all records in specific evidence.
+	'''Vytvori a odesle pozadavek k ziskani vsech zaznamu z pozadovane evidence.
 	Returns :list: contatining all records
 
-	:param evidence: valid values of evidence are in config.evidence_list
+	:param evidence: podporovane evidence se nachazi v config.evidence_list
 
 	'''
-	re.sub(r'\s', '', evidence) #remove all wihtespaces
-	if evidence not in config.evidence_list:
-		raise ValueError('evidence arg is valid only for' +str(config.evidence_list))		
+	re.sub(r'\s', '', evidence) #remove all wihtespaces	
 	r = __send_request(method='get', endUrl=evidence+'.json')
 	return __process_response(r, evidence)
 
 def __get_evidence_property_list(evidence):
-	"""This function returns list of properties for evidence.
-	These properties are parsed from flexibee.
-	:param evidence: identifies evidence which properties are needed 
+	"""Tato funkce vraci seznam polozek danne evidence. Tyto polozky jsou 
+	parsovane z Flexibee.
+	:param evidence: identifikuje evidenci jejiz seznam polozek chceme stahnout
 	"""
 	result = {}
 	r = r = __send_request(method='get', endUrl=evidence+'/properties.json')
@@ -64,20 +62,20 @@ def __get_evidence_property_list(evidence):
 	return d['properties']['property']		
 
 def __prepare_error_messages(e):	
+	"""Pomocna funkce pro vytvareni chybovych zprav.
+	Tyto chybove zpravy se se prebiraji z odpovedi kterou
+	posila v pripade neuspechu Flexibee.
+	"""
 	error_messages = []
 	for error in e:
 		error_messages.append(error['message'])
 	return error_messages	
 
 def __process_response(response, evidence=None):
-	"""After Flexibee created new evidence item it returns response with 
-	certain informations. This function process this response and returns it 
-	as dictionary.	And removes unnecessary parts. With parametr evidence it 
-	als serve for processing returned evidence item. If response contains only 
-	one item(one specific evidence item) than it returns clean dictionary
-	containing only information of that item. It response contains mote irems 
-	it will return list of evidence item.
-	:param response: Response object returned from Flexibee
+	"""Pote co Flexibee vytvori novy zaznam v nejake evidenci, vrati
+	odpoved obsahujici urcite informace. Tato funkce zpracuje odpoved a vratu 
+	jeji obsah jako dictionary.	Odstrani take nepotrebne casti. 
+	:param response: Response objekt vraceny z Flexibee
 	"""
 	if evidence == None:
 		d = response.json()
@@ -93,40 +91,54 @@ def __process_response(response, evidence=None):
 			return list_of_items	
 
 def __delete_item(id, evidence):
-	"""Delte item defined by id and evidence
-	:param id: identifies item to delete
-	:param evidence: identifies what type of item to delete
+	"""Smaze zaznam v evidenci na zaklade id.
+	:param id: identifikuje zaznam(Flexibee identifikator nebo pripadne kod)
+	:param evidence: identifikuje v ktere evidenci se zaznam nachazi
 	"""
 	r = __send_request(method='delete', endUrl=evidence+'/'+str(id)+'.json')
 	if r.status_code not in (200,201):
 		if r.status_code == 404:
-			raise FlexipyException("The record with id="+str(id)+" was not found")			
+			raise FlexipyException("Zaznam s id="+str(id)+" nebyl nalezen.")			
 		else:
-			raise FlexipyException("Uknown error")								
+			raise FlexipyException("Neznama chyba.")								
 
 def __get_evidence_item(id, evidence):
-	"""Get item from evidence and return it as dictionary.
-	Returns dictionary for further proccessing
-	:param id: id of item(Flexibee identificator)
-	:param evidence: type of evidence	
+	"""Ziskej zaznam z evidence na zaklade id.
+	Vraci zaznam jako dictionary pro dalsi zpracovani.
+	:param id: id zaznamu(Flexibee identifikator nebo pripadne kod)
+	:param evidence: identifikuje v ktere evidenci se zaznam nachazi	
 	"""		
 	r = __send_request(method='get', endUrl=evidence+'/'+str(id)+'.json')
 	if r.status_code not in (200,201):
 		if r.status_code == 404:
-			raise FlexipyException("The record with id="+str(id)+" was not found")			
+			raise FlexipyException("Zaznam s id="+str(id)+" nebyl nalezen.")			
 		else:
-			raise FlexipyException("Uknown error")	
+			raise FlexipyException("Neznama chyba.")	
 	else:		
 		dictionary = __process_response(r, evidence=evidence)
 		return dictionary
 
+def __get_evidence_item_by_code(id, evidence):
+	"""Ziskej zaznam z evidence na zaklade id.
+	Vraci zaznam jako dictionary pro dalsi zpracovani.
+	:param id: id zaznamu(Flexibee identifikator nebo pripadne kod)
+	:param evidence: identifikuje v ktere evidenci se zaznam nachazi	
+	"""		
+	r = __send_request(method='get', endUrl=evidence+'/'+str(id)+'.json')
+	if r.status_code not in (200,201):
+		if r.status_code == 404:
+			raise FlexipyException("Zaznam s id="+str(id)+" nebyl nalezen.")			
+		else:
+			raise FlexipyException("Neznama chyba.")	
+	else:		
+		dictionary = __process_response(r, evidence=evidence)
+		return dictionary
 
 def __create_evidence_item(evidence, data):
-	"""Function for creating evidence item, 
-	created for purpose of refactoring
-	Returns :tuple consisting of (success, result_id, error_message)
+	"""Privatni funkce pro vytvareni novych zaznamu v evidenci.
+	Returns :tuple skladajici se z (success, result_id, error_message)
 	:param evidence: evidence for new item
-	:param data: JSON representation of data of created item
+	:param data: JSON reprezebtace dat vytvareneho zaznamu
 	"""	
 	data = __prepare_data(evidence, data)
 	r = __send_request(method='put', endUrl=evidence+'.json', payload=data)
@@ -156,6 +168,13 @@ def __update_evidence_item(id, evidence, data):
 		e = d['results'][0]['errors']
 		error_messages = __prepare_error_messages(e)
 		return (False, None, error_messages) 
+
+def __initialize_config_file():
+	for odkaz, typ_list in config.typDokl.iteritems():	
+		d = __get_all_records(odkaz)
+		for dictPolozka in d:
+			kod = dictPolozka['kod']
+			typ_list.append(kod)
 
 def get_template_dict(evidence, complete=False):
 	"""This function creates tepmlate dictionary for evidence.
@@ -224,6 +243,7 @@ def create_received_invoice(invoice, invoice_items):
 	d = faktura.to_dict()
 	invoice['polozkyFaktury']= inv_items
 	return __create_evidence_item('faktura-prijata',invoice)
+	
 
 def update_issued_invoice(id, invoice):
 	"""This function update issued invoice that is already in the Flexibee.

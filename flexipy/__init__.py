@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
 """
-flexipy library for working with REST API of accounting ststem FLexibee
-Basic usage:
+Knihovna flexipy pro snadnou praci s REST API systemu Flexibee.
+Ukazka pouziti:
 >>>> import flexipy
 >>>> flexipy.create_invoice(data)
 it will return tuple consisting of (success, result, error_message)
@@ -13,13 +13,17 @@ error_message = Error message if success=False else erorr_message=''
 The other functions are supported - see `flexipy.api`. Full documentation
 is at <TODO>.
 
-:copyright: (c) 2012 by Jakub Ječmínek.
-:license: BSD, see LICENSE for more details.
+:copyright: (c) 2012 Jakub Ječmínek.
+:license: BSD, soubor LICENSE obsahuje kopii license.
 """
 from .api import create_issued_invoice, get_all_bank_items, get_all_issued_invoices, \
 get_all_received_invoices, create_received_invoice, delete_issued_invoice, \
 delete_received_invoice, get_issued_invoice, get_received_invoice,\
 get_template_dict, create_address_book_item,\
-get_address_book_item, update_issued_invoice
+get_address_book_item, update_issued_invoice, __initialize_config_file
 
+
+#tato funkce se vola pouze pri importovani knihovny flexipy,
+#inicializuje nektere poloyky typu relation primo z Flexibee
+__initialize_config_file()
 

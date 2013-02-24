@@ -71,3 +71,5 @@ def get_address_book_item(id):
 def get_template_dict(evidence, complete=False):
 	return main.get_template_dict(evidence, complete)
 
+def __initialize_config_file():
+	main.__initialize_config_file()
