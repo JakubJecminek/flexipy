@@ -38,20 +38,20 @@ def create_address_book_item(address_item):
 def update_issued_invoice(id, invoice):
 	return main.update_issued_invoice(id, invoice)	
 
-def get_all_bank_items():
+def get_all_bank_items(query=None, detail='summary'):
 	"""This function obtains all bank items form Flexibee. 
 	Returns :dictionary that contains all bank items.
 	"""	
-	return main.get_all_bank_items()
+	return main.get_all_bank_items(query, detail)
 
-def get_all_issued_invoices():
+def get_all_issued_invoices(query=None, detail='summary'):
 	"""This function obtains all issued invoices form Flexibee. 
 	Returns :dictionary that contains all issued invoices.
 	"""	
-	return main.get_all_issued_invoices()
+	return main.get_all_issued_invoices(query, detail)
 
-def get_all_received_invoices():
-	return main.get_all_received_invoices()
+def get_all_received_invoices(query=None, detail='summary'):
+	return main.get_all_received_invoices(query, detail)
 
 def delete_issued_invoice(id):
 	main.delete_issued_invoice(id)
@@ -59,14 +59,29 @@ def delete_issued_invoice(id):
 def delete_received_invoice(id):	
 	main.delete_received_invoice(id)
 
-def get_issued_invoice(id):
-	return main.get_issued_invoice(id)
+def get_issued_invoice(id, detail='summary'):
+	return main.get_issued_invoice(id, detail)
 
-def get_received_invoice(id):
-	return main.get_received_invoice(id)	
+def get_issued_invoice_by_code(code, detail='summary'):
+	return main.get_issued_invoice_by_code(code, detail)
 
-def get_address_book_item(id):
-	return main.get_address_book_item(id)		
+def get_received_invoice(id, detail='summary'):
+	return main.get_received_invoice(id, detail)	
+
+def get_received_invoice_by_code(code, detail='summary'):
+	return get_received_invoice_by_code(code, detail)	
+
+def get_address_book_item(id, detail='summary'):
+	return main.get_address_book_item(id, detail)		
+
+def get_address_book_by_code(code, detail='summary'):
+	return main.get_address_book_by_code(code, detail)
+
+def get_bank_item(id, detail='summary'):
+	return main.get_bank_item(id, detail)
+
+def get_banka_by_code(code, detail='summary'):
+	return  main.get_banka_by_code(code, detail)	
 
 def get_template_dict(evidence, complete=False):
 	return main.get_template_dict(evidence, complete)

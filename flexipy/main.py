@@ -40,15 +40,22 @@ def __prepare_data(evidence, data):
 	return json.dumps(winstrom)
 
 
-def __get_all_records(evidence):
+def __get_all_records(evidence, query=None, detail='summary'):
 	'''Vytvori a odesle pozadavek k ziskani vsech zaznamu z pozadovane evidence.
 	Returns :list: contatining all records
 
 	:param evidence: podporovane evidence se nachazi v config.evidence_list
-
+	:param query: dotaz ktey filtruje zaznamy
+	:param detail: uroven zobrazeni detailu(kolik polozek daneho zaznamu se vypise)
+	defaultni hodnota je summary. Dalsi moznosi je id(vypise pouze id zaznamu) a full(kompletni vypis)
 	'''
 	re.sub(r'\s', '', evidence) #remove all wihtespaces	
-	r = __send_request(method='get', endUrl=evidence+'.json')
+	if query == None:
+		r = __send_request(method='get', endUrl=evidence+'.json?detail='+detail)
+	else:
+		#pouzij query pro filtrovani
+		#TODO: nejakym zpusobem zvaliduj query
+		r = __send_request(method='get', endUrl=evidence+'/('+query+').json?detail='+detail)	
 	return __process_response(r, evidence)
 
 def __get_evidence_property_list(evidence):
@@ -102,13 +109,15 @@ def __delete_item(id, evidence):
 		else:
 			raise FlexipyException("Neznama chyba.")								
 
-def __get_evidence_item(id, evidence):
+def __get_evidence_item(id, evidence, detail='summary'):
 	"""Ziskej zaznam z evidence na zaklade id.
 	Vraci zaznam jako dictionary pro dalsi zpracovani.
 	:param id: id zaznamu(Flexibee identifikator nebo pripadne kod)
-	:param evidence: identifikuje v ktere evidenci se zaznam nachazi	
+	:param evidence: identifikuje v ktere evidenci se zaznam nachazi
+	:param detail: uroven zobrazeni detailu(kolik polozek daneho zaznamu se vypise)
+	defaultni hodnota je summary. Dalsi moznosi je id(vypise pouze id zaznamu) a full(kompletni vypis)		
 	"""		
-	r = __send_request(method='get', endUrl=evidence+'/'+str(id)+'.json')
+	r = __send_request(method='get', endUrl=evidence+'/'+str(id)+'.json?detail='+detail)
 	if r.status_code not in (200,201):
 		if r.status_code == 404:
 			raise FlexipyException("Zaznam s id="+str(id)+" nebyl nalezen.")			
@@ -118,16 +127,18 @@ def __get_evidence_item(id, evidence):
 		dictionary = __process_response(r, evidence=evidence)
 		return dictionary
 
-def __get_evidence_item_by_code(id, evidence):
-	"""Ziskej zaznam z evidence na zaklade id.
+def __get_evidence_item_by_code(kod, evidence, detail='summary'):
+	"""Ziskej zaznam z evidence na zaklade polozky kod.
 	Vraci zaznam jako dictionary pro dalsi zpracovani.
-	:param id: id zaznamu(Flexibee identifikator nebo pripadne kod)
+	:param kod: kod zaznamu(Flexibee polozka kod)
 	:param evidence: identifikuje v ktere evidenci se zaznam nachazi	
+	:param detail: uroven zobrazeni detailu(kolik polozek daneho zaznamu se vypise)
+	defaultni hodnota je summary. Dalsi moznosi je id(vypise pouze id zaznamu) a full(kompletni vypis)	
 	"""		
-	r = __send_request(method='get', endUrl=evidence+'/'+str(id)+'.json')
+	r = __send_request(method='get', endUrl=evidence+"/(kod='"+kod+"').json?detail="+detail)
 	if r.status_code not in (200,201):
 		if r.status_code == 404:
-			raise FlexipyException("Zaznam s id="+str(id)+" nebyl nalezen.")			
+			raise FlexipyException("Zaznam s kodem="+kod+" nebyl nalezen.")			
 		else:
 			raise FlexipyException("Neznama chyba.")	
 	else:		
@@ -203,16 +214,31 @@ def get_template_dict(evidence, complete=False):
 	return result	
 
 
-def get_all_bank_items():
-	d = __get_all_records('banka')
+def get_all_bank_items(query=None, detail='summary'):
+	"""Funkce vrati vsechny bankovni doklady z Flexibee.
+	:param query: Pokud je uveden dotaz ve formatu jaky podporuje 
+	Flexibee(viz dokumentace), vrati vyfiltrovane zaznamy na zaklade 
+	dotazu.
+	"""
+	d = __get_all_records('banka', query, detail)
 	return d
 
-def get_all_issued_invoices():
-	d = __get_all_records('faktura-vydana')
+def get_all_issued_invoices(query=None, detail='summary'):
+	"""Funkce vrati vsechny vydane faktury z Flexibee.
+	:param query: Pokud je uveden dotaz ve formatu jaky podporuje 
+	Flexibee(viz dokumentace), vrati vyfiltrovane zaznamy na zaklade 
+	dotazu.
+	"""
+	d = __get_all_records('faktura-vydana', query, detail)
 	return d
 
-def get_all_received_invoices():
-	d = __get_all_records('faktura-prijata')
+def get_all_received_invoices(query=None, detail='summary'):
+	"""Funkce vrati vsechny prijate faktury z Flexibee.
+	:param query: Pokud je uveden dotaz ve formatu jaky podporuje 
+	Flexibee(viz dokumentace), vrati vyfiltrovane zaznamy na zaklade 
+	dotazu.
+	"""
+	d = __get_all_records('faktura-prijata', query, detail)
 	return d
 
 
@@ -266,15 +292,29 @@ def delete_received_invoice(id):
 	"""
 	__delete_item(id, 'faktura-prijata')	
 
-def get_issued_invoice(id):
-	return __get_evidence_item(id, 'faktura-vydana')
+def get_issued_invoice(id, detail='summary'):
+	return __get_evidence_item(id, 'faktura-vydana', detail)
+
+def get_issued_invoice_by_code(code, detail='summary'):
+	return __get_evidence_item_by_code(code, 'faktura-vydana', detail)
 		
+def get_received_invoice(id, detail='summary'):
+	return __get_evidence_item(id, 'faktura-prijata', detail)
 
-def get_received_invoice(id):
-	return __get_evidence_item(id, 'faktura-prijata')
+def get_received_invoice_by_code(code, detail='summary'):
+	return __get_evidence_item_by_code(code, 'faktura-prijata', detail)		
 
-def get_address_book_item(id):
-	return __get_evidence_item(id, 'adresar')
+def get_address_book_item(id, detail='summary'):
+	return __get_evidence_item(id, 'adresar', detail)
+
+def get_address_book_by_code(code, detail='summary'):
+	return __get_evidence_item_by_code(code, 'adresar', detail)			
+
+def get_bank_item(id, detail='summary'):
+	return __get_evidence_item(id, 'banka', detail)
+
+def get_banka_by_code(code, detail='summary'):
+	return __get_evidence_item_by_code(code, 'banka', detail)		
 
 def create_address_book_item(address_item):
 	"""Creates new contact in address book, can be good for suppliers and
