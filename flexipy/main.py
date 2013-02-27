@@ -242,27 +242,32 @@ def get_all_received_invoices(query=None, detail='summary'):
 	return d
 
 
-def create_issued_invoice(invoice, invoice_items):
+def create_issued_invoice(kod, var_sym, datum_vyst, zdroj_pro_sklad=False, 
+	typ_dokl=config.typ_faktury_vydane[0], dalsi_param=None, polozky_faktury=None):
 	"""This function creates new issued invoice in Flexibee. 
 	Returns :tuple consisting of (success, result, error_message)
-	where success = True/False
-	result = id of invoice in FLexibee or None if success = False
-	error_message = List of error messages if success=False else error_message=None
 	"""	
-	inv_items = []
-	for it in invoice_items:
-		inv_items.append(it)
-	invoice['polozkyFaktury']= inv_items
+	invoice = {'kod':kod, 'varSym':var_sym, 'datVyst':datum_vyst,'zdrojProSkl':zdroj_pro_sklad, 'typDokl':typ_dokl}
+	if dalsi_param != None:
+		for k,v in dalsi_param.iteritems():
+			invoice[k] = v			
+	if polozky_faktury != None:		
+		invoice['bezPolozek'] = False
+		inv_items = []
+		for it in polozky_faktury:
+			inv_items.append(it)
+		invoice['polozkyFaktury']= inv_items
 	return __create_evidence_item('faktura-vydana',invoice)
 	
 
-def create_received_invoice(invoice, invoice_items):
+def create_received_invoice(kod, var_sym, cislo_dosle, datum_splat, 
+	datum_vyst, zdroj_pro_sklad=False, typ_dokl=config.typ_faktury_prijate[0], 
+	dalsi_param=None, polozky_faktury=None)):
 	"""This function creates new received invoice in Flexibee. 
 	Returns :tuple consisting of (success, result, error_message)
 	where success = True/False
-	result = id of invoice in FLexibee or None if success = False
-	error_message = Error message if success=False else error_message=None
 	"""	
+	invoice = {'datSplat': datum_splat, 'kod': kod, 'zdrojProSkl': zdroj_pro_sklad, 'datVyst': datum_vyst, 'varSym': var_sym, 'cisDosle': cislo_dosle, 'typDokl': typ_dokl}
 	inv_items = []
 	for it in invoice_items:
 		inv_items.append(it)
