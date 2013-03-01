@@ -1,5 +1,7 @@
 import re
 import os
+from flexipy import main
+from flexipy import config
 from functools import partial
 
 from paver import doctools
@@ -63,3 +65,7 @@ def delete_pyc():
 def build_docs():
     doctools.doc_clean()
     doctools.html()
+
+@task
+def test():
+    pass

@@ -3,13 +3,12 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-===================================
-Welcome to flexipy's documentation!
-===================================
+======================================
+Vítejte v dokumentaci projektu flexipy
+======================================
 
-Overview
-========
-The big picture
+Přehled
+=======
 
 * :doc:`overview/carsharing`
 
@@ -39,8 +38,8 @@ Getting started
 How to...
 =========
 
-* :doc:`...work with Git <howto/git>`
-* :doc:`...run the test suite <howto/tests>`
+* :doc:`...jak pracovat s gitem <howto/git>`
+* :doc:`...jak testovat knihovnu <howto/tests>`
 
 
 Indices and tables

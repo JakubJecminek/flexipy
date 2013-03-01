@@ -3,8 +3,8 @@
 """
 Zde se nachazi globalni nastaveni modulu.
 Je treba zde nastavit nektere parametry(viz dokumentace).
-Nektere promene se automaticky naplni pri importu modulu.
-Pro spravne nastaveni konfigurace je nutne byt pripojeny k systemu Flexibee.
+Nektere promene je treba doplnit na zaklade faktickeho 
+stavu z Flexibee. Napriklad doplnit typy faktur.
 """
 
 #parametry pro nastaveni serveru na kterem bezi Flexibee
@@ -27,18 +27,12 @@ evidence_list = ('faktura-vydana', 'banka', 'interni-doklad',
 
 #dict ktery se inicializuje pri nacteni knihovny, obsahuje vsechny moznosti
 #tato polozka se vyuziva u faktura-prijata, oznaceni typDokl
-typ_faktury_prijate = []
+typ_faktury_prijate = ['FAKTURA', 'PR\xcdJEMKA','Z\xc1LOHA','ZDD']
 
-typ_faktury_vydane = []
+typ_faktury_vydane = ['FAKTURA','FAKT\xdaRA ESHOP','PREDFAKT\xdaRA','Z\xc1LOHA','ZDD']
 
 #typDokl u banka
-typ_bank_dokladu = []
-
-#tento dict se nainicalizuje pri importu knihovny dynamicky ze serveru na kterem je umisteno flexibee
-#key je odkaz na evidenci(url) ktera obsahuje list moznych hodnot
-#value je list, ktery obsahuje vsechny polozky kod, ktere muze nabyvat typDokl danne evidence
-#kod je faktickym odkazem ktery se pak umistuje do typDokl
-typDokl = {'typ-faktury-vydane':typ_faktury_vydane, 'typ-faktury-prijate':typ_faktury_prijate,'typ-banka':typ_bank_dokladu}
+typ_bank_dokladu = ['BANKOVN\xcd \xda\u010cET 2','STANDARD']
 
 #select u banky, pevne dano, pouze dve moznosti
 typPohybuK = {'prijem':'typPohybu.prijem','vydej':'typPohybu.vydej'}
