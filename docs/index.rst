@@ -41,15 +41,6 @@ How to...
 * :doc:`...jak testovat knihovnu <howto/tests>`
 
 
-Indices and tables
-==================
-
-* :doc:`Detailed table of contents <contents>`
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
-
-
 Full contents
 =============
 

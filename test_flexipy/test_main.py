@@ -12,3 +12,5 @@ def test_validate_item():
 	invalid_params = {'doprava':'','duzpaPuv':'','zaveTxt':''}
 	expected_invalid = (False, ['duzpaPuv','zaveTxt'])
 	assert main.__validate_params(invalid_params, 'faktura-vydana') == expected_invalid
+
+
