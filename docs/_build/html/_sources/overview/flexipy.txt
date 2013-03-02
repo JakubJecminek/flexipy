@@ -10,6 +10,6 @@ API je ale velmi podrobné a práce s ním může ze začátku činit problémy.
 knihovnu v jazyku Python, která bude zjednodušovat práci s Flexibee. Další motivací bylo to, že díky této knihovně 
 bude možné znovu použít části kódu, které se opakují. Knihovna také odchytává základní vyjímky a má jeden jednoduchý konfigurační soubor. 
 Knihovna flexipy je vyvíjena v rámci mé bakalářské práce, která se zabývá implementací účetní komponenty(modulu) 
-pro podporu sdílení aut(carsharing). Tento projekt je vyvíjen pod názvem Autonapůl.cz(dříve Metrocar) a jeho dokumentaci lze nalézt na `http://autonapul.cz/docs/`_.
+pro podporu sdílení aut(carsharing). Tento projekt je vyvíjen pod názvem Autonapůl.cz(dříve Metrocar) a jeho dokumentaci lze nalézt na `http://autonapul.cz/docs/`.
 
 Pro více informací o REST API systému Flexibee doporučuji podrobnou `oficiální dokumentaci <http://www.flexibee.eu/api/>`_

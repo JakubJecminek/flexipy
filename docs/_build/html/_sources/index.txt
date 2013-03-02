@@ -25,9 +25,9 @@ Getting started
 
 * :doc:`gettingstarted/installation` -- jak si nainstalovat knihovnu.
 
-* :doc:`gettingstarted/usage` -- jak si používat knihovnu.
+* :doc:`gettingstarted/usage` -- jak používat knihovnu.
 
-project.
+* :doc:`gettingstarted/contributing` -- doporučení pro ty, kteří by chtěli přidat funkcionalitu do knihovny
 
   * :ref:`contributing-coding-style`
   * :ref:`contributing-documentation`

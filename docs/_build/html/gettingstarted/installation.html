@@ -1,0 +1,172 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Instalace &mdash; flexipy 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/pyramid.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="flexipy 0.1 documentation" href="../index.html" />
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Neuton&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Nobile:regular,italic,bold,bolditalic&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
+<!--[if lte IE 6]>
+<link rel="stylesheet" href="../_static/ie6.css" type="text/css" media="screen" charset="utf-8" />
+<![endif]-->
+
+  </head>
+  <body>
+
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li><a href="../index.html">flexipy 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="instalace">
+<h1>Instalace<a class="headerlink" href="#instalace" title="Permalink to this headline">¶</a></h1>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p><em>Word of advice</em></p>
+<p class="last">Pokud to je pro Vás možné, pracujte na projektu na Unix-based systému,
+protože to je systém, který nejvíce vývojářu používá a je nejméně
+pravděpodobné, že by jste narazili na nějaké větší problémy při
+instalaci knihovny.</p>
+</div>
+<div class="section" id="get-the-code">
+<h2>1. Get the code<a class="headerlink" href="#get-the-code" title="Permalink to this headline">¶</a></h2>
+<p>Aktuální kód se nacházi v <a class="reference external" href="https://www.assembla.com/code/flexipy/git/nodes">git repozitáři</a></p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>git clone git@git.assembla.com:flexipy.git
+</pre></div>
+</div>
+<p><tt class="docutils literal"><span class="pre">git&#64;git.assembla.com:flexipy.git</span></tt> je hlavní rewpozitář. Požádejte
+<a class="reference internal" href="../overview/people.html#project-maintainer"><em>Tvůrce a maintainer</em></a> pro získání přístupu. Mezitím, můžete získat kód
+skrze Public clone URL:</p>
+<p><tt class="docutils literal"><span class="pre">git://git.assembla.com/flexipy.git</span></tt></p>
+</div>
+<div class="section" id="vitvoreni-virtualenv-doporuceny-krok">
+<h2>2. Vitvoření virtualenv(doporučený krok)<a class="headerlink" href="#vitvoreni-virtualenv-doporuceny-krok" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="http://pypi.python.org/pypi/virtualenv">Virtualenv</a> je nástroj pro vytváření oddělených python prostředí. Umožňuje Vám instalovat python package bez zanášení hlavního python prostředí Vašeho OS.</p>
+<p>Nejdříve je nutné virtuaelnv <a href="#id1"><span class="problematic" id="id2">nainstalovat_</span></a> na Váš systém, pokud jej již nemáte.</p>
+<p>Poté vytvořte virtuální prostředí pro flexipy takto:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>virtualenv flexipy-env
+</pre></div>
+</div>
+<p>Kde <tt class="docutils literal"><span class="pre">flexipy-env</span></tt> je adresář, ve kterém virtualenv bude vytvořeno. Může se nacházet kdekoliv (ale nevytvářejte virtualenv uvnitř repozitáře, aby nedošlo náhodnému komitnutí).</p>
+<p>Pro využívání virtuálního prostředí je nutné ho aktivovat:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>. flexipy-env/bin/activate
+</pre></div>
+</div>
+<p>Pro deaktivaci zadejte:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>deactivate
+</pre></div>
+</div>
+<p>(V jakékoliv složce)</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Toto se liší pokud jste na Windows, viz <a class="reference external" href="http://pypi.python.org/pypi/virtualenv">virtualenv
+documentation</a>.</p>
+</div>
+</div>
+<div class="section" id="nainstalujte-python-balicky">
+<h2>3. Nainstalujte python balíčky<a class="headerlink" href="#nainstalujte-python-balicky" title="Permalink to this headline">¶</a></h2>
+<p>Běžte do repozitáře, které jste si stáhli(git clone) v prvním kroku (s virtualenv aktivovanám, pokud ho
+využíváte):</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span><span class="nb">cd </span>flexipy
+</pre></div>
+</div>
+<p>Nainstalujte balíčky potřebné pro projekt:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>python setup.py develop
+</pre></div>
+</div>
+<p>A nainstalujte další závislosti:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>paver install_dependencies
+</pre></div>
+</div>
+</div>
+<div class="section" id="update-your-development-settings">
+<h2>4. Update your development settings<a class="headerlink" href="#update-your-development-settings" title="Permalink to this headline">¶</a></h2>
+<p>TODO</p>
+</div>
+<div class="section" id="run-the-tests">
+<h2>5. Run the tests<a class="headerlink" href="#run-the-tests" title="Permalink to this headline">¶</a></h2>
+<p>TODO</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Instalace</a><ul>
+<li><a class="reference internal" href="#get-the-code">1. Get the code</a></li>
+<li><a class="reference internal" href="#vitvoreni-virtualenv-doporuceny-krok">2. Vitvoření virtualenv(doporučený krok)</a></li>
+<li><a class="reference internal" href="#nainstalujte-python-balicky">3. Nainstalujte python balíčky</a></li>
+<li><a class="reference internal" href="#update-your-development-settings">4. Update your development settings</a></li>
+<li><a class="reference internal" href="#run-the-tests">5. Run the tests</a></li>
+</ul>
+</li>
+</ul>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li><a href="../index.html">flexipy 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Jakub Ječmínek.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>
