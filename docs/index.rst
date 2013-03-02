@@ -10,9 +10,9 @@ Vítejte v dokumentaci projektu flexipy
 Přehled
 =======
 
-* :doc:`overview/carsharing`
+* :doc:`overview/flexibee`
 
-* :doc:`overview/metrocar`
+* :doc:`overview/flexipy`
 
 * :doc:`overview/about`
 
@@ -23,12 +23,11 @@ Přehled
 Getting started
 ===============
 
-* :doc:`gettingstarted/prerequisites` -- what you should know (take a look at) before you start,
-  Python/Django tutorials, etc.
+* :doc:`gettingstarted/installation` -- jak si nainstalovat knihovnu.
 
-* :doc:`gettingstarted/installation` -- how to get the project up and running.
+* :doc:`gettingstarted/usage` -- jak si používat knihovnu.
 
-* :doc:`gettingstarted/contributing` -- some hints to follow to not make a (*bigger than it already is*) mess of this project.
+project.
 
   * :ref:`contributing-coding-style`
   * :ref:`contributing-documentation`
