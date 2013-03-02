@@ -6,7 +6,10 @@ Je to také jediný etní systém v ČR, který má otevřené rozhraní, které
 další informační systémy. Toto rozhraní je postavené na technologii REST. 
 Toto rozhraní má velmi dobrou dokumentaci a umožňuje výměnu dat v mnoha formátech.
 Tato knihovna využívá pro kunikaci JSON. Pro podrobnosti o knihovně flexipy a důvody jejího vzniku, 
-Vás odkazuji na stránku `overview/flexipy`_.
+Vás odkazuji na stránku:
+
+.. seealso::
+    :doc:`/overview/flexipy` 
 
 Pro více informací doporučuji navštívit `oficiální stránka o Flexibee
 <http://flexibee.eu>`_
