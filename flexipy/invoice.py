@@ -4,7 +4,7 @@ import requests
 import json
 import config
 from main import FlexipyException, __create_evidence_item, __delete_item, __update_evidence_item, __get_all_records, __get_evidence_item,\
-__get_evidence_item_by_code
+__get_evidence_item_by_code, __validate_params
 
 def get_all_issued_invoices(query=None, detail='summary'):
 	"""Funkce vrati vsechny vydane faktury z Flexibee.
