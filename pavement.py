@@ -68,4 +68,4 @@ def build_docs():
 
 @task
 def test():
-    pass
+    sh('py.test test_flexipy/')

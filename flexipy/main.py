@@ -51,7 +51,10 @@ def __get_all_records(evidence, query=None, detail='summary'):
 	'''
 	re.sub(r'\s', '', evidence) #remove all wihtespaces	
 	if query == None:
-		r = __send_request(method='get', endUrl=evidence+'.json?detail='+detail)
+		try:
+			r = __send_request(method='get', endUrl=evidence+'.json?detail='+detail)
+		except FlexipyException:
+			print 		
 	else:
 		#pouzij query pro filtrovani
 		#TODO: nejakym zpusobem zvaliduj query

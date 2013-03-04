@@ -52,11 +52,16 @@ def create_received_invoice(kod, var_sym, cislo_dosle, datum_splat,
 	where success = True/False
 	"""	
 	invoice = {'datSplat': datum_splat, 'kod': kod, 'zdrojProSkl': zdroj_pro_sklad, 'datVyst': datum_vyst, 'varSym': var_sym, 'cisDosle': cislo_dosle, 'typDokl': typ_dokl}
-	inv_items = []
-	for it in invoice_items:
-		inv_items.append(it)
-	d = faktura.to_dict()
-	invoice['polozkyFaktury']= inv_items
+	if dalsi_param != None:
+		__validate_params(dalsi_param, 'faktura-prijata')
+		for k,v in dalsi_param.iteritems():
+			invoice[k] = v			
+	if polozky_faktury != None:		
+		invoice['bezPolozek'] = False
+		inv_items = []
+		for it in polozky_faktury:
+			inv_items.append(it)
+		invoice['polozkyFaktury']= inv_items
 	return __create_evidence_item('faktura-prijata',invoice)
 	
 
