@@ -27,9 +27,18 @@ def get_all_received_invoices(query=None, detail='summary'):
 
 def create_issued_invoice(kod, var_sym, datum_vyst, zdroj_pro_sklad=False, 
 	typ_dokl=config.typ_faktury_vydane[0], dalsi_param=None, polozky_faktury=None):
-	"""This function creates new issued invoice in Flexibee. 
-	Returns :tuple consisting of (success, result, error_message)
+	"""Tato funkce vytvori novou vydanou fakturu ve Flexibee 
+	:param kod: interni cislo
+	:param var_sym: variabilni symbol faktury
+	:param datum_vyst: datum vystaveni faktury format datumu(2013-02-28+01:00)
+	:param zdroj_pro_sklad: True nebo False zda je zdrojem pro skladove zaznamy 
+	:param typ_dokl: mozne hodnoty se nachazi v config.typ_faktury_vydane
+	:param dalsi_param:  dalsi nepovinne paramerty viz dokumentace Flexibee
+	:param polozky_faktury: polozky fakturz jsou list obsahujici jednotlive polozky
+	Returns :tuple skladajici se z (success, result, error_message)
 	"""	
+	#doplneni vyzadovano flexibee
+	typ_dokl = 'code:'+typ_dokl 
 	invoice = {'kod':kod, 'varSym':var_sym, 'datVyst':datum_vyst,'zdrojProSkl':zdroj_pro_sklad, 'typDokl':typ_dokl}
 	if dalsi_param != None:
 		__validate_params(dalsi_param, 'faktura-vydana')
@@ -47,10 +56,19 @@ def create_issued_invoice(kod, var_sym, datum_vyst, zdroj_pro_sklad=False,
 def create_received_invoice(kod, var_sym, cislo_dosle, datum_splat, 
 	datum_vyst, zdroj_pro_sklad=False, typ_dokl=config.typ_faktury_prijate[0], 
 	dalsi_param=None, polozky_faktury=None):
-	"""This function creates new received invoice in Flexibee. 
-	Returns :tuple consisting of (success, result, error_message)
-	where success = True/False
+	"""Tato funkce zaznamena novou prijatou fakturu ve Flexibee 
+	:param kod: interni cislo
+	:param var_sym: variabilni symbol faktury
+	:param datum_splat: datum splatnosti faktury format datumu(2013-02-28+01:00)
+	:param datum_vyst: datum vystaveni faktury format datumu(2013-02-28+01:00)
+	:param zdroj_pro_sklad: True nebo False zda je zdrojem pro skladove zaznamy 
+	:param typ_dokl: mozne hodnoty se nachazi v config.typ_faktury_prijate
+	:param dalsi_param:  dalsi nepovinne paramerty viz dokumentace Flexibee
+	:param polozky_faktury: polozky fakturz jsou list obsahujici jednotlive polozky
+	Returns :tuple skladajici se z (success, result, error_message)
+	kde success = True/False
 	"""	
+	typ_dokl = 'code:'+typ_dokl 
 	invoice = {'datSplat': datum_splat, 'kod': kod, 'zdrojProSkl': zdroj_pro_sklad, 'datVyst': datum_vyst, 'varSym': var_sym, 'cisDosle': cislo_dosle, 'typDokl': typ_dokl}
 	if dalsi_param != None:
 		__validate_params(dalsi_param, 'faktura-prijata')

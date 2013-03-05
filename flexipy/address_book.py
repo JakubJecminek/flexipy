@@ -19,4 +19,9 @@ def create_address_book_item(address_item):
 	"""	
 	return __create_evidence_item('adresar',address_item)
 
-	
+def create_address_book_bank_account(firma, cislo_uctu, kod_banky, dalsi_parametry):
+	"""Vytvori pro firmu v adresari bankovni spojeni.
+	:param firma: kod firmy
+	:dalsi_parametry: dalsi mozne parametry viz dokumentace
+	"""
+	return __create_evidence_item('adresar-bankovni-uce')	
