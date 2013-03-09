@@ -35,7 +35,7 @@ typ_faktury_vydane = ['FAKTURA','FAKT\xdaRA ESHOP','PREDFAKT\xdaRA','Z\xc1LOHA',
 typ_bank_dokladu = ['BANKOVN\xcd \xda\u010cET 2','STANDARD']
 
 #select u banky, pevne dano, pouze dve moznosti
-typ_pohybu = {'prijem':'typPohybu.prijem','vydej':'typPohybu.vydej'}
+typ_pohybu = ['typPohybu.prijem','typPohybu.vydej']
 
 #relace u bank dokladu je to evidence bankovni-ucet
 bankovni_ucet = ['BANKA_1']

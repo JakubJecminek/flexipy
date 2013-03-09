@@ -38,6 +38,9 @@ def create_received_invoice(kod, var_sym, cislo_dosle, datum_splat,
 	return invoice.create_received_invoice(kod=kod, var_sym=var_sym, cislo_dosle=cislo_dosle, datum_splat=datum_splat, 
 	datum_vyst=datum_vyst, **kwargs)
 
+def create_bank_item(kod, dat_vyst, **kwargs):
+	return bank.create_bank_item(kod=kod, dat_vyst=dat_vyst, **kwargs)	
+
 def update_issued_invoice(id, invoice):
 	return invoice.update_issued_invoice(id, invoice)	
 

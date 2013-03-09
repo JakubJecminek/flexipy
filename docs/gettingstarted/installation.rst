@@ -84,9 +84,13 @@ A nainstalujte další závislosti::
 4. Update your development settings
 ===================================
 
-TODO
+Ve složce flexipy se nachazi soubor config.py. Tento souburo je nutné upravit před použitím knihovny dle Vaší situace. 
+Především je nutné nastavit proměné host, firma, username a password, díky tomu bude knihovna schopn komunikovat s Flexibee. 
 
 5. Run the tests
 ================
 
-TODO
+Tento projekt používá knihovnu pytest pro testování, testy spustíte příkazem::
+
+    $ paver test
+    
