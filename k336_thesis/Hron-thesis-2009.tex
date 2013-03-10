@@ -265,7 +265,8 @@ REST API, které je součástí systému Flexibee.
 % atd...
 
 %*****************************************************************************
-\chapter{Introduction} \section{Carsharing definition} Carsharing is model of
+\chapter{Introduction} 
+\section{Carsharing definition} Carsharing is model of
 renting cars where group of people is sharing car  for a short periods of
 time. This is especially  useful for people who use car only occasinally. The
 organization that provides carsharing service don't have to be necessarily
@@ -403,12 +404,15 @@ Flexipy is a Python library that is being created as a part of this project by m
 
 Design goal of flexipy is to be as simple as possible. It is powered by Requests library\cite{requests} which provides tools for working with HTTP protocol. The main advantage of Requests over traditional urllib2 is simplicity. With Requests I am capable to send request with just one line of code. Also it simplifies work with HTTP status codes, which are used in FLexibee's REST API as identifiers of operation results.
 
-Flexipy is using the fact that most of the fields of every evidence\footnote{In Flexibee the word evidence corresponds to one specific part of the system, for example issued invoices, or address book of companies etc.} item\footnote{By the word item is meant one specific document that belong to certain evidence, for example one concrete invoice.} are automatically populated by Flexibee during their creation, thanks to the mechanism of internal dependencies\cite{flexDep}. Therefore the number of fields that user of the flexipy has to specifically insert is not so big. Without this mechanism, creating new items in Flexibee would be very hard, for example if user would have to specify all attributes of invoice, he would have to manually insert about 100 values. 
+Flexipy is using the fact that most of the fields of every evidence\footnote{In Flexibee the word evidence corresponds to one specific part of the system, for example issued invoices, or address book of companies etc.} item\footnote{By the word item is meant one specific document that belong to certain evidence, for example one concrete invoice.} are automatically populated by Flexibee during their creation, thanks to the mechanism of internal dependencies\cite{flexDep}. Therefore the number of fields that user of the flexipy has to specifically insert is not so big. Without this mechanism, creating new items in Flexibee would be very hard, for example if user would have to specify all attributes of invoice, he would have to manually insert about 100 values. Flexibee is also very customizible when it comes to specific needs. For example, user can define custom relations and types of customer and then use these features to simplify the procces of creation of new evidence items. This aspect of Flexibee is also part of flexipy as there is configuration file that can be customized to specific needs of the user and state of Flexibee. This mechanism will be described in further details in the implementation part. 
 
 
 
 %*****************************************************************************
 \chapter{Implementation}
+In this part of thesis are described implementation detials of both flexipy, accouting module and all other parts of Metrocar system that where either created or modified by me. For this chapter it was decided to use the iteration model after discusion with Martin Komárek. This model allowes to specify specific goals and problems for iteration and was also used in thesis of Jan Wágner. Another reason for this is the fact that after Petr Pokorný finished his work on the project I have become only person actively involved, that was familiar with server side of the project, therefore I took the role of project maintainer. So as a mainainer I had to solve problems that where not necessarily for my thesis but where impotent for further continuation of the project as a whole. I also worked closely with Roman Kubů who is working on the car unit solution for the Metrocar project. All of these tasks are later on described in this chapter.
+
+
 
 
 
