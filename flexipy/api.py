@@ -86,14 +86,16 @@ def get_bank_item(id, detail='summary'):
 	return bank.get_bank_item(id, detail)
 
 def get_banka_by_code(code, detail='summary'):
-	return bank.get_banka_by_code(code, detail)		
-	
+	return bank.get_banka_by_code(code, detail)			
 
-def get_address_book_item(id, detail='summary'):
-	return main.get_address_book_item(id, detail)		
+def get_adresar(id, detail='summary'):
+	return main.get_adresar(id, detail)		
 
-def get_address_book_by_code(code, detail='summary'):
-	return main.get_address_book_by_code(code, detail)
+def get_adresar_by_code(code, detail='summary'):
+	return main.get_adresar_by_code(code, detail)
+
+def delete_adresar(id):
+	address_book.delete_adresar(id)	
 
 
 def get_template_dict(evidence, complete=False):

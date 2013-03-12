@@ -21,7 +21,7 @@ password='winstrom'
 #tuple obsahujici podporavene evidence se kterymi knihovna umi pracovat
 evidence_list = ('faktura-vydana', 'banka', 'interni-doklad',
 	'adresar','cenik','faktura-prijata','faktura-vydana-polozka',
-	'faktura-prijata-polozka','typ-faktury-vydane')
+	'faktura-prijata-polozka','typ-faktury-vydane','adresar-bankovni-ucet')
 
 #nasleduji listy a dictionaries ktere obsahuji polozky typu relation, ktere se nacitaji z flexibee
 
