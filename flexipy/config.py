@@ -40,3 +40,6 @@ typ_pohybu = ['typPohybu.prijem','typPohybu.vydej']
 #relace u bank dokladu je to evidence bankovni-ucet
 bankovni_ucet = ['BANKA_1']
 
+#typy polozek u faktury vydane
+#toto je typ select, tyto hodnoty jsou by default ve flexibee
+typ_polozky_vydane=['typPolozky.obecny','typPolozky.katalog','typPolozky.ucetni','typPolozky.text']

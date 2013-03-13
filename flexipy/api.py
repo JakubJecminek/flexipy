@@ -8,7 +8,7 @@ This module implements the flexipy API.
 """
 from . import main, invoice, bank, address_book
 
-def create_issued_invoice(kod, var_sym, datum_vyst, **kwargs):
+def create_vydana_faktura(kod, var_sym, datum_vyst, **kwargs):
 	"""Tato funkce vytvori novou vydanou fakturu ve Flexibee 
 	:param kod: interni cislo
 	:param var_sym: variabilni symbol faktury
@@ -19,9 +19,9 @@ def create_issued_invoice(kod, var_sym, datum_vyst, **kwargs):
 	:param polozky_faktury: polozky fakturz jsou list obsahujici jednotlive polozky
 	Returns :tuple skladajici se z (success, result, error_message)
 	"""	
-	return invoice.create_issued_invoice(kod=kod, var_sym=var_sym, datum_vyst=datum_vyst, **kwargs)
+	return invoice.create_vydana_faktura(kod=kod, var_sym=var_sym, datum_vyst=datum_vyst, **kwargs)
 
-def create_received_invoice(kod, var_sym, cislo_dosle, datum_splat, 
+def create_prijata_faktura(kod, var_sym, cislo_dosle, datum_splat, 
 	datum_vyst, **kwargs):
 	"""Tato funkce zaznamena novou prijatou fakturu ve Flexibee 
 	:param kod: interni cislo
@@ -35,58 +35,47 @@ def create_received_invoice(kod, var_sym, cislo_dosle, datum_splat,
 	Returns :tuple skladajici se z (success, result, error_message)
 	kde success = True/False
 	"""	
-	return invoice.create_received_invoice(kod=kod, var_sym=var_sym, cislo_dosle=cislo_dosle, datum_splat=datum_splat, 
+	return invoice.create_prijata_faktura(kod=kod, var_sym=var_sym, cislo_dosle=cislo_dosle, datum_splat=datum_splat, 
 	datum_vyst=datum_vyst, **kwargs)
 
-def create_bank_item(kod, dat_vyst, **kwargs):
-	return bank.create_bank_item(kod=kod, dat_vyst=dat_vyst, **kwargs)	
+def create_bank_doklad(kod, dat_vyst, **kwargs):
+	return bank.create_bank_doklad(kod=kod, dat_vyst=dat_vyst, **kwargs)	
 
-def update_issued_invoice(id, invoice):
-	return invoice.update_issued_invoice(id, invoice)	
+def create_adresar(kod, nazev, dalsi_param=None):
+	return address_book.create_adresar(kod, nazev, dalsi_param)	
 
-
-def get_all_issued_invoices(query=None, detail='summary'):
+def get_all_vydane_faktury(query=None, detail='summary'):
 	"""This function obtains all issued invoices form Flexibee. 
 	Returns :dictionary that contains all issued invoices.
 	"""	
-	return invoice.get_all_issued_invoices(query, detail)
+	return invoice.get_all_vydane_faktury(query, detail)
 
-def get_all_received_invoices(query=None, detail='summary'):
-	return invoice.get_all_received_invoices(query, detail)
+def get_all_prijate_faktury(query=None, detail='summary'):
+	return invoice.get_all_prijate_faktury(query, detail)
 
-def delete_issued_invoice(id):
-	invoice.delete_issued_invoice(id)
+def get_vydana_faktura(id, detail='summary'):
+	return invoice.get_vydana_faktura(id, detail)
 
-def delete_received_invoice(id):	
-	invoice.delete_received_invoice(id)
+def get_vydana_faktura_by_code(code, detail='summary'):
+	return invoice.get_vydana_faktura_by_code(code, detail)
 
-def get_issued_invoice(id, detail='summary'):
-	return invoice.get_issued_invoice(id, detail)
+def get_prijata_faktura(id, detail='summary'):
+	return invoice.get_prijata_faktura(id, detail)	
 
-def get_issued_invoice_by_code(code, detail='summary'):
-	return invoice.get_issued_invoice_by_code(code, detail)
+def get_prijata_faktura_by_code(code, detail='summary'):
+	return invoice.get_prijata_faktura_by_code(code, detail)		
 
-def get_received_invoice(id, detail='summary'):
-	return invoice.get_received_invoice(id, detail)	
-
-def get_received_invoice_by_code(code, detail='summary'):
-	return invoice.get_received_invoice_by_code(code, detail)	
-
-def create_address_book_item(address_item):
-	return address_book.create_address_book_item(address_item)
-	
-
-def get_all_bank_items(query=None, detail='summary'):
+def get_all_bank_doklady(query=None, detail='summary'):
 	"""This function obtains all bank items form Flexibee. 
 	Returns :dictionary that contains all bank items.
 	"""	
-	return bank.get_all_bank_items(query, detail)
+	return bank.get_all_bank_doklady(query, detail)
 
-def get_bank_item(id, detail='summary'):
-	return bank.get_bank_item(id, detail)
+def get_bank_doklad(id, detail='summary'):
+	return bank.get_bank_doklad(id, detail)
 
-def get_banka_by_code(code, detail='summary'):
-	return bank.get_banka_by_code(code, detail)			
+def get_bank_doklad_by_code(code, detail='summary'):
+	return bank.get_bank_doklad_by_code(code, detail)			
 
 def get_adresar(id, detail='summary'):
 	return main.get_adresar(id, detail)		
@@ -94,9 +83,26 @@ def get_adresar(id, detail='summary'):
 def get_adresar_by_code(code, detail='summary'):
 	return main.get_adresar_by_code(code, detail)
 
+def get_template_dict(evidence, complete=False):
+	return main.get_template_dict(evidence, complete)
+
 def delete_adresar(id):
 	address_book.delete_adresar(id)	
 
+def delete_bank_doklad(id):
+	bank.delete_bank_doklad(id)
 
-def get_template_dict(evidence, complete=False):
-	return main.get_template_dict(evidence, complete)
+def delete_vydana_faktura(id):
+	invoice.delete_vydana_faktura(id)
+
+def delete_prijata_faktura(id):	
+	invoice.delete_prijata_faktura(id)
+
+def update_vydana_faktura(id, invoice):
+	return invoice.update_vydana_faktura(id, invoice)	
+
+def update_prijata_faktura(id, invoice):
+	return invoice.update_prijata_faktura(id, invoice)	
+
+def update_bank_doklad(id, bank_item):
+	return bank.update_bank_doklad(id, bank_item)	

@@ -6,7 +6,7 @@ import config
 from main import FlexipyException, __create_evidence_item, __delete_item, __update_evidence_item, __get_all_records, __get_evidence_item,\
 __get_evidence_item_by_code, __validate_params
 
-def get_all_issued_invoices(query=None, detail='summary'):
+def get_all_vydane_faktury(query=None, detail='summary'):
 	"""Funkce vrati vsechny vydane faktury z Flexibee.
 	:param query: Pokud je uveden dotaz ve formatu jaky podporuje 
 	Flexibee(viz dokumentace), vrati vyfiltrovane zaznamy na zaklade 
@@ -15,7 +15,7 @@ def get_all_issued_invoices(query=None, detail='summary'):
 	d = __get_all_records('faktura-vydana', query, detail)
 	return d
 
-def get_all_received_invoices(query=None, detail='summary'):
+def get_all_prijate_faktury(query=None, detail='summary'):
 	"""Funkce vrati vsechny prijate faktury z Flexibee.
 	:param query: Pokud je uveden dotaz ve formatu jaky podporuje 
 	Flexibee(viz dokumentace), vrati vyfiltrovane zaznamy na zaklade 
@@ -25,7 +25,7 @@ def get_all_received_invoices(query=None, detail='summary'):
 	return d
 
 
-def create_issued_invoice(kod, var_sym, datum_vyst, zdroj_pro_sklad=False, 
+def create_vydana_faktura(kod, var_sym, datum_vyst, zdroj_pro_sklad=False, 
 	typ_dokl=config.typ_faktury_vydane[0], dalsi_param=None, polozky_faktury=None):
 	"""Tato funkce vytvori novou vydanou fakturu ve Flexibee 
 	:param kod: interni cislo
@@ -53,7 +53,7 @@ def create_issued_invoice(kod, var_sym, datum_vyst, zdroj_pro_sklad=False,
 	return __create_evidence_item('faktura-vydana',invoice)
 	
 
-def create_received_invoice(kod, var_sym, cislo_dosle, datum_splat, 
+def create_prijata_faktura(kod, var_sym, cislo_dosle, datum_splat, 
 	datum_vyst, zdroj_pro_sklad=False, typ_dokl=config.typ_faktury_prijate[0], 
 	dalsi_param=None, polozky_faktury=None):
 	"""Tato funkce zaznamena novou prijatou fakturu ve Flexibee 
@@ -83,35 +83,39 @@ def create_received_invoice(kod, var_sym, cislo_dosle, datum_splat,
 	return __create_evidence_item('faktura-prijata',invoice)
 	
 
-def update_issued_invoice(id, invoice):
-	"""This function update issued invoice that is already in the Flexibee.
-	For usage example see documentation.
+def update_vydana_faktura(id, invoice):
+	"""Tato funkce slouzi k updatu hodnot vydane faktuy, ktera je jiz
+	vedena ve Flexibee.
+	Pro ukazku pouziti viz dokumentace.
 	Returns :tuple consisting of (success, result, error_message)
 	:param: id: id of invoice which you want to change
 	:param invoice: dictionary that contains changed data
 	"""
 	return __update_evidence_item(id, 'faktura-vydana', invoice)
 
-def delete_issued_invoice(id):
-	"""Delete issued invoice specifeid by id.
-	:param id: identifies invoice	
+def update_prijata_faktura(id, invoice):
+	return __update_evidence_item(id, 'faktura-prijata', invoice)
+
+def delete_vydana_faktura(id):
+	"""Smaze vydanou fakturu podle id.
+	:param id: id faktury	
 	"""
 	__delete_item(id, 'faktura-vydana')
 
-def delete_received_invoice(id):
-	"""Delete received invoice specifeid by id
-	:param id: identifies invoice	
+def delete_prijata_faktura(id):
+	"""Smaze prijatou fakturu podle id.
+	:param id: id faktury
 	"""
 	__delete_item(id, 'faktura-prijata')	
 
-def get_issued_invoice(id, detail='summary'):
+def get_vydana_faktura(id, detail='summary'):
 	return __get_evidence_item(id, 'faktura-vydana', detail)
 
-def get_issued_invoice_by_code(code, detail='summary'):
+def get_vydana_faktura_by_code(code, detail='summary'):
 	return __get_evidence_item_by_code(code, 'faktura-vydana', detail)
 		
-def get_received_invoice(id, detail='summary'):
+def get_prijata_faktura(id, detail='summary'):
 	return __get_evidence_item(id, 'faktura-prijata', detail)
 
-def get_received_invoice_by_code(code, detail='summary'):
+def get_prijata_faktura_by_code(code, detail='summary'):
 	return __get_evidence_item_by_code(code, 'faktura-prijata', detail)		

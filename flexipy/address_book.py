@@ -3,8 +3,8 @@
 import requests
 import json
 import config
-from main import FlexipyException, __create_evidence_item, __delete_item, __update_evidence_item, __get_all_records, __get_evidence_item,\
-__get_evidence_item_by_code
+from main import FlexipyException, __create_evidence_item, __delete_item, __update_evidence_item,\
+__get_all_records, __get_evidence_item, __get_evidence_item_by_code
 
 def get_adresar(id, detail='summary'):
 	return __get_evidence_item(id, 'adresar', detail)
