@@ -75,6 +75,7 @@ def create_prijata_faktura(kod, var_sym, cislo_dosle, datum_splat,
 		for k,v in dalsi_param.iteritems():
 			invoice[k] = v			
 	if polozky_faktury != None:		
+		//TODO pouzij __validate_params na validaci polozek
 		invoice['bezPolozek'] = False
 		inv_items = []
 		for it in polozky_faktury:
