@@ -43,3 +43,7 @@ bankovni_ucet = ['BANKA_1']
 #typy polozek u faktury vydane
 #toto je typ select, tyto hodnoty jsou by default ve flexibee
 typ_polozky_vydane=['typPolozky.obecny','typPolozky.katalog','typPolozky.ucetni','typPolozky.text']
+
+#polozka typUcOp u faktur
+#zde jen uvedeny ty ktere konkretne potrebuji ja
+typ_ucetni_operace = [u'TRŽBA SLUŽBY',u'NÁKUP SLUŽBY']

@@ -30,7 +30,7 @@ def create_vydana_faktura(kod, var_sym, datum_vyst, zdroj_pro_sklad=False,
 	"""Tato funkce vytvori novou vydanou fakturu ve Flexibee 
 	:param kod: interni cislo
 	:param var_sym: variabilni symbol faktury
-	:param datum_vyst: datum vystaveni faktury format datumu(2013-02-28+01:00)
+	:param datum_vyst: datum vystaveni faktury format datumu(2013-02-28)
 	:param zdroj_pro_sklad: True nebo False zda je zdrojem pro skladove zaznamy 
 	:param typ_dokl: mozne hodnoty se nachazi v config.typ_faktury_vydane
 	:param dalsi_param:  dalsi nepovinne paramerty viz dokumentace Flexibee
@@ -39,6 +39,8 @@ def create_vydana_faktura(kod, var_sym, datum_vyst, zdroj_pro_sklad=False,
 	"""	
 	#doplneni vyzadovano flexibee
 	typ_dokl = 'code:'+typ_dokl 
+	#dopleni datumu na pozadovany format
+	datum_vyst += '+01:00'
 	invoice = {'kod':kod, 'varSym':var_sym, 'datVyst':datum_vyst,'zdrojProSkl':zdroj_pro_sklad, 'typDokl':typ_dokl}
 	if dalsi_param != None:
 		__validate_params(dalsi_param, 'faktura-vydana')
@@ -48,6 +50,7 @@ def create_vydana_faktura(kod, var_sym, datum_vyst, zdroj_pro_sklad=False,
 		invoice['bezPolozek'] = False
 		inv_items = []
 		for it in polozky_faktury:
+			__validate_params(it, 'faktura-vydana-polozka')
 			inv_items.append(it)
 		invoice['polozkyFaktury']= inv_items
 	return __create_evidence_item('faktura-vydana',invoice)
@@ -59,8 +62,8 @@ def create_prijata_faktura(kod, var_sym, cislo_dosle, datum_splat,
 	"""Tato funkce zaznamena novou prijatou fakturu ve Flexibee 
 	:param kod: interni cislo
 	:param var_sym: variabilni symbol faktury
-	:param datum_splat: datum splatnosti faktury format datumu(2013-02-28+01:00)
-	:param datum_vyst: datum vystaveni faktury format datumu(2013-02-28+01:00)
+	:param datum_splat: datum splatnosti faktury format datumu(2013-02-28)
+	:param datum_vyst: datum vystaveni faktury format datumu(2013-02-28)
 	:param zdroj_pro_sklad: True nebo False zda je zdrojem pro skladove zaznamy 
 	:param typ_dokl: mozne hodnoty se nachazi v config.typ_faktury_prijate
 	:param dalsi_param:  dalsi nepovinne paramerty viz dokumentace Flexibee
@@ -69,16 +72,19 @@ def create_prijata_faktura(kod, var_sym, cislo_dosle, datum_splat,
 	kde success = True/False
 	"""	
 	typ_dokl = 'code:'+typ_dokl 
+	datum_splat+= '+01:00'
+	datum_vyst += '+01:00'
 	invoice = {'datSplat': datum_splat, 'kod': kod, 'zdrojProSkl': zdroj_pro_sklad, 'datVyst': datum_vyst, 'varSym': var_sym, 'cisDosle': cislo_dosle, 'typDokl': typ_dokl}
 	if dalsi_param != None:
 		__validate_params(dalsi_param, 'faktura-prijata')
 		for k,v in dalsi_param.iteritems():
 			invoice[k] = v			
 	if polozky_faktury != None:		
-		//TODO pouzij __validate_params na validaci polozek
+		#TODO pouzij __validate_params na validaci polozek
 		invoice['bezPolozek'] = False
 		inv_items = []
 		for it in polozky_faktury:
+			__validate_params(it, 'faktura-prijata-polozka')
 			inv_items.append(it)
 		invoice['polozkyFaktury']= inv_items
 	return __create_evidence_item('faktura-prijata',invoice)

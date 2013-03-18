@@ -186,21 +186,17 @@ def __update_evidence_item(id, evidence, data):
 def __validate_params(params, evidence):
 	"""Tato funkce validuje parametry ktere zadal uzivatel jako dodatecne polozky 
 	evidence.
-	Returns: Vraci tuple skladajici se z (True, None) pokud jsou params validni 
-	(False, invalid_params) pokud ne. invalid_params je list obsahujici polozky ktere 
-	nejsou validni.
+	V pripade chybi vyhodi FlexipyException
 	:param params: dictionary obsahujici dodatecne polozky
 	:param evidence: typ evidence pro ktery se ma provest validace
 	"""
 	template_dict = get_template_dict(evidence, True)
-	invalid_params = []
+	invalid_params = ''
 	for key in params:
 		if key not in template_dict:
-			invalid_params.append(key)
+			invalid_params += key + ', '			
 	if len(invalid_params) > 0:
-		return (False, invalid_params)
-	else:
-		return (True, None)				
+		raise FlexipyException('Dalsi parametry: '+invalid_params+'nejsou validni')
 
 def get_template_dict(evidence, complete=False):
 	"""This function creates tepmlate dictionary for evidence.
