@@ -404,7 +404,20 @@ Flexipy is using the fact that most of the fields of every evidence\footnote{In 
 \section{Accounting module}
 As was mentioned above, the accounting module is responsible for handling situations in which Flexibee has crashed, but this will be only secondary purpose of this module. The main purpose of this module is to act as intermediate between Metrocar system and Flexibee. It defines interface for Metrocar system through which Metrocar interacts with Flexibee. Thanks the nature of Python, this module can be easily replaced in the future with different implementation of the same interface, so on the side of Metrocar system, it will look like that nothing has changed, but actually Metrocar system will now be communicating with completely different accounting system on the other side. Therefore there will be no coupling between Metrocar system and Flexibee. This is very important because if the interface of accounting module was coupled with Flexibee it would extremely hard and tedious to change accounting system. 
 
-On the side of Flexibee system, the accounting module is using library flexipy that was described in the previous section. This will also help to adhere separation of concerns principle\cite{wiki:soc}, because accounting module simply calls function from flexipy and passes data if needed. It does not know anything about Flexibee REST API or format of data in which Flexibee communicate.  
+On the side of Flexibee system, the accounting module is using library flexipy that was described in the previous section. This will also help to adhere separation of concerns principle\cite{wiki:soc}, because accounting module simply calls function from flexipy and passes data if needed. It does not know anything about Flexibee REST API or format of data in which Flexibee communicate. 
+
+The accounting module i responsible for these requiremnts:
+Creation of new invoices
+Stornovani faktur
+Mazani chybnych faktur
+Uprava udaju na fakture
+Parovani plateb
+Kontrola prichozich plateb
+Posilani upiminek za nezaplacene faktury
+Vraceni faktur ve formatu PDF pro zobrazeni v uzivatelskem rozhrani
+Odesilani faktur v PDF formatu pomoci e-mailu
+Osetreni pripadu kdy Flexibee neni dostupne
+Pri vytvoreni faktury v administratorskem rozhrani systemu Metrocar vytvorit fakturu na strane Flexibee
 
 For better understading of interactions between flexipy, accounting module and Metorcar system I created simple UML diagram using Enterprise architect. I've used this case modeling system because it was used before by previous teams.
 
@@ -412,7 +425,9 @@ For better understading of interactions between flexipy, accounting module and M
 \chapter{Implementation}
 In this part of thesis are described the implementation detials of both flexipy, accouting module and all other parts of Metrocar system that where either created or modified by me. For this chapter it was decided to use the iteration model after discusion with Martin Komárek. This model allowes to specify specific goals and problems for iteration and was also used in thesis of Jan Wágner. Another reason for this is the fact that after Petr Pokorný finished his work on the project I have become only person actively involved, that was familiar with server side of the project, therefore I took the role of project maintainer. So as a mainainer I had to solve problems that were not necessarily for my thesis but where importent for further continuation of the project as a whole. I also worked closely with Roman Kubů who is working on the car unit solution for the Metrocar project. All of these tasks are later on described in this chapter.
 
-
+\section{Iteration 1}
+\subsubsection{Introduction}
+The main goal of the first iteration was to implement flexipy library to the point where it could be used for basic accounting requirements of Metrocar system.  
 
 
 
