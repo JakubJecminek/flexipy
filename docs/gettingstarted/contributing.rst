@@ -1,5 +1,5 @@
-Contribution guidelines
-=======================
+Doporučení pro přispěvatele
+===========================
 
 V této části dokumentace uvádím návody a doporučení pro ty, kteří by měli zájem o rozšíření knihovny flexipy. Za každou pomoc 
 budu jen rád :) a jsem otevřen jakýmkoliv návrhům na zlepšení. Navíc když jsem začal tuto knihovnu psát, bylo mi jasné, že nebudu schopen v krátké době implementovat podporu pro práci se všemi evidencemi a využívání všech možností Flexibe. Proto budu vděčný za pomoc s implementací dalších funkcionalit. 
