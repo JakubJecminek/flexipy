@@ -4,7 +4,9 @@
 Zde se nachazi globalni nastaveni modulu.
 Je treba zde nastavit nektere parametry(viz dokumentace).
 Nektere promene je treba doplnit na zaklade faktickeho 
-stavu z Flexibee. Napriklad doplnit typy faktur.
+stavu z Flexibee či vlastních potřeb. Napriklad doplnit typy faktur.
+TOTO JE POUZE UKAZKOVY CONFIG FILE!!! JE NUTNE SKOPIROVAT A VYTVORIT 
+VLASTNI. 
 """
 
 #parametry pro nastaveni serveru na kterem bezi Flexibee
@@ -26,13 +28,13 @@ evidence_list = ('faktura-vydana', 'banka', 'interni-doklad',
 #nasleduji listy, ktere obsahuji polozky typu relation, ktere se nachazeji ve flexibee
 
 #tato polozka se vyuziva u faktura-prijata, oznaceni typDokl
-typ_faktury_prijate = ['FAKTURA', 'PR\xcdJEMKA','Z\xc1LOHA','ZDD']
+typ_faktury_prijate = ['FAKTURA']
 
 #tato polozka se vyuziva u faktura-vydana, oznaceni typDokl
-typ_faktury_vydane = ['FAKTURA','FAKT\xdaRA ESHOP','PREDFAKT\xdaRA','Z\xc1LOHA','ZDD']
+typ_faktury_vydane = ['FAKTURA']
 
 #typDokl u banka
-typ_bank_dokladu = ['BANKOVN\xcd \xda\u010cET 2','STANDARD']
+typ_bank_dokladu = ['STANDARD']
 
 #select u banky, pevne dano, pouze dve moznosti
 typ_pohybu = ['typPohybu.prijem','typPohybu.vydej']

@@ -106,3 +106,9 @@ def update_prijata_faktura(id, invoice):
 
 def update_bank_doklad(id, bank_item):
 	return bank.update_bank_doklad(id, bank_item)	
+
+def get_faktura_prijata_pdf_url(id):
+	return invoice.get_faktura_prijata_pdf_url(id)
+
+def get_faktura_vydana_pdf_url(id):
+	return invoice.get_faktura_vydana_pdf_url(id)	

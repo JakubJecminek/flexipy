@@ -126,3 +126,22 @@ def get_prijata_faktura(id, detail='summary'):
 
 def get_prijata_faktura_by_code(code, detail='summary'):
 	return __get_evidence_item_by_code(code, 'faktura-prijata', detail)		
+
+def __get_faktura_pdf_url(faktura_typ, id):
+	"""Vraci url odkaz na fakturu ve formatu pdf.
+	:param faktura_typ: dve moznosti faktura-prijata, faktura-vydana
+	:param id: id faktury
+	"""
+	return config.url+faktura_typ+'/'+id+'.pdf'
+
+def get_faktura_vydana_pdf_url(id):
+	"""Vrati string obsahujici odkaz na pdf vydane faktury.
+	:param id: Id vydane faktury
+	"""
+	return __get_faktura_pdf_url('faktura-vydana',id)
+
+def get_faktura_prijata_pdf_url(id):
+	"""Vrati string obsahujici odkaz na pdf prijate faktury.
+	:param id: Id vydane faktury
+	"""
+	return __get_faktura_pdf_url('faktura-prijata',id)	
