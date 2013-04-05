@@ -8,15 +8,15 @@ stavu z Flexibee. Napriklad doplnit typy faktur.
 """
 
 #parametry pro nastaveni serveru na kterem bezi Flexibee
-host='https://demo.flexibee.eu'
-firma='demo'
+host='https://192.168.56.1:5434'
+firma='autonapul'
 
 #zaklad url pro requesty
 url=host+'/c/'+firma+'/'
 
 #autorizacni udaje k Flexibee
-username='winstrom'
-password='winstrom' 
+username='jecmijak'
+password='Abyss17gabs=' 
 
 #tuple obsahujici podporavene evidence se kterymi knihovna umi pracovat
 evidence_list = ('faktura-vydana', 'banka', 'interni-doklad',
@@ -48,3 +48,6 @@ typ_polozky_vydane=['typPolozky.obecny','typPolozky.katalog','typPolozky.ucetni'
 #polozka typUcOp u faktur
 #zde jen uvedeny ty ktere konkretne potrebuji ja
 typ_ucetni_operace = [u'TRŽBA SLUŽBY',u'NÁKUP SLUŽBY']
+
+#nastaveni zda requests maji kontrolovat https certifikat
+verify_ssl = False

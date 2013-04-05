@@ -18,7 +18,7 @@ def __send_request(method, endUrl, payload=''):
 	:param payload: Data v requestu
 	"""
 	try:
-		r = requests.request(method=method, url=config.url+endUrl, data=payload, auth=(config.username,config.password))	
+		r = requests.request(method=method, url=config.url+endUrl, data=payload, auth=(config.username,config.password), verify=config.verify_ssl)	
 		if r.status_code == 401:
 			raise FlexipyException("Nemate opravneni provest tuto operaci.")
 		elif r.status_code == 402:

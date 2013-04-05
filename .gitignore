@@ -1,4 +1,4 @@
-*.pyc
+*pyc
 *.egg-info
 requirements.installed
-
+/flexipy/config.py

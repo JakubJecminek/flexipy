@@ -50,3 +50,8 @@ typ_polozky_vydane=['typPolozky.obecny','typPolozky.katalog','typPolozky.ucetni'
 #polozka typUcOp u faktur
 #zde jen uvedeny ty ktere konkretne potrebuji ja
 typ_ucetni_operace = [u'TRŽBA SLUŽBY',u'NÁKUP SLUŽBY']
+
+#nastaveni zda requests maji kontrolovat https certifikat
+#na lokalni instalaci jsem mel s timto problem, proto pro lokalni instalaci
+#doporucuji nastavit na False. Default je na True
+verify_ssl = True
