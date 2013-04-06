@@ -22,3 +22,5 @@ Poděkování
 ==========
 Velké díky za pomoc a cenné rady patří Ing. Petru Pokornému, který mi předal mnoho cených znalostí ze světa 
 vývoje v Pythonu/Djangu. Na jeho profilu na `githubu <https://github.com/0101>`_ je možné nalézt mnoho zajímavých projektů, včetně jeho knihovny `Pipetools <https://github.com/0101/pipetools>`_.
+
+Tento projekt využívá knihovnu `requests <https://github.com/kennethreitz/requests>` která usnadňuje práci s posíláním a zpracováním HTTP dotazů. 

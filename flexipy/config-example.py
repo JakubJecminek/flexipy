@@ -51,6 +51,11 @@ typ_polozky_vydane=['typPolozky.obecny','typPolozky.katalog','typPolozky.ucetni'
 #zde jen uvedeny ty ktere konkretne potrebuji ja
 typ_ucetni_operace = [u'TRŽBA SLUŽBY',u'NÁKUP SLUŽBY']
 
+#zde je vhodne uvest seznam firem s kterymi pracujte ve Flexibee, pote lze snadneji
+#vytvaret faktury pomoci vnitrnich vazeb. Viz dokumentace.
+#firmy musi byt ve formatu 'code:<kodFirmy>' kde kodFirmy je kod ktery jste danne firme priradili
+firmy = []
+
 #nastaveni zda requests maji kontrolovat https certifikat
 #na lokalni instalaci jsem mel s timto problem, proto pro lokalni instalaci
 #doporucuji nastavit na False. Default je na True

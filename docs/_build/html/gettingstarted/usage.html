@@ -7,7 +7,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>&lt;no title&gt; &mdash; flexipy 0.1 documentation</title>
+    <title>Jak používat flexipy &mdash; flexipy 0.1 documentation</title>
     
     <link rel="stylesheet" href="../_static/pyramid.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -49,13 +49,51 @@
         <div class="bodywrapper">
           <div class="body">
             
-  
+  <div class="section" id="jak-pouzivat-flexipy">
+<h1>Jak používat flexipy<a class="headerlink" href="#jak-pouzivat-flexipy" title="Permalink to this headline">¶</a></h1>
+<p>Flexipy je především určeno k usnadnění napojení informačního systému(napsaného například v Djangu nebo Flask frameworku) na REST API systému Flexibee. Flexibee je poměrně komplexní nástroj ve kterém se dá mnoho věcí nastavit a případně upravit dle požadavků.
+Flexipy se naopak snaží odstínit tuto komplexitu a poskytnout maximální možný komfort pro programátora. Momentálně flexipy nepodporuje všechny evidence a všechny možnosti Flexibee, ale přes to základní práce s fakturami a dalšími položkami je téměř hotová.
+Flexipy je navrhnuto tak, aby bylo maximálně konfigurovatelné a přizpůsobívé konkrétním potřebám. Zde uvedu základní postupy jak si flexipy natavit a na které věci je třeba dát pozor.</p>
+</div>
+<div class="section" id="nastaveni-konfiguracniho-souboru-flexipy">
+<span id="config-file"></span><h1>Nastavení konfiguračního souboru flexipy<a class="headerlink" href="#nastaveni-konfiguracniho-souboru-flexipy" title="Permalink to this headline">¶</a></h1>
+<p>Flexipy využívá konfigruační soubor config.py, který obsahuje všechna nastavení potřebná pro správnou práci flexipy.
+Flexipy obsahuje šablonu konfiguračního souboru flexipy/config-example.py která obsahuje všechny možná nastavení.
+Nastavení odpovídají demo instalaci Flexibee serveru na demo.flexibee.eu. Je nutné před samotným použitím flexipy si vytvořit ve
+složce flexipy/ vlastní soubor config.py takovým způsobem, že skopírujete config-example.py a pouze upravíte hodnoty, které potřebujete
+dle Vaší situace:</p>
+<div class="highlight-python"><pre>$ cp config-example.py cofig.py         #nutné být ve složce flexipy/</pre>
+</div>
+</div>
+<div class="section" id="zakladni-pouziti-knihovny">
+<h1>Základní použití knihovny<a class="headerlink" href="#zakladni-pouziti-knihovny" title="Permalink to this headline">¶</a></h1>
+<p>Knihovna je strukturovaná podobným způsobem jako známá knihovna requests. Pro práci s flexipy tedy stačí pouze
+importovat knihovnu a dále pracovat už jen s api:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">flexipy</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">flexipy</span><span class="o">.</span><span class="n">delete_vydana_faktura</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Kompletní api se nachází v api.py.</p>
+</div>
+<div class="section" id="system-vnitrnich-vazeb">
+<h1>Systém vnitřních vazeb<a class="headerlink" href="#system-vnitrnich-vazeb" title="Permalink to this headline">¶</a></h1>
+<p>Systém vniřních vazeb, který používá Flexibee je podrobně vysvětlen v oficiální <cite>http://www.flexibee.eu/api/doc/ref/internal-dependencies dokumentaci</cite>. V podstatě jde o to, že pokud například vytvářím fakturu, tak musím uvést informace o odběrateli(jméno firmy, adresa atd.). Flexibee ale umožňuje tento proces zjednodušit kdy si firmu zadefiunuju v adresáři a přiřadím ji nějaký unikátní kód. Poté pouze při vytváření faktury uvedu &#8216;firma&#8217;:&#8217;code:&lt;kodirmy&gt;&#8217; a ostatni polozky se automaticky doplni z adresare. Takových to položek je ve Flexibee více a snahou při vývoji flexipy bylo začlenit toto usnadnění do knihovny. Proto v config.py se nachází několik listů, které je třeba doplnit o Vámi vytvořené typy dokladů, firem atd. Komentáře nad každým tímto seznamem Vám napoví o kterou položku se jedná a jak ji vyplnit. V config-example.py se nachází pouze u každé položky defaultní hodnoty které najdete v čisté instalaci Flexibee serveru(například pouze základní faktura), zbytek je třeba doplnit dle Vašich konkrétních potřeb a stavu Flexibee.</p>
+</div>
+
 
           </div>
         </div>
       </div>
       <div class="sphinxsidebar">
         <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Jak používat flexipy</a></li>
+<li><a class="reference internal" href="#nastaveni-konfiguracniho-souboru-flexipy">Nastavení konfiguračního souboru flexipy</a></li>
+<li><a class="reference internal" href="#zakladni-pouziti-knihovny">Základní použití knihovny</a></li>
+<li><a class="reference internal" href="#system-vnitrnich-vazeb">Systém vnitřních vazeb</a></li>
+</ul>
+
 <div id="searchbox" style="display: none">
   <h3>Quick search</h3>
     <form class="search" action="../search.html" method="get">

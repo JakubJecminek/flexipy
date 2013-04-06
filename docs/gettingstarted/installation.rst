@@ -84,8 +84,8 @@ A nainstalujte další závislosti::
 4. Update your development settings
 ===================================
 
-Ve složce flexipy se nachazi soubor config.py. Tento soubor je nutné upravit před použitím knihovny dle Vaší situace. 
-Především je nutné nastavit proměné host, firma, username a password, díky tomu bude knihovna schopn komunikovat s Flexibee. 
+Ve složce flexipy se nachazi soubor config-example.py. Tento soubor je slouží pouze jako šablona Vašeho konfiguračního souboru, je nutné skopírovat config-example.py ve stejné složce ale se jménem config.py a upravit před použitím knihovny dle Vaší situace. Více se dočtete v :ref:`config-file`.
+Především je nutné nastavit proměnné host, firma, username a password, díky tomu bude knihovna schopn komunikovat s Vaším Flexibee serverem. 
 
 5. Run the tests
 ================
