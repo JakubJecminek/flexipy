@@ -1,4 +1,4 @@
-\begin{thebibliography}{16}
+\begin{thebibliography}{17}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -23,9 +23,17 @@ i-mbank/}.
 Assembla.
 \newblock \\ \verb|https://www.assembla.com/spaces/wagnejan_metrocar/wiki|.
 
-\bibitem[{Kenneth Reitz}(2012)]{requests}
+\bibitem[{Kenneth Reitz}(2012{\natexlab{a}})]{pythonGuide}
 {Kenneth Reitz}.
-\newblock \emph{Requests: HTTP for Humans} [online]. 2012.
+\newblock \emph{The Hitchhiker’s Guide to Python!} [online].
+  2012{\natexlab{a}}. [cit.~1.\,4.\,2013].
+\newblock Dostupn{\'{e}} z:
+  \url{https://python-guide.readthedocs.org/en/latest/writing/structure.html#s%
+tructure-is-key}.
+
+\bibitem[{Kenneth Reitz}(2012{\natexlab{b}})]{requests}
+{Kenneth Reitz}.
+\newblock \emph{Requests: HTTP for Humans} [online]. 2012{\natexlab{b}}.
   [cit.~30.\,12.\,2012].
 \newblock Dostupn{\'{e}} z: \url{http://docs.python-requests.org/en/latest/}.
 

@@ -40,7 +40,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \usepackage{graphicx}
 %\usepackage{indentfirst} %1. odstavec jako v cestine.
-
+\usepackage{dirtree}
 \usepackage{k336_thesis_macros} % specialni makra pro formatovani DP a BP
  % muzete si vytvorit i sva vlastni v souboru k336_thesis_macros.sty
  % najdete  radu jednoduchych definic, ktere zde ani nejsou pouzity
@@ -395,7 +395,7 @@ created by Filip Vařecha and then maintained by Jan Wágner. As I mentioned bef
 this application is very integrated into the Metrocar system. Also the standard things like managing invoices is well handled by the application. Flexibee is very good system and has a lot of satisfied customers, but even systems like this can experience from time to time problems. Petr Pokorný experienced a few server crashes while he was working on the project that involved Flexibee as an accounting system. At that point the whole system is inaccessible for users. because they can't create invoices or issue their bills. A this point keeping and old Invoices application could help. When a user creates invoice, or issue a bill or just do some action that involves accounting and at this point Flexibee crashes, accounting module(later described) will notice this and set certain actions into motion. Accounting module will use old Invoices application and store the changes or new data in local database in appropriate tables. Also he notifies administrator that the server on which is Flexibee deployed has crashed. After server with Flexibee is running again, accounting module will resolve inconsistencies between local database and Flexibee's records. This way we can say that old Invoices application will serve as some kind of fail-safe mechanism, which will be primarily used to serve users' requests while Flexibee is down. For this reasons I've decided to keep old application Invoices in the project Metrocar. It will be slightly modified and certain functionalities will be transfered on to Flexibee(for example printing of invoices and sending them to users). 	
 
 \section{Flexipy}
-Flexipy is a Python library that is being created as a part of this project by myself. The main goal of this library is to provide simple interface for other Python/Django projects that wants to use Flexibee as their accounting system. Therefore flexipy is not being developed just as a component of Metrocar system, but as a standalone library that can be easily used in other projects. Hopefully the library will be available from PyPI\footnote{PyPI -The Python Package Index is a repository of software for the Python programming language.} when the state of library will be optimal. Thanks to the fact that PyPI is central source for all third party Python libraries, flexipy would become available to other developers. 
+Flexipy is a Python library that is being created as a part of this project by myself. The main goal of this library is to provide simple interface for other Python/Django projects that wants to use Flexibee as their accounting system. Therefore flexipy is not being developed just as a component of Metrocar system, but as a standalone library that can be easily used in other projects. Hopefully the library will be available from PyPI\footnote{PyPI -The Python Package Index is a repository of software for the Python programming language.} when the state of library will be optimal. Thanks to the fact that PyPI is central source for all third party Python libraries, flexipy would become available to other developers that want to uset REST API of Flexibee. 
 
 Design goal of flexipy is to be as simple as possible. It is powered by Requests library\cite{requests} which provides tools for working with HTTP protocol. The main advantage of Requests over traditional urllib2 is simplicity. With Requests I am capable to send request with just one line of code. Also it simplifies work with HTTP status codes, which are used in FLexibee's REST API as identifiers of operation results.
 
@@ -408,26 +408,45 @@ On the side of Flexibee system, the accounting module is using library flexipy t
 
 The accounting module is responsible for these requiremnts:
 Creation of new invoices
-Stornovani faktur
-Mazani chybnych faktur
+Cancellation of invoice - this is common use case in accounting systems.
+Deletion of invalid invoice - sometimes there is a need for deletion of invoice, for example if the 
 Uprava udaju na fakture
-Parovani plateb
-Kontrola prichozich plateb
-Posilani upiminek za nezaplacene faktury
-Vraceni faktur ve formatu PDF pro zobrazeni v uzivatelskem rozhrani
-Odesilani faktur v PDF formatu pomoci e-mailu
-Osetreni pripadu kdy Flexibee neni dostupne
-Pri vytvoreni faktury v administratorskem rozhrani systemu Metrocar vytvorit fakturu na strane Flexibee
+Matching of payments - the module, must be capable to assign incoming payment to invoice by certain parametr.
+Sending reminder for unpayd invoices - this is laready partially handled by Flexibee.
+Printing of invoices to PDF - the module will use build in support in Flexibee for printing of invoices.
+Sending emails with printed invoices - this also already possible in Flexibee, therefore module will simply use and call this funcionality through flexipy.
+Handling the situation in which the Flexibee server is unreachable - there is probability(small but still real) that Flexibee server will become unreachable(for example Flexibee server in cloud) than accounting module has to act appropriatly. This will described later on. 
+
 
 For better understading of interactions between flexipy, accounting module and Metorcar system I created simple UML diagram using Enterprise architect. I've used this case modeling system because it was used before by previous teams.
 
 %*****************************************************************************
 \chapter{Implementation}
-In this part of thesis are described the implementation detials of both flexipy, accouting module and all other parts of Metrocar system that where either created or modified by me. For this chapter it was decided to use the iteration model after discusion with Martin Komárek. This model allowes to specify specific goals and problems for iteration and was also used in thesis of Jan Wágner. Another reason for this is the fact that after Petr Pokorný finished his work on the project I have become only person actively involved, that was familiar with server side of the project, therefore I took the role of project maintainer. So as a mainainer I had to solve problems that were not necessarily for my thesis but where importent for further continuation of the project as a whole. I also worked closely with Roman Kubů who is working on the car unit solution for the Metrocar project. All of these tasks are later on described in this chapter.
+In this part of thesis are described the implementation detials of both flexipy, accouting module and all other parts of Metrocar system that where either created or modified by me. For this chapter it was decided to use the iteration model after discusion with Martin Komárek. This model allowes to plan specific goals and problems for iteration and was also used in thesis of Jan Wágner. Another reason for this is the fact that after Petr Pokorný finished his work on the project I have become only person actively involved, that was familiar with server side of the project, therefore I took the role of project maintainer. So as a mainainer I had to solve problems that were not necessarily importent for my thesis or part of my task description but where importent for further continuation of the project as a whole. I also worked closely with Roman Kubů who is working on the car unit solution for the Metrocar project. All of these tasks are later on described in this chapter.
 
 \section{Iteration 1}
 \subsubsection{Introduction}
-The main goal of the first iteration was to implement flexipy library to the point where it could be used for basic accounting requirements of Metrocar system.  
+The main goal of the first iteration was to implement flexipy library to the point where it could be used for basic accounting requirements of Metrocar system. This goal was partially achieved but the library was not completely finished due to certain tasks on server side of Metrocar system that were required by member of team who is working on the car unit solution.   
+
+\subsection{Structure of flexipy library}
+Structure of flexipy library is trying to follow best practices at python development described at The Hitchhiker’s Guide to Python!\cite{pythonGuide} which is written by importent pzthon comunity figure Kenneth Reitz who is also author of Requests library that is used in flexipy for handling HTTP requests and reponses. The folder structure of flexipy library: 
+
+
+\dirtree{%
+.1 flexipy/.
+.2 docs/.
+.2 flexipy/.
+.3 \_\_init\_\_.py.
+.3 addressbook.py.
+.3 api.py.
+.3 bank.py.
+.3 config.py.
+.3 config\_example.py.
+.3 invoice.py.
+.3 main.py.
+.2 test\_flexipy/.
+}
+
 
 
 

@@ -10,10 +10,14 @@
 \contentsline {subsection}{\numberline {2.2.2}Accounting system}{5}{subsection.2.2.2}
 \contentsline {chapter}{\numberline {3}Analysis and Solution Proposal}{7}{chapter.3}
 \contentsline {section}{\numberline {3.1}Invoices application}{7}{section.3.1}
-\contentsline {section}{\numberline {3.2}Accounting module}{8}{section.3.2}
-\contentsline {section}{\numberline {3.3}Flexipy}{8}{section.3.3}
+\contentsline {section}{\numberline {3.2}Flexipy}{8}{section.3.2}
+\contentsline {section}{\numberline {3.3}Accounting module}{8}{section.3.3}
 \contentsline {chapter}{\numberline {4}Implementation}{11}{chapter.4}
+\contentsline {section}{\numberline {4.1}Iteration 1}{11}{section.4.1}
+\contentsline {subsubsection}{\numberline {4.1.0.1}Introduction}{11}{subsubsection.4.1.0.1}
+\contentsline {subsection}{\numberline {4.1.1}Structure of flexipy library}{11}{subsection.4.1.1}
 \contentsline {chapter}{\numberline {5}Testing}{13}{chapter.5}
+\contentsline {section}{\numberline {5.1}Flexipy}{13}{section.5.1}
 \contentsline {chapter}{\numberline {6}Summary}{15}{chapter.6}
 \contentsline {section}{\numberline {6.1}Summary of semestral project}{15}{section.6.1}
 \contentsline {chapter}{\numberline {A}Seznam pou\IeC {\v z}it\IeC {\'y}ch zkratek}{19}{appendix.A}

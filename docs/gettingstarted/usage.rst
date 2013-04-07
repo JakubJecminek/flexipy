@@ -11,12 +11,12 @@ Nastavení konfiguračního souboru flexipy
 ========================================
 
 Flexipy využívá konfigruační soubor config.py, který obsahuje všechna nastavení potřebná pro správnou práci flexipy. 
-Flexipy obsahuje šablonu konfiguračního souboru flexipy/config-example.py která obsahuje všechny možná nastavení. 
+Flexipy obsahuje šablonu konfiguračního souboru flexipy/config_example.py která obsahuje všechny možná nastavení. 
 Nastavení odpovídají demo instalaci Flexibee serveru na demo.flexibee.eu. Je nutné před samotným použitím flexipy si vytvořit ve 
 složce flexipy/ vlastní soubor config.py takovým způsobem, že skopírujete config-example.py a pouze upravíte hodnoty, které potřebujete 
 dle Vaší situace::
 	
-	$ cp config-example.py cofig.py 	#nutné být ve složce flexipy/
+	$ cp config_example.py cofig.py 	#nutné být ve složce flexipy/
 
 
 Základní použití knihovny
