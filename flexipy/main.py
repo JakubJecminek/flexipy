@@ -2,11 +2,12 @@
 
 import requests
 import json
-import config
+from .exceptions import FlexipyException
+try:	
+	import config
+except ImportError:
+	raise FlexipyException("Pred samotnym pouzitim knihovny musite vytvorit config - viz docs.")
 import re
-
-class FlexipyException(Exception):
-	pass
 
 
 def __send_request(method, endUrl, payload=''):

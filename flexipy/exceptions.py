@@ -1,0 +1,2 @@
+class FlexipyException(Exception):
+	pass

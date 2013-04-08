@@ -2,9 +2,13 @@
 
 import requests
 import json
-import config
-from main import FlexipyException, __create_evidence_item, __delete_item, __update_evidence_item,\
+from .exceptions import FlexipyException
+from main import __create_evidence_item, __delete_item, __update_evidence_item,\
 __get_all_records, __get_evidence_item, __get_evidence_item_by_code
+try:	
+	import config
+except ImportError:
+	raise FlexipyException("Pred samotnym pouzitim knihovny musite vytvorit config - viz docs.")
 
 def get_adresar(id, detail='summary'):
 	return __get_evidence_item(id, 'adresar', detail)

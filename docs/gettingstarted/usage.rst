@@ -34,3 +34,10 @@ Systém vnitřních vazeb
 ======================
 
 Systém vniřních vazeb, který používá Flexibee je podrobně vysvětlen v oficiální `http://www.flexibee.eu/api/doc/ref/internal-dependencies dokumentaci`. V podstatě jde o to, že pokud například vytvářím fakturu, tak musím uvést informace o odběrateli(jméno firmy, adresa atd.). Flexibee ale umožňuje tento proces zjednodušit kdy si firmu zadefiunuju v adresáři a přiřadím ji nějaký unikátní kód. Poté pouze při vytváření faktury uvedu 'firma':'code:<kodirmy>' a ostatni polozky se automaticky doplni z adresare. Takových to položek je ve Flexibee více a snahou při vývoji flexipy bylo začlenit toto usnadnění do knihovny. Proto v config.py se nachází několik listů, které je třeba doplnit o Vámi vytvořené typy dokladů, firem atd. Komentáře nad každým tímto seznamem Vám napoví o kterou položku se jedná a jak ji vyplnit. V config-example.py se nachází pouze u každé položky defaultní hodnoty které najdete v čisté instalaci Flexibee serveru(například pouze základní faktura), zbytek je třeba doplnit dle Vašich konkrétních potřeb a stavu Flexibee.
+
+Jak použit config soubor::
+
+
+	>>> import flexipy
+	>>> from flexipy import config
+	>>> flexipy.create_vydana_faktura(kod='flex11', var_sym='11235484', datum_vyst='2013-02-28', zdroj_pro_sklad=False, typ_dokl=config.typ_faktury_vydane[0], dalsi_param=dalsi_param)

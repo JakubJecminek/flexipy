@@ -2,9 +2,14 @@
 
 import requests
 import json
-import config
-from main import FlexipyException, __create_evidence_item, __delete_item, __update_evidence_item, __get_all_records, __get_evidence_item,\
+from .exceptions import FlexipyException
+from main import __create_evidence_item, __delete_item, __update_evidence_item, __get_all_records, __get_evidence_item,\
 __get_evidence_item_by_code, __validate_params
+try:	
+	import config
+except ImportError:
+	raise FlexipyException("Pred samotnym pouzitim knihovny musite vytvorit config - viz docs.")
+
 
 def get_all_vydane_faktury(query=None, detail='summary'):
 	"""Funkce vrati vsechny vydane faktury z Flexibee.
