@@ -2,3 +2,4 @@
 *.egg-info
 requirements.installed
 /flexipy/config.py
+/dist/*
