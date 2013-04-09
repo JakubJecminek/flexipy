@@ -9,7 +9,7 @@ setup(
     author='Jakub Jecminek',
     author_email='jecmijak@gmail.com',
     keywords='flexibee accounting invoices',
-    url='https://www.assembla.com/spaces/flexipy/wiki',
+    url='https://www.assembla.com/code/flexipy/git/nodes',
     include_package_data=True,
 
     install_requires=(
