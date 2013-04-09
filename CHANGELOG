@@ -1,0 +1,10 @@
+=========
+CHANGELOG
+=========
+
+This is official changelog of flexipy library.
+Versions:
+0.0.1 - First version of flexipy, just solving basic communication with Flexibee.
+0.0.2 - Improved version, added basic support for invoices, address books and bank items.
+0.0.3 - Selected different approach for api and for passing of arguments.
+
