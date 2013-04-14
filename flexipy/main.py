@@ -19,7 +19,7 @@ def __send_request(method, endUrl, payload=''):
 	"""
 	try:
 		#vytahni nastaveni serveru s flexipy z konfiguracniho souboru see docs!!	
-		try
+		try:
 			url = config.conf.get("server","url")
 			username = config.conf.get("server","username")
 			password = config.conf.get("server","password")

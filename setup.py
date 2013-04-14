@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='flexipy',
-    version='0.1.0',
+    version='0.2.2',
     description='A library for communication with accounting system Flexibee.',
     packages=['flexipy'],
     license='BSD',
@@ -11,7 +11,7 @@ setup(
     keywords='flexibee accounting invoices',
     url='https://www.assembla.com/code/flexipy/git/nodes',
     include_package_data=True,
-
+    package_data={'flexipy':['flexipy.conf']},
     install_requires=(
          'setuptools>=0.6b1',
          'Paver==1.0.5',

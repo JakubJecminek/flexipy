@@ -22,7 +22,7 @@ def test_get_all_prijate_faktury():
 def test_create_vydana_faktura():
 	expected_data = {'kod':'flex11','typDokl':'code:FAKTURA','firma':'code:WINSTROM','popis':'Flexipy test invoice', 'sumDphZakl':'0.0','bezPolozek':'true', 'varSym':'11235484','zdrojProSkl':'false'}
 	dalsi_param = {'popis':'Flexipy test invoice','firma':'code:WINSTROM'}
-	result = invoice.create_vydana_faktura(kod='flex11', var_sym='11235484', datum_vyst='2013-02-28', zdroj_pro_sklad=False, typ_dokl=config.typ_faktury_vydane[0], dalsi_param=dalsi_param)
+	result = invoice.create_vydana_faktura(kod='flex11', var_sym='11235484', datum_vyst='2013-02-28', zdroj_pro_sklad=False, typ_dokl=config.get_typy_faktury_vydane()[0], dalsi_param=dalsi_param)
 	assert result[0] == True #expected True
 	id = result[1]
 	actualData = invoice.get_vydana_faktura(id, detail='full') 
@@ -35,13 +35,13 @@ def test_create_vydana_faktura():
 	invoice.delete_vydana_faktura(id)
 
 def test_create_vydana_faktura_polozky():
-	polozky = [{'typPolozkyK':config.typ_polozky_vydane[0],'zdrojProSkl':False,'nazev':'vypujceni auta','ucetni':True,'cenaMj':'4815.0'}]	
+	polozky = [{'typPolozkyK':config.get_typ_polozky_vydane()[0],'zdrojProSkl':False,'nazev':'vypujceni auta','ucetni':True,'cenaMj':'4815.0'}]	
 	expected_data = {'kod':'flex11','typDokl':'code:FAKTURA','firma':'code:WINSTROM','popis':'Flexipy test invoice', 
 	'varSym':'11235484','zdrojProSkl':'false','polozkyFaktury':polozky}
 	expected_polozky = [{'typPolozkyK':'typPolozky.obecny','zdrojProSkl':'false','nazev':'vypujceni auta','ucetni':'true','cenaMj':'4815.0'},{'zaokrouhleno':None}]
 	dalsi_param = {'popis':'Flexipy test invoice','firma':'code:WINSTROM','typUcOp':u'code:TRŽBA SLUŽBY'}
 	result = invoice.create_vydana_faktura(kod='flex11', var_sym='11235484', datum_vyst='2013-02-28', 
-	zdroj_pro_sklad=False, typ_dokl=config.typ_faktury_vydane[0], dalsi_param=dalsi_param, polozky_faktury=polozky)
+	zdroj_pro_sklad=False, typ_dokl=config.get_typy_faktury_vydane()[0], dalsi_param=dalsi_param, polozky_faktury=polozky)
 	assert result[0] == True #expected True
 	id = result[1]
 	actualData = invoice.get_vydana_faktura(id, detail='full') 

@@ -14,7 +14,7 @@ import codecs
 
 conf = SafeConfigParser()
 #use resource management api to find flexipy.conf, see docs
-filename = resource_filename(Requirement.parse("flexipy"),"flexipy.conf")
+filename = resource_filename(Requirement.parse("flexipy"),"flexipy/flexipy.conf")
 # Open the file with the correct encoding	
 with codecs.open(filename, 'r', encoding='utf-8') as f:
 		conf.readfp(f)
