@@ -10,13 +10,23 @@ Flexipy je navrhnuto tak, aby bylo maximálně konfigurovatelné a přizpůsobí
 Nastavení konfiguračního souboru flexipy
 ========================================
 
-Flexipy využívá konfigruační soubor config.py, který obsahuje všechna nastavení potřebná pro správnou práci flexipy. 
-Flexipy obsahuje šablonu konfiguračního souboru flexipy/config_example.py která obsahuje všechny možná nastavení. 
-Nastavení odpovídají demo instalaci Flexibee serveru na demo.flexibee.eu. Je nutné před samotným použitím flexipy si vytvořit ve 
-složce flexipy/ vlastní soubor config.py takovým způsobem, že skopírujete config-example.py a pouze upravíte hodnoty, které potřebujete 
-dle Vaší situace::
+Flexipy využívá konfigruační soubor flexipy.conf, který obsahuje všechna nastavení potřebná pro správnou práci flexipy. K tomuto 
+konfiguračnímu souboru knihovna přistupuje skrze modul config.py, který využívá standartní třídu ConfigParser pro práci s flexipy.conf.
+ 
+Nastavení odpovídají demo instalaci Flexibee serveru na demo.flexibee.eu. Je nutné před samotným použitím flexipy si uprvit ve
+složce flexipy/ soubor flexipy.conf takovým způsobem, kdy pouze upravíte hodnoty, které potřebujete 
+dle Vaší situace. To můžete provést buď tak, že přímo editujete danný soubor(který je ve formátu INI odpovídajícího RFC 822), nebo můžete 
+využít metod třídy ConfigParser a měnit flexipz.conf přímo z shellu::
 	
-	$ cp config_example.py cofig.py 	#nutné být ve složce flexipy/
+	>>> from ConfigParser import SafeConfigParser
+	>>> from pkg_resources import Requirement, resource_filename	
+	>>> import codecs #nektera nastaveni vyzaduji unicode
+	>>> conf = SafeConfigParser()
+	>>> filename = resource_filename(Requirement.parse("flexipy"),"flexipy/flexipy.conf") #vyuziva resource management api 
+	>>> with codecs.open(filename, 'a+', encoding='utf-8') as f: conf.readfp(f)
+	>>> conf.add_section('moje_sekce') #pridani sekce [moje_sekce]
+	>>> conf.set('moje_sekce', 'popisek', 'hodnota') # vlozi do sekce moje_sekce par klic/hodnota popisek=hodnota
+	>>> conf.write(filename) # ulozime zmeny
 
 
 Základní použití knihovny
