@@ -3,10 +3,9 @@
 import requests
 import json
 from .exceptions import FlexipyException
-try:	
-	import config
-except ImportError:
-	raise FlexipyException("Pred samotnym pouzitim knihovny musite vytvorit config - viz docs.")
+from ConfigParser import NoOptionError, NoSectionError
+import config
+
 import re
 
 
@@ -19,7 +18,15 @@ def __send_request(method, endUrl, payload=''):
 	:param payload: Data v requestu
 	"""
 	try:
-		r = requests.request(method=method, url=config.url+endUrl, data=payload, auth=(config.username,config.password), verify=config.verify_ssl)	
+		#vytahni nastaveni serveru s flexipy z konfiguracniho souboru see docs!!	
+		try
+			url = config.conf.get("server","url")
+			username = config.conf.get("server","username")
+			password = config.conf.get("server","password")
+			verify_ssl = config.conf.getboolean("server","verify")
+		except (NoOptionError, NoSectionError) as e:
+			raise FlexipyException("Chyba v config souboru "+e)				
+		r = requests.request(method=method, url=url+endUrl, data=payload, auth=(username, password), verify=False)	
 		if r.status_code == 401:
 			raise FlexipyException("Nemate opravneni provest tuto operaci.")
 		elif r.status_code == 402:
@@ -28,8 +35,8 @@ def __send_request(method, endUrl, payload=''):
 			raise FlexipyException("Zakazana operace. Vase licence zrejme neumoznuje tuto operaci.")	
 		elif r.status_code == 500:
 			raise FlexipyException("Server error, zrejme je neco spatne se serverem na kterem je Flexibee.")							
-	except requests.exceptions.ConnectionError:
-		raise FlexipyException("Connection error")
+	except requests.exceptions.ConnectionError as e:
+		raise FlexipyException("Connection error "+e)
 	else:
 		return r
 
@@ -52,10 +59,7 @@ def __get_all_records(evidence, query=None, detail='summary'):
 	'''
 	re.sub(r'\s', '', evidence) #remove all wihtespaces	
 	if query == None:
-		try:
-			r = __send_request(method='get', endUrl=evidence+'.json?detail='+detail)
-		except FlexipyException:
-			print 		
+		r = __send_request(method='get', endUrl=evidence+'.json?detail='+detail)
 	else:
 		#pouzij query pro filtrovani
 		#TODO: nejakym zpusobem zvaliduj query
@@ -149,6 +153,14 @@ def __get_evidence_item_by_code(kod, evidence, detail='summary'):
 		dictionary = __process_response(r, evidence=evidence)
 		return dictionary
 
+def proved_sparovani_plateb():
+	"""
+	Provede automaticke sparovani plateb s fakturami.
+	"""		
+	r = __send_request(method='get', endUrl='banka/automaticke-parovani?ok=true')
+	if r.status_code not in (200,201):
+		raise FlexipyException("Neznama chyba.")
+
 def __create_evidence_item(evidence, data):
 	"""Privatni funkce pro vytvareni novych zaznamu v evidenci.
 	Returns :tuple skladajici se z (success, result_id, error_message)
@@ -205,8 +217,8 @@ def get_template_dict(evidence, complete=False):
 	:param evidence: evidence for which will be created template
 	:param complete: if True return dict with all params
 	"""
-	if evidence not in config.evidence_list:
-		raise ValueError('evidence arg is valid only for' +str(config.evidence_list))
+	if evidence not in config.get_evidence_list():
+		raise ValueError('evidence arg is valid only for' +str(config.get_evidence_list().evidence_list))
 	#start parsing properties
 	property_list = __get_evidence_property_list(evidence)
 	result={}

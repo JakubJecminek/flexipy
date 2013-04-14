@@ -5,11 +5,7 @@ import json
 from .exceptions import FlexipyException
 from main import __create_evidence_item, __delete_item, __update_evidence_item, __get_all_records, __get_evidence_item,\
 __get_evidence_item_by_code, __validate_params
-try:	
-	import config
-except ImportError:
-	raise FlexipyException("Pred samotnym pouzitim knihovny musite vytvorit config - viz docs.")
-
+import config
 
 def get_all_vydane_faktury(query=None, detail='summary'):
 	"""Funkce vrati vsechny vydane faktury z Flexibee.
@@ -31,7 +27,7 @@ def get_all_prijate_faktury(query=None, detail='summary'):
 
 
 def create_vydana_faktura(kod, var_sym, datum_vyst, zdroj_pro_sklad=False, 
-	typ_dokl=config.typ_faktury_vydane[0], dalsi_param=None, polozky_faktury=None):
+	typ_dokl=config.get_typy_faktury_vydane()[0], dalsi_param=None, polozky_faktury=None):
 	"""Tato funkce vytvori novou vydanou fakturu ve Flexibee 
 	:param kod: interni cislo
 	:param var_sym: variabilni symbol faktury
@@ -62,7 +58,7 @@ def create_vydana_faktura(kod, var_sym, datum_vyst, zdroj_pro_sklad=False,
 	
 
 def create_prijata_faktura(kod, var_sym, cislo_dosle, datum_splat, 
-	datum_vyst, zdroj_pro_sklad=False, typ_dokl=config.typ_faktury_prijate[0], 
+	datum_vyst, zdroj_pro_sklad=False, typ_dokl=config.get_typy_faktury_prijate()[0], 
 	dalsi_param=None, polozky_faktury=None):
 	"""Tato funkce zaznamena novou prijatou fakturu ve Flexibee 
 	:param kod: interni cislo
@@ -137,7 +133,7 @@ def __get_faktura_pdf_url(faktura_typ, id):
 	:param faktura_typ: dve moznosti faktura-prijata, faktura-vydana
 	:param id: id faktury
 	"""
-	return config.url+faktura_typ+'/'+id+'.pdf'
+	return config.conf.get("server","url")+faktura_typ+'/'+id+'.pdf'
 
 def get_faktura_vydana_pdf_url(id):
 	"""Vrati string obsahujici odkaz na pdf vydane faktury.
