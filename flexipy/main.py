@@ -20,13 +20,14 @@ def __send_request(method, endUrl, payload=''):
 	try:
 		#vytahni nastaveni serveru s flexipy z konfiguracniho souboru see docs!!	
 		try:
-			url = config.conf.get("server","url")
-			username = config.conf.get("server","username")
-			password = config.conf.get("server","password")
-			verify_ssl = config.conf.getboolean("server","verify")
+			url = str(config.conf.get("server","url"))
+			username = str(config.conf.get("server","username"))
+			password = str(config.conf.get("server","password"))
+			verify = config.conf.getboolean("server","verify")
+
 		except (NoOptionError, NoSectionError) as e:
-			raise FlexipyException("Chyba v config souboru "+e)				
-		r = requests.request(method=method, url=url+endUrl, data=payload, auth=(username, password), verify=False)	
+			raise FlexipysException("Chyba v config souboru "+e)				
+		r = requests.request(method=method, url=str(url)+endUrl, data=payload, auth=(username, password), verify=False)	
 		if r.status_code == 401:
 			raise FlexipyException("Nemate opravneni provest tuto operaci.")
 		elif r.status_code == 402:
@@ -36,7 +37,7 @@ def __send_request(method, endUrl, payload=''):
 		elif r.status_code == 500:
 			raise FlexipyException("Server error, zrejme je neco spatne se serverem na kterem je Flexibee.")							
 	except requests.exceptions.ConnectionError as e:
-		raise FlexipyException("Connection error "+e)
+		raise FlexipyException("Connection error "+str(e))
 	else:
 		return r
 

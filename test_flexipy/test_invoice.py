@@ -6,22 +6,32 @@ import requests
 import json
 
 def test_get_all_vydane_faktury():
-	r = requests.get('https://demo.flexibee.eu/c/demo/faktura-vydana.json',auth=('winstrom','winstrom'))
+	username = str(config.conf.get("server","username"))
+	password = str(config.conf.get("server","password"))
+	r = requests.get(str(config.conf.get("server","url"))+'faktura-vydana.json' ,auth=(username,password), verify=False)
 	d = r.json()
-	list_of_invoices_expected = d['winstrom']['faktura-vydana']
+	if len(d['winstrom']['faktura-vydana']):
+		list_of_invoices_expected = d['winstrom']['faktura-vydana'][0]
+	else:
+		list_of_invoices_expected = d['winstrom']['faktura-vydana']
 	list_of_invoices_actual = invoice.get_all_vydane_faktury()
 	assert list_of_invoices_expected == list_of_invoices_actual
 
 def test_get_all_prijate_faktury():
-	r = requests.get('https://demo.flexibee.eu/c/demo/faktura-prijata.json',auth=('winstrom','winstrom'))
+	username = str(config.conf.get("server","username"))
+	password = str(config.conf.get("server","password"))
+	r = requests.get(str(config.conf.get("server","url"))+'faktura-prijata.json' ,auth=(username,password), verify=False)
 	d = r.json()
-	list_of_invoices_expected = d['winstrom']['faktura-prijata']
+	if(len(d['winstrom']['faktura-prijata']) == 1):
+		list_of_invoices_expected = d['winstrom']['faktura-prijata'][0]
+	else:	
+		list_of_invoices_expected = d['winstrom']['faktura-prijata']
 	list_of_invoices_actual = invoice.get_all_prijate_faktury()
 	assert list_of_invoices_expected == list_of_invoices_actual
 
 def test_create_vydana_faktura():
-	expected_data = {'kod':'flex11','typDokl':'code:FAKTURA','firma':'code:WINSTROM','popis':'Flexipy test invoice', 'sumDphZakl':'0.0','bezPolozek':'true', 'varSym':'11235484','zdrojProSkl':'false'}
-	dalsi_param = {'popis':'Flexipy test invoice','firma':'code:WINSTROM'}
+	expected_data = {'kod':'flex11','typDokl':'code:FAKTURA','firma':'code:201','popis':'Flexipy test invoice', 'sumDphZakl':'0.0','bezPolozek':'true', 'varSym':'11235484','zdrojProSkl':'false'}
+	dalsi_param = {'popis':'Flexipy test invoice','firma':'code:201'}
 	result = invoice.create_vydana_faktura(kod='flex11', var_sym='11235484', datum_vyst='2013-02-28', zdroj_pro_sklad=False, typ_dokl=config.get_typy_faktury_vydane()[0], dalsi_param=dalsi_param)
 	assert result[0] == True #expected True
 	id = result[1]
@@ -36,10 +46,10 @@ def test_create_vydana_faktura():
 
 def test_create_vydana_faktura_polozky():
 	polozky = [{'typPolozkyK':config.get_typ_polozky_vydane()[0],'zdrojProSkl':False,'nazev':'vypujceni auta','ucetni':True,'cenaMj':'4815.0'}]	
-	expected_data = {'kod':'flex11','typDokl':'code:FAKTURA','firma':'code:WINSTROM','popis':'Flexipy test invoice', 
+	expected_data = {'kod':'flex11','typDokl':'code:FAKTURA','firma':'code:201','popis':'Flexipy test invoice', 
 	'varSym':'11235484','zdrojProSkl':'false','polozkyFaktury':polozky}
 	expected_polozky = [{'typPolozkyK':'typPolozky.obecny','zdrojProSkl':'false','nazev':'vypujceni auta','ucetni':'true','cenaMj':'4815.0'},{'zaokrouhleno':None}]
-	dalsi_param = {'popis':'Flexipy test invoice','firma':'code:WINSTROM','typUcOp':u'code:TRŽBA SLUŽBY'}
+	dalsi_param = {'popis':'Flexipy test invoice','firma':'code:201','typUcOp':u'code:TRŽBA SLUŽBY'}
 	result = invoice.create_vydana_faktura(kod='flex11', var_sym='11235484', datum_vyst='2013-02-28', 
 	zdroj_pro_sklad=False, typ_dokl=config.get_typy_faktury_vydane()[0], dalsi_param=dalsi_param, polozky_faktury=polozky)
 	assert result[0] == True #expected True
