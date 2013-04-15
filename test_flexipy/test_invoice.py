@@ -46,11 +46,11 @@ def test_create_vydana_faktura():
 
 def test_create_vydana_faktura_polozky():
 	polozky = [{'typPolozkyK':config.get_typ_polozky_vydane()[0],'zdrojProSkl':False,'nazev':'vypujceni auta','ucetni':True,'cenaMj':'4815.0'}]	
-	expected_data = {'kod':'flex11','typDokl':'code:FAKTURA','firma':'code:201','popis':'Flexipy test invoice', 
+	expected_data = {'kod':'flex12','typDokl':'code:FAKTURA','firma':'code:201','popis':'Flexipy test invoice', 
 	'varSym':'11235484','zdrojProSkl':'false','polozkyFaktury':polozky}
 	expected_polozky = [{'typPolozkyK':'typPolozky.obecny','zdrojProSkl':'false','nazev':'vypujceni auta','ucetni':'true','cenaMj':'4815.0'},{'zaokrouhleno':None}]
 	dalsi_param = {'popis':'Flexipy test invoice','firma':'code:201','typUcOp':u'code:TRŽBA SLUŽBY'}
-	result = invoice.create_vydana_faktura(kod='flex11', var_sym='11235484', datum_vyst='2013-02-28', 
+	result = invoice.create_vydana_faktura(kod='flex12', var_sym='11235484', datum_vyst='2013-02-28', 
 	zdroj_pro_sklad=False, typ_dokl=config.get_typy_faktury_vydane()[0], dalsi_param=dalsi_param, polozky_faktury=polozky)
 	assert result[0] == True #expected True
 	id = result[1]
