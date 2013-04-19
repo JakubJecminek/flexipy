@@ -98,11 +98,11 @@ def delete_vydana_faktura(id):
 def delete_prijata_faktura(id):	
 	invoice.delete_prijata_faktura(id)
 
-def update_vydana_faktura(id, invoice):
-	return invoice.update_vydana_faktura(id, invoice)	
+def update_vydana_faktura(id, inv):
+	return invoice.update_vydana_faktura(id, inv)	
 
-def update_prijata_faktura(id, invoice):
-	return invoice.update_prijata_faktura(id, invoice)	
+def update_prijata_faktura(id, inv):
+	return invoice.update_prijata_faktura(id, inv)	
 
 def update_bank_doklad(id, bank_item):
 	return bank.update_bank_doklad(id, bank_item)	

@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='flexipy',
-    version='0.2.5',
+    version='0.2.7',
     description='A library for communication with accounting system Flexibee.',
     packages=['flexipy'],
     license='BSD',
