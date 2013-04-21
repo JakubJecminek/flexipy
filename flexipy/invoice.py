@@ -4,7 +4,7 @@ import requests
 import json
 from .exceptions import FlexipyException
 from main import __create_evidence_item, __delete_item, __update_evidence_item, __get_all_records, __get_evidence_item,\
-__get_evidence_item_by_code, __validate_params
+__get_evidence_item_by_code, __validate_params, get_evidence_pdf
 import config
 
 def get_all_vydane_faktury(query=None, detail='summary'):
@@ -143,6 +143,14 @@ def get_faktura_vydana_pdf_url(id):
 
 def get_faktura_prijata_pdf_url(id):
 	"""Vrati string obsahujici odkaz na pdf prijate faktury.
-	:param id: Id vydane faktury
+	:param id: Id prijate faktury
 	"""
 	return __get_faktura_pdf_url('faktura-prijata',id)	
+
+
+def get_faktura_vydana_pdf(id):
+	"""
+	Vraci pdf faktury vydane, ktera je ve Flexibee.
+	:param id: id vydane faktury
+	"""
+	return get_evidence_pdf('faktura-vydana',id)

@@ -112,3 +112,9 @@ def get_faktura_prijata_pdf_url(id):
 
 def get_faktura_vydana_pdf_url(id):
 	return invoice.get_faktura_vydana_pdf_url(id)	
+
+def proved_sparovani():
+	main.proved_sparovani_plateb()	
+
+def get_faktura_vydana_pdf(id):
+	return invoice. get_faktura_vydana_pdf(id)	

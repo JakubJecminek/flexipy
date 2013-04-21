@@ -237,3 +237,21 @@ def get_template_dict(evidence, complete=False):
 				result[property_name] = ''
 
 	return result	
+
+
+def get_evidence_pdf(evidence, id):
+	"""Tato funkce vrati pdf evidence s id v argumentu funkce 
+	v binary podobe. TODO: checkovat ktere evidence lze takto tisknout
+	Retuns: pdf v binary
+	:params evidence: evidence kterou chceme vytisknout (napr. faktura-vydana)
+	:params id: id evidence	
+	"""	
+	r = __send_request(method='get', endUrl=evidence+'/'+str(id)+'.pdf')
+	if r.status_code not in (200,201):
+		if r.status_code == 404:
+			raise FlexipyException("Zaznam s id="+str(id)+" nebyl nalezen.")			
+		else:
+			raise FlexipyException("Neznama chyba.")	
+	else:				
+		return r.content
+
