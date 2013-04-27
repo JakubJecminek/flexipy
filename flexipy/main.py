@@ -146,13 +146,14 @@ def __get_evidence_item_by_code(kod, evidence, detail='summary'):
 	"""		
 	r = __send_request(method='get', endUrl=evidence+"/(kod='"+kod+"').json?detail="+detail)
 	if r.status_code not in (200,201):
-		if r.status_code == 404:
-			raise FlexipyException("Zaznam s kodem="+kod+" nebyl nalezen.")			
-		else:
-			raise FlexipyException("Neznama chyba.")	
+		raise FlexipyException("Neznama chyba.")	
 	else:		
 		dictionary = __process_response(r, evidence=evidence)
-		return dictionary
+		#pokud neni prazdne
+		if dictionary:
+			return dictionary
+		else:
+			raise FlexipyException("Zaznam s kodem="+str(kod)+" nebyl nalezen.")	
 
 def proved_sparovani_plateb():
 	"""
