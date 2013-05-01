@@ -53,11 +53,12 @@
 <h1>Instalace<a class="headerlink" href="#instalace" title="Permalink to this headline">¶</a></h1>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p><em>Word of advice</em></p>
+<p><em>Rada</em></p>
 <p class="last">Pokud to je pro Vás možné, pracujte na projektu na Unix-based systému,
 protože to je systém, který nejvíce vývojářu používá a je nejméně
 pravděpodobné, že by jste narazili na nějaké větší problémy při
-instalaci knihovny.</p>
+instalaci knihovny. Pokus jste na Windows doporučuji navštívit stránky projektu
+<a class="reference external" href="http://www.vagrantup.com/">Vagrant</a></p>
 </div>
 <div class="section" id="get-the-code">
 <h2>1. Get the code<a class="headerlink" href="#get-the-code" title="Permalink to this headline">¶</a></h2>
@@ -70,8 +71,8 @@ instalaci knihovny.</p>
 skrze Public clone URL:</p>
 <p><tt class="docutils literal"><span class="pre">git://git.assembla.com/flexipy.git</span></tt></p>
 </div>
-<div class="section" id="vitvoreni-virtualenv-doporuceny-krok">
-<h2>2. Vitvoření virtualenv(doporučený krok)<a class="headerlink" href="#vitvoreni-virtualenv-doporuceny-krok" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="vytvoreni-virtualenv-doporuceny-krok">
+<h2>2. Vytvoření virtualenv(doporučený krok)<a class="headerlink" href="#vytvoreni-virtualenv-doporuceny-krok" title="Permalink to this headline">¶</a></h2>
 <p><a class="reference external" href="http://pypi.python.org/pypi/virtualenv">Virtualenv</a> je nástroj pro vytváření oddělených python prostředí. Umožňuje Vám instalovat python package bez zanášení hlavního python prostředí Vašeho OS.</p>
 <p>Nejdříve je nutné virtuaelnv <a href="#id1"><span class="problematic" id="id2">nainstalovat_</span></a> na Váš systém, pokud jej již nemáte.</p>
 <p>Poté vytvořte virtuální prostředí pro flexipy takto:</p>
@@ -112,7 +113,7 @@ využíváte):</p>
 </div>
 <div class="section" id="update-your-development-settings">
 <h2>4. Update your development settings<a class="headerlink" href="#update-your-development-settings" title="Permalink to this headline">¶</a></h2>
-<p>Ve složce flexipy se nachazi soubor config_example.py. Tento soubor je slouží pouze jako šablona Vašeho konfiguračního souboru, je nutné skopírovat config_example.py ve stejné složce ale se jménem config.py a upravit před použitím knihovny dle Vaší situace. Více se dočtete v <a class="reference internal" href="usage.html#config-file"><em>Nastavení konfiguračního souboru flexipy</em></a>.
+<p>Ve složce flexipy se nachazi soubor flexipy.conf. Tento soubor je slouží konfigurační soubor, je nutné soubor upravit dle Vaších potřeb, defaultně je tento soubor nastaven na demo instalaci Flexibee. Konfigurační soubor se dá upravit buď textovým editorem(je ve stadartním formátu ini), nebo lze interaktivně upravit pomocí metod, které nabízí třída ConfigParser. Více se dočtete v <a class="reference internal" href="usage.html#config-file"><em>Nastavení konfiguračního souboru flexipy</em></a>.
 Především je nutné nastavit proměnné host, firma, username a password, díky tomu bude knihovna schopn komunikovat s Vaším Flexibee serverem.</p>
 </div>
 <div class="section" id="run-the-tests">
@@ -134,7 +135,7 @@ Především je nutné nastavit proměnné host, firma, username a password, dí
   <ul>
 <li><a class="reference internal" href="#">Instalace</a><ul>
 <li><a class="reference internal" href="#get-the-code">1. Get the code</a></li>
-<li><a class="reference internal" href="#vitvoreni-virtualenv-doporuceny-krok">2. Vitvoření virtualenv(doporučený krok)</a></li>
+<li><a class="reference internal" href="#vytvoreni-virtualenv-doporuceny-krok">2. Vytvoření virtualenv(doporučený krok)</a></li>
 <li><a class="reference internal" href="#nainstalujte-python-balicky">3. Nainstalujte python balíčky</a></li>
 <li><a class="reference internal" href="#update-your-development-settings">4. Update your development settings</a></li>
 <li><a class="reference internal" href="#run-the-tests">5. Run the tests</a></li>

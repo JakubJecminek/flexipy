@@ -13,6 +13,7 @@ def __send_request(method, endUrl, payload=''):
 	"""Privatni funkce pro posilani requestu. Cast url se bere z nastaveni v config, 
 	zbytek se doplni dle pozadavku. Tato funkce chyta nejzavaznejsi vyjimky definovane
 	v knihovne Requests a vraci Response objekt pro dalsi zpracovani.
+	Returns :r: response object z requests knihovny
 	:param method: Typ HTTP metody, mozne hodnoty:(get,put,post,delete)
 	:param endUrl: koncova cast url, zavisla na konkretnim requestu 
 	:param payload: Data v requestu
@@ -159,7 +160,7 @@ def proved_sparovani_plateb():
 	"""
 	Provede automaticke sparovani plateb s fakturami.
 	"""		
-	r = __send_request(method='get', endUrl='banka/automaticke-parovani?ok=true')
+	r = __send_request(method='post', endUrl='banka/automaticke-parovani.json')
 	if r.status_code not in (200,201):
 		raise FlexipyException("Neznama chyba.")
 

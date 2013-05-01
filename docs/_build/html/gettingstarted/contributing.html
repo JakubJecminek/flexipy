@@ -54,9 +54,28 @@
 <p>V této části dokumentace uvádím návody a doporučení pro ty, kteří by měli zájem o rozšíření knihovny flexipy. Za každou pomoc
 budu jen rád :) a jsem otevřen jakýmkoliv návrhům na zlepšení. Navíc když jsem začal tuto knihovnu psát, bylo mi jasné, že nebudu schopen v krátké době implementovat podporu pro práci se všemi evidencemi a využívání všech možností Flexibe. Proto budu vděčný za pomoc s implementací dalších funkcionalit.</p>
 <div class="section" id="coding-style">
-<h2>Coding style<a class="headerlink" href="#coding-style" title="Permalink to this headline">¶</a></h2>
+<span id="contributing-coding-style"></span><h2>Coding style<a class="headerlink" href="#coding-style" title="Permalink to this headline">¶</a></h2>
 <p>Doporučuji dodržovat <a class="reference external" href="https://docs.djangoproject.com/en/dev/internals/contributing/writing-code/coding-style/">Django coding style</a>.</p>
 <p><a class="reference external" href="http://www.python.org/dev/peps/pep-0008/">PEP8</a> je oficiální přiručka pro psaní Python kódu a proto doporučuji všem potenciálním přispěvate si ji alespoň zběžně pročíst.</p>
+</div>
+<div class="section" id="pridani-nove-evidence">
+<span id="contributing-add-evidence"></span><h2>Přídaní nové evidence<a class="headerlink" href="#pridani-nove-evidence" title="Permalink to this headline">¶</a></h2>
+<p>Pokus chcete přidat funkcionalitu do flexipy, která bude sloužit k obsluze evidence ve Flexibee, která jesšte není zde implementovaná dodržujte prosím následující pravidla.</p>
+<ol class="arabic simple">
+<li>Všechny funkce, které nějakým způsobem souvisí s danou evidencí umístěte do souboru &lt;jmeno_evidence&gt;.py. Například pro adresář je to adresar.py.</li>
+</ol>
+<p>2. Snažte se maximálně využívat jiř připravených generických funckí z modulu main.py. Například pro získání instance evidence zavolejte z modulu main funkci
+__get_evidence_item a pouze ošetřete nebo upravte věci, které vyžadujte pro danou evidenci.</p>
+<ol class="arabic simple" start="3">
+<li>Pro ošetřování chyb doporučuji používat systém, který je vidět v modulu invoice, kde se vyhazuje vyjímka FlexipyException v případě chyby nebo neočekávaného stavu. Případně do modulu exceptions přidejte vlastní vyjímku, která bude dědit FlexipyException.</li>
+<li>Obecně by se dalo říci, že ideálně se stačí podívat na již implementovaný modul invoice a z něj vyjít při implementaci vlastního modulu.</li>
+</ol>
+</div>
+<div class="section" id="testovani">
+<span id="contributing-testing"></span><h2>Testování<a class="headerlink" href="#testovani" title="Permalink to this headline">¶</a></h2>
+<p>Flexipy využívá <a class="reference external" href="http://pytest.org/">pytest</a> proto doporučuji projít si dokumentaci, která je na oficiálních stránkách projektu. Testy jsou izolovány pro každý modul, tzn. že pro modul invoice je testovací modul test_invoice. Pro psaní testů lze z výhodou použít knihovnu requests, kterou flexipy využívá. Pro spouštění testů je vytvořen paver task, takže stačí zavolat z rootu projektu příkaz:</p>
+<div class="highlight-python"><pre>$ paver test</pre>
+</div>
 </div>
 </div>
 
@@ -70,6 +89,8 @@ budu jen rád :) a jsem otevřen jakýmkoliv návrhům na zlepšení. Navíc kdy
   <ul>
 <li><a class="reference internal" href="#">Doporučení pro přispěvatele</a><ul>
 <li><a class="reference internal" href="#coding-style">Coding style</a></li>
+<li><a class="reference internal" href="#pridani-nove-evidence">Přídaní nové evidence</a></li>
+<li><a class="reference internal" href="#testovani">Testování</a></li>
 </ul>
 </li>
 </ul>

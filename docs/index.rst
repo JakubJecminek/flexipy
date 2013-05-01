@@ -30,15 +30,8 @@ Getting started
 * :doc:`gettingstarted/contributing` -- doporučení pro ty, kteří by chtěli přidat funkcionalitu do knihovny
 
   * :ref:`contributing-coding-style`
-  * :ref:`contributing-documentation`
-  * :ref:`Testing <contributing-testing>`
-
-
-How to...
-=========
-
-* :doc:`...jak pracovat s gitem <howto/git>`
-* :doc:`...jak testovat knihovnu <howto/tests>`
+  * :ref:`contributing-add-evidence`
+  * :ref:`Testování <contributing-testing>`
 
 
 Full contents
