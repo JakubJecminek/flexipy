@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from flexipy import main, config, invoice
+from flexipy import main, config, faktura
 import requests
 import pytest
 import json
@@ -8,18 +8,18 @@ import json
 
 def setup_module(self):
 	#create some items in flexibee
-	invoice.create_vydana_faktura(kod='flex11', var_sym='11235484', datum_vyst='2013-02-28', zdroj_pro_sklad=False)
+	faktura.create_vydana_faktura(kod='flex11', var_sym='11235484', datum_vyst='2013-02-28', zdroj_pro_sklad=False)
 	dalsiParams = {'specSym':48152342}
 	#tyto dve jsou pro testovani get all records
-	invoice.create_vydana_faktura(kod='flex12', var_sym='11235494', datum_vyst='2013-03-14', zdroj_pro_sklad=False,dalsi_param=dalsiParams)
-	invoice.create_vydana_faktura(kod='flex13', var_sym='11235495', datum_vyst='2013-02-17', zdroj_pro_sklad=False,dalsi_param=dalsiParams)
+	faktura.create_vydana_faktura(kod='flex12', var_sym='11235494', datum_vyst='2013-03-14', zdroj_pro_sklad=False,dalsi_param=dalsiParams)
+	faktura.create_vydana_faktura(kod='flex13', var_sym='11235495', datum_vyst='2013-02-17', zdroj_pro_sklad=False,dalsi_param=dalsiParams)
 def teardown_module(self):
-	inv1 = invoice.get_vydana_faktura_by_code('flex11')
-	inv2 = invoice.get_vydana_faktura_by_code('flex12')
-	inv3 = invoice.get_vydana_faktura_by_code('flex13')
-	invoice.delete_vydana_faktura(inv1['id'])
-	invoice.delete_vydana_faktura(inv2['id'])
-	invoice.delete_vydana_faktura(inv3['id'])
+	inv1 = faktura.get_vydana_faktura_by_code('flex11')
+	inv2 = faktura.get_vydana_faktura_by_code('flex12')
+	inv3 = faktura.get_vydana_faktura_by_code('flex13')
+	faktura.delete_vydana_faktura(inv1['id'])
+	faktura.delete_vydana_faktura(inv2['id'])
+	faktura.delete_vydana_faktura(inv3['id'])
 
 def test_validate_item():	
 	invalid_params = {'doprava':'','duzpaPuv':'','zaveTxt':''}	
