@@ -77,7 +77,7 @@ Nainstalujte balíčky potřebné pro projekt::
 
     $ python setup.py develop
 
-A nainstalujte další závislosti::
+A nainstalujte další závislosti(tyto závislosti nejsou nutné pro používání knihovny ale jsou určeny pro vývoj a testování a dokumentaci)::
 
     $ paver install_dependencies
 
@@ -85,7 +85,7 @@ A nainstalujte další závislosti::
 4. Update your development settings
 ===================================
 
-Ve složce flexipy se nachazi soubor flexipy.conf. Tento soubor je slouží konfigurační soubor, je nutné soubor upravit dle Vaších potřeb, defaultně je tento soubor nastaven na demo instalaci Flexibee. Konfigurační soubor se dá upravit buď textovým editorem(je ve stadartním formátu ini), nebo lze interaktivně upravit pomocí metod, které nabízí třída ConfigParser. Více se dočtete v :ref:`config-file`.
+Ve složce flexipy se nachazi soubor flexipy.conf. Tento soubor slouží jako ukázkový a zároveň defaultní konfigurační soubor(pokud nespecifikujete jinak načte se tento soubor), tento soubor si skopírujte a vytvořte podle něj svůj vlastní konfigurační soubor dle svých potřeb. Konfigurační soubor se dá upravit buď textovým editorem(je ve stadartním formátu ini), nebo lze interaktivně upravit pomocí metod, které nabízí třída ConfigParser. Více se dočtete v :ref:`config-file`.
 Především je nutné nastavit proměnné host, firma, username a password, díky tomu bude knihovna schopn komunikovat s Vaším Flexibee serverem. 
 
 5. Run the tests

@@ -1,1 +1,3 @@
 include flexipy/flexipy.conf
+include flexipy/test_flexipy.conf
+include flexipy/demo_flexibee.conf

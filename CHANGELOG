@@ -8,3 +8,5 @@ Versions:
 0.0.2 - Improved version, added basic support for invoices, address books and bank items.
 0.0.3 - Selected different approach for api and for passing of arguments.
 
+0.4.0 - Změněn systém jakým flexipy pracuje. Api také změněno. Pokud někdo používá flexipy, přečtěte si prosím dokumentaci kde jsou 
+popsány všechny změny a důvody proč jsem změnil mchanismus jakým flexipy pracuje. 

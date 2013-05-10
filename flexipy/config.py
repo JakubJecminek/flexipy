@@ -7,56 +7,84 @@ Nektere promene je treba doplnit na zaklade faktickeho
 stavu z Flexibee. Napriklad doplnit typy faktur.
 """
 
-from ConfigParser import SafeConfigParser
+import ConfigParser
 from pkg_resources import Requirement, resource_filename
 import codecs
 
 
-conf = SafeConfigParser()
-#use resource management api to find flexipy.conf, see docs
-filename = resource_filename(Requirement.parse("flexipy"),"flexipy/flexipy.conf")
-# Open the file with the correct encoding	
-with codecs.open(filename, 'r', encoding='utf-8') as f:
-		conf.readfp(f)
-
-
-
-
-def __get_section_list(section_name):
+class Config(object):
 	"""
-	Tato privatni funkce ypracuje vsechny sekce v config filu 
-	na zaklade jmena sekce a vrati list obsahujici vsechny polozky.
-	"""	
-	result_list = []
+	Base config class definuje zakladni metody pro praci s konfiguracnim souborem.	
+	"""
 
-	try:
-		section_content = conf.items(section_name)
-		for key, val in section_content:
-			result_list.append(val)
-	except ConfigParser.NoSectionError:
-		raise ValueError("Config file neobsahuje sekci "+section_name)		
-	return result_list
+	def __init__(self, config_name="flexipy/flexipy.conf"):
+		self.conf = ConfigParser.SafeConfigParser()
+		#use resource management api to find flexipy.conf, see docs
+		filename = resource_filename(Requirement.parse("flexipy"), config_name)
+		# Open the file with the correct encoding	
+		try:
+			with codecs.open(filename, 'r', encoding='utf-8') as f:
+				self.conf.readfp(f)
+		except IOError:
+			raise ValueError('Konfiguracni soubor '+config_name+' neexistuje nebo jste uvedli spatnou cestu.')		
 
-def get_evidence_list():
-	return __get_section_list('evidence')	
+	def get_section_list(self, section_name):
+		"""
+		Tato privatni metoda spracuje vsechny sekce v config filu 
+		na zaklade jmena sekce a vrati list obsahujici vsechny polozky.
+		"""	
+		result_list = []
+		try:
+			section_content = self.conf.items(section_name)
+			for key, val in section_content:
+				result_list.append(val)
+		except ConfigParser.NoSectionError:
+			raise ValueError("Config file neobsahuje sekci "+section_name)		
+		return result_list
 
-def get_typy_faktury_prijate():
-	return __get_section_list('typ_faktury_prijate')
+	def get_server_config(self):
+		"""
+		Tato metoda vrati dict obsahujici vsechna nastaveni tykajici se serveru. 		
+		"""
+		result = {}
+		try:
+			section_content = self.conf.items("server")
+			for key, val in section_content:
+				result[key]=val			
+		except ConfigParser.NoSectionError:
+			raise ValueError("Config file neobsahuje sekci server")		
+		return result
 
-def get_typy_faktury_vydane():
-	return __get_section_list('typ_faktury_vydane')	
+	def get_evidence_list(self):
+		return self.get_section_list('evidence')	
 
-def get_typ_bank_dokladu():
-	return __get_section_list('typ_bank_dokladu')
+	def get_typy_faktury_prijate(self):
+		return self.get_section_list('typ_faktury_prijate')
 
-def get_typ_pohybu():
-	return __get_section_list('typ_pohybu')	
+	def get_typy_faktury_vydane(self):
+		return self.get_section_list('typ_faktury_vydane')	
 
-def get_bankovni_ucty():
-	return __get_section_list('bankovni_ucty')	
+	def get_typ_bank_dokladu(self):
+		return self.get_section_list('typ_bank_dokladu')
 
-def get_typ_polozky_vydane():
-	return __get_section_list('typ_polozky_vydane')
+	def get_typ_pohybu(self):
+		return self.get_section_list('typ_pohybu')	
 
-def get_typ_ucetni_operace():
-	return __get_section_list('typ_ucetni_operace')	
+	def get_bankovni_ucty(self):
+		return self.get_section_list('bankovni_ucty')	
+
+	def get_typ_polozky_vydane(self):
+		return self.get_section_list('typ_polozky_vydane')
+
+	def get_typ_ucetni_operace(self):
+		return self.get_section_list('typ_ucetni_operace')	
+
+
+
+class TestingConfig(Config):
+	"""
+	Pro testovani staci vytvorit instanci teto tridy.
+	"""
+
+	def __init__(self):
+		Config.__init__(self, config_name="flexipy/test_flexipy.conf")
