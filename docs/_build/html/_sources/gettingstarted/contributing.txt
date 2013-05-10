@@ -12,7 +12,7 @@ Coding style
 
 Doporučuji dodržovat `Django coding style <https://docs.djangoproject.com/en/dev/internals/contributing/writing-code/coding-style/>`_.
 
-`PEP8`_ je oficiální přiručka pro psaní Python kódu a proto doporučuji všem potenciálním přispěvate si ji alespoň zběžně pročíst.
+`PEP8`_ je oficiální přiručka pro psaní Python kódu a proto doporučuji všem potenciálním přispěvatům si ji alespoň zběžně pročíst.
 
 .. _PEP8: http://www.python.org/dev/peps/pep-0008/
 
@@ -24,14 +24,19 @@ Přídaní nové evidence
 
 Pokus chcete přidat funkcionalitu do flexipy, která bude sloužit k obsluze evidence ve Flexibee, která jesšte není zde implementovaná dodržujte prosím následující pravidla.
 
-1. Všechny funkce, které nějakým způsobem souvisí s danou evidencí umístěte do souboru <jmeno_evidence>.py. Například pro adresář je to adresar.py.
+1. Všechnu funkcionalitu, která nějakým způsobem souvisí s danou evidencí umístěte do souboru <jmeno_evidence>.py. Například pro adresář je to adresar.py.
 
-2. Snažte se maximálně využívat jiř připravených generických funckí z modulu main.py. Například pro získání instance evidence zavolejte z modulu main funkci 
-__get_evidence_item a pouze ošetřete nebo upravte věci, které vyžadujte pro danou evidenci.
+2. V tomto vytvořeném modulu vytvořte třídu, která bude mít jměno evidence například pro adresar je to Adresar. Tato třída by měla být potomkem třídy Flexipy, která 
+obsahuje obecné metody pro práci s Flexibee. Tyto metody nejsou uživatelem knihony volány a správně by ani neměl být schopen přistoupit k třídě Flexipy, ale k pouze ke konkrétním 
+potomkům jako například třída Adresar. Potomci tříy Flexipy již mají konkrétní metody přizpůsobené pro danou evidenci. Doporučuji se podívat jak je napsána třída Faktura v modulu 
+faktura.py
 
-3. Pro ošetřování chyb doporučuji používat systém, který je vidět v modulu invoice, kde se vyhazuje vyjímka FlexipyException v případě chyby nebo neočekávaného stavu. Případně do modulu exceptions přidejte vlastní vyjímku, která bude dědit FlexipyException.
+2. Snažte se maximálně využívat jiř připravených metod z modulu main.py a třídy Flexipy. Například pro získání instance evidence zavolejte z třídy Flexipy metodu  
+get_evidence_item a pouze ošetřete nebo upravte věci, které vyžadujte pro danou evidenci.
 
-4. Obecně by se dalo říci, že ideálně se stačí podívat na již implementovaný modul invoice a z něj vyjít při implementaci vlastního modulu.
+3. Pro ošetřování chyb doporučuji používat systém, který je vidět v modulu faktura, kde se vyhazuje vyjímka FlexipyException v případě chyby nebo neočekávaného stavu. Případně do modulu exceptions přidejte vlastní vyjímku, která bude dědit od FlexipyException.
+
+4. Obecně by se dalo říci, že ideálně se stačí podívat na již implementovaný modul faktura a z něj vyjít při implementaci vlastního modulu.
 
 
 .. _contributing-testing:
@@ -42,3 +47,5 @@ Testování
 Flexipy využívá `pytest <http://pytest.org/>`_ proto doporučuji projít si dokumentaci, která je na oficiálních stránkách projektu. Testy jsou izolovány pro každý modul, tzn. že pro modul invoice je testovací modul test_invoice. Pro psaní testů lze z výhodou použít knihovnu requests, kterou flexipy využívá. Pro spouštění testů je vytvořen paver task, takže stačí zavolat z rootu projektu příkaz::
 
 	$ paver test
+
+Doporučuji pro testy použít jiný konfigurační soubor, například skrze třídu TestingConfig v modulu config. Ta defaultně využívá konfigurační soubor testing_flexipy.conf. Ttto samozřejmě můžete jednoduše změnit. 

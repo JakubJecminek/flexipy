@@ -57,11 +57,19 @@ Flexipy je navrhnuto tak, aby bylo maximálně konfigurovatelné a přizpůsobí
 </div>
 <div class="section" id="nastaveni-konfiguracniho-souboru-flexipy">
 <span id="config-file"></span><h1>Nastavení konfiguračního souboru flexipy<a class="headerlink" href="#nastaveni-konfiguracniho-souboru-flexipy" title="Permalink to this headline">¶</a></h1>
-<p>Flexipy využívá konfigruační soubor flexipy.conf, který obsahuje všechna nastavení potřebná pro správnou práci flexipy. K tomuto
-konfiguračnímu souboru knihovna přistupuje skrze modul config.py, který využívá standartní třídu ConfigParser pro práci s flexipy.conf.</p>
-<p>Nastavení odpovídají demo instalaci Flexibee serveru na demo.flexibee.eu. Je nutné před samotným použitím flexipy si uprvit ve
-složce flexipy/ soubor flexipy.conf takovým způsobem, kdy pouze upravíte hodnoty, které potřebujete
-dle Vaší situace. To můžete provést buď tak, že přímo editujete danný soubor(který je ve formátu INI odpovídajícího RFC 822), nebo můžete
+<p>Flexipy využívá defaultně konfigruační soubor flexipy.conf, který obsahuje všechna nastavení potřebná pro správnou práci flexipy. K tomuto
+konfiguračnímu souboru knihovna přistupuje skrze třídu Config z modulu config.py, který využívá standartní třídu ConfigParser pro práci s flexipy.conf.
+Flexipy defaultně obsahuje ještě další konfigurační soubory, například test_flexipy.conf je konfigurační soubor určen pro testování. demo_flexibee.conf obsahuje
+nastavení pro komunikaci s demo isntalací Flexibee na serveru demo.flexibee.eu. Jakékoliv třídě, která reprezentuje nějakou evidenci můžete při inicializaci vložit
+svoji konfiguraci. Stačí pokud vytvoříte podle defaultního konfiguračního souboru svoji konfiguraci. Můžete tajé vytvořit potomka třídy Config jakým je například třída TestingConfig.
+Pro takto vzniklého potomka si můžete definovat vlastní metody, které potřebujete nebo pouze překrýt již existující metody z předka. Objekt zakto vzniklé třídy poté vložte jako argument konstruktoru dané třídy.:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">flexipy</span> <span class="kn">import</span> <span class="n">config</span><span class="p">,</span> <span class="n">Faktura</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">my_conf</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">TestingConfig</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">faktura</span> <span class="o">=</span> <span class="n">Faktura</span><span class="p">(</span><span class="n">my_conf</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Konstruktor třídy Config obsahuje nepovinný parametr, který specifikujeme cestu ke konfiguračnímu souboru. Defaultně je vždy nastaven na konfigurační soubor, který je pro danou třídu jako default. Například pro rodičovskou(defaultní) třídu Config je to flexipy.cong pro TestingConfig je to test_flexipy.conf.</p>
+<p>Nastavení ve flexipy.conf odpovídají instalaci Flexibee serveru na mém stroji, proto je nutné si vytvořit vlastní konfigurační soubor dle Vaší situace. To můžete provést buď tak, že přímo editujete danný soubor(který je ve formátu INI odpovídajícího RFC 822), nebo můžete
 využít metod třídy ConfigParser a měnit flexipz.conf přímo z shellu:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">ConfigParser</span> <span class="kn">import</span> <span class="n">SafeConfigParser</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pkg_resources</span> <span class="kn">import</span> <span class="n">Requirement</span><span class="p">,</span> <span class="n">resource_filename</span>
@@ -77,21 +85,25 @@ využít metod třídy ConfigParser a měnit flexipz.conf přímo z shellu:</p>
 </div>
 <div class="section" id="zakladni-pouziti-knihovny">
 <h1>Základní použití knihovny<a class="headerlink" href="#zakladni-pouziti-knihovny" title="Permalink to this headline">¶</a></h1>
-<p>Knihovna je strukturovaná podobným způsobem jako známá knihovna requests. Pro práci s flexipy tedy stačí pouze
-importovat knihovnu a dále pracovat už jen s api:</p>
+<p>Knihovna je strukturovaná způsobem kdy každá evidence ve Flexibee je reprezentována třídou, která zapouzdřuje funkcionalitu pro danou evidenci. Pro práci s flexipy tedy stačí pouze
+importovat knihovnu a dále pracovat už jen s třídami, které jsou definovány v api:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">flexipy</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">flexipy</span><span class="o">.</span><span class="n">delete_vydana_faktura</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">faktura</span> <span class="o">=</span> <span class="n">flexipy</span><span class="o">.</span><span class="n">Faktura</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">faktura</span><span class="o">.</span><span class="n">delete_vydana_faktura</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Kompletní api se nachází v api.py.</p>
+<p>Kompletní seznam tříd, které momentálně flexipy nabízí se nachází v api.py.</p>
 </div>
 <div class="section" id="system-vnitrnich-vazeb">
 <h1>Systém vnitřních vazeb<a class="headerlink" href="#system-vnitrnich-vazeb" title="Permalink to this headline">¶</a></h1>
-<p>Systém vniřních vazeb, který používá Flexibee je podrobně vysvětlen v oficiální <cite>http://www.flexibee.eu/api/doc/ref/internal-dependencies dokumentaci</cite>. V podstatě jde o to, že pokud například vytvářím fakturu, tak musím uvést informace o odběrateli(jméno firmy, adresa atd.). Flexibee ale umožňuje tento proces zjednodušit kdy si firmu zadefiunuju v adresáři a přiřadím ji nějaký unikátní kód. Poté pouze při vytváření faktury uvedu &#8216;firma&#8217;:&#8217;code:&lt;kodirmy&gt;&#8217; a ostatni polozky se automaticky doplni z adresare. Takových to položek je ve Flexibee více a snahou při vývoji flexipy bylo začlenit toto usnadnění do knihovny. Proto v flexipy.conf se nachází několik listů, které je třeba doplnit o Vámi vytvořené typy dokladů, firem atd. Komentáře nad každým tímto seznamem Vám napoví o kterou položku se jedná a jak ji vyplnit. V config-example.py se nachází pouze u každé položky defaultní hodnoty které najdete v čisté instalaci Flexibee serveru(například pouze základní faktura), zbytek je třeba doplnit dle Vašich konkrétních potřeb a stavu Flexibee.</p>
+<p>Systém vniřních vazeb, který používá Flexibee je podrobně vysvětlen v oficiální <cite>http://www.flexibee.eu/api/doc/ref/internal-dependencies dokumentaci</cite>. V podstatě jde o to, že pokud například vytvářím fakturu, tak musím uvést informace o odběrateli(jméno firmy, adresa atd.). Flexibee ale umožňuje tento proces zjednodušit kdy si firmu zadefiunuju v adresáři a přiřadím ji nějaký unikátní kód. Poté pouze při vytváření faktury uvedu &#8216;firma&#8217;:&#8217;code:&lt;kodfirmy&gt;&#8217; a ostatní položky se automaticky doplní z adresáře. Takových to položek je ve Flexibee více a snahou při vývoji flexipy bylo začlenit toto usnadnění do knihovny. Proto v flexipy.conf se nachází několik listů, které je třeba doplnit o Vámi vytvořené typy dokladů, firem atd. Komentáře nad každým tímto seznamem Vám napoví o kterou položku se jedná a jak ji vyplnit. V config-example.py se nachází pouze u každé položky defaultní hodnoty které najdete v čisté instalaci Flexibee serveru(například pouze základní faktura), zbytek je třeba doplnit dle Vašich konkrétních potřeb a stavu Flexibee.</p>
 <p>Jak použit config soubor:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">flexipy</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">flexipy</span> <span class="kn">import</span> <span class="n">config</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">flexipy</span><span class="o">.</span><span class="n">create_vydana_faktura</span><span class="p">(</span><span class="n">kod</span><span class="o">=</span><span class="s">&#39;flex11&#39;</span><span class="p">,</span> <span class="n">var_sym</span><span class="o">=</span><span class="s">&#39;11235484&#39;</span><span class="p">,</span> <span class="n">datum_vyst</span><span class="o">=</span><span class="s">&#39;2013-02-28&#39;</span><span class="p">,</span> <span class="n">zdroj_pro_sklad</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">typ_dokl</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">get_typy_faktury_vydane</span><span class="p">()[</span><span class="mi">0</span><span class="p">],</span> <span class="n">dalsi_param</span><span class="o">=</span><span class="n">dalsi_param</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">Config</span><span class="p">(</span><span class="s">&#39;mojeKonfigurace.conf&#39;</span><span class="p">)</span> <span class="c">#vlozim vlastni conf soubor</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">faktura</span> <span class="o">=</span> <span class="n">flexipy</span><span class="o">.</span><span class="n">Faktura</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="c">#objekt faktura nainicializuji svym konfiguracnim souborem</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c">#faktura nyni obsahuje instanci tridy Config a muzu k ni pristupovat prez faktura.conf</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">faktura</span><span class="o">.</span><span class="n">create_vydana_faktura</span><span class="p">(</span><span class="n">kod</span><span class="o">=</span><span class="s">&#39;flex11&#39;</span><span class="p">,</span> <span class="n">var_sym</span><span class="o">=</span><span class="s">&#39;11235484&#39;</span><span class="p">,</span> <span class="n">datum_vyst</span><span class="o">=</span><span class="s">&#39;2013-02-28&#39;</span><span class="p">,</span> <span class="n">zdroj_pro_sklad</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">typ_dokl</span><span class="o">=</span><span class="n">faktura</span><span class="o">.</span><span class="n">conf</span><span class="o">.</span><span class="n">get_typy_faktury_vydane</span><span class="p">()[</span><span class="mi">0</span><span class="p">],</span> <span class="n">dalsi_param</span><span class="o">=</span><span class="n">dalsi_param</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>

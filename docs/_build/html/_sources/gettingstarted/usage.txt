@@ -10,12 +10,20 @@ Flexipy je navrhnuto tak, aby bylo maximálně konfigurovatelné a přizpůsobí
 Nastavení konfiguračního souboru flexipy
 ========================================
 
-Flexipy využívá konfigruační soubor flexipy.conf, který obsahuje všechna nastavení potřebná pro správnou práci flexipy. K tomuto 
-konfiguračnímu souboru knihovna přistupuje skrze modul config.py, který využívá standartní třídu ConfigParser pro práci s flexipy.conf.
+Flexipy využívá defaultně konfigruační soubor flexipy.conf, který obsahuje všechna nastavení potřebná pro správnou práci flexipy. K tomuto 
+konfiguračnímu souboru knihovna přistupuje skrze třídu Config z modulu config.py, který využívá standartní třídu ConfigParser pro práci s flexipy.conf.
+Flexipy defaultně obsahuje ještě další konfigurační soubory, například test_flexipy.conf je konfigurační soubor určen pro testování. demo_flexibee.conf obsahuje 
+nastavení pro komunikaci s demo isntalací Flexibee na serveru demo.flexibee.eu. Jakékoliv třídě, která reprezentuje nějakou evidenci můžete při inicializaci vložit 
+svoji konfiguraci. Stačí pokud vytvoříte podle defaultního konfiguračního souboru svoji konfiguraci. Můžete tajé vytvořit potomka třídy Config jakým je například třída TestingConfig. 
+Pro takto vzniklého potomka si můžete definovat vlastní metody, které potřebujete nebo pouze překrýt již existující metody z předka. Objekt zakto vzniklé třídy poté vložte jako argument konstruktoru dané třídy.::
+	
+	>>> from flexipy import config, Faktura
+	>>> my_conf = config.TestingConfig()
+	>>> faktura = Faktura(my_conf)
+
+Konstruktor třídy Config obsahuje nepovinný parametr, který specifikujeme cestu ke konfiguračnímu souboru. Defaultně je vždy nastaven na konfigurační soubor, který je pro danou třídu jako default. Například pro rodičovskou(defaultní) třídu Config je to flexipy.cong pro TestingConfig je to test_flexipy.conf. 
  
-Nastavení odpovídají demo instalaci Flexibee serveru na demo.flexibee.eu. Je nutné před samotným použitím flexipy si uprvit ve
-složce flexipy/ soubor flexipy.conf takovým způsobem, kdy pouze upravíte hodnoty, které potřebujete 
-dle Vaší situace. To můžete provést buď tak, že přímo editujete danný soubor(který je ve formátu INI odpovídajícího RFC 822), nebo můžete 
+Nastavení ve flexipy.conf odpovídají instalaci Flexibee serveru na mém stroji, proto je nutné si vytvořit vlastní konfigurační soubor dle Vaší situace. To můžete provést buď tak, že přímo editujete danný soubor(který je ve formátu INI odpovídajícího RFC 822), nebo můžete 
 využít metod třídy ConfigParser a měnit flexipz.conf přímo z shellu::
 	
 	>>> from ConfigParser import SafeConfigParser
@@ -32,22 +40,26 @@ využít metod třídy ConfigParser a měnit flexipz.conf přímo z shellu::
 Základní použití knihovny
 =========================
 
-Knihovna je strukturovaná podobným způsobem jako známá knihovna requests. Pro práci s flexipy tedy stačí pouze 
-importovat knihovnu a dále pracovat už jen s api::
+Knihovna je strukturovaná způsobem kdy každá evidence ve Flexibee je reprezentována třídou, která zapouzdřuje funkcionalitu pro danou evidenci. Pro práci s flexipy tedy stačí pouze 
+importovat knihovnu a dále pracovat už jen s třídami, které jsou definovány v api::
 
 	>>> import flexipy
-	>>> flexipy.delete_vydana_faktura(id=1)
+	>>> faktura = flexipy.Faktura()
+	>>> faktura.delete_vydana_faktura(id=1)
 
-Kompletní api se nachází v api.py. 	
+Kompletní seznam tříd, které momentálně flexipy nabízí se nachází v api.py. 	
 
 Systém vnitřních vazeb
 ======================
 
-Systém vniřních vazeb, který používá Flexibee je podrobně vysvětlen v oficiální `http://www.flexibee.eu/api/doc/ref/internal-dependencies dokumentaci`. V podstatě jde o to, že pokud například vytvářím fakturu, tak musím uvést informace o odběrateli(jméno firmy, adresa atd.). Flexibee ale umožňuje tento proces zjednodušit kdy si firmu zadefiunuju v adresáři a přiřadím ji nějaký unikátní kód. Poté pouze při vytváření faktury uvedu 'firma':'code:<kodirmy>' a ostatni polozky se automaticky doplni z adresare. Takových to položek je ve Flexibee více a snahou při vývoji flexipy bylo začlenit toto usnadnění do knihovny. Proto v flexipy.conf se nachází několik listů, které je třeba doplnit o Vámi vytvořené typy dokladů, firem atd. Komentáře nad každým tímto seznamem Vám napoví o kterou položku se jedná a jak ji vyplnit. V config-example.py se nachází pouze u každé položky defaultní hodnoty které najdete v čisté instalaci Flexibee serveru(například pouze základní faktura), zbytek je třeba doplnit dle Vašich konkrétních potřeb a stavu Flexibee.
+Systém vniřních vazeb, který používá Flexibee je podrobně vysvětlen v oficiální `http://www.flexibee.eu/api/doc/ref/internal-dependencies dokumentaci`. V podstatě jde o to, že pokud například vytvářím fakturu, tak musím uvést informace o odběrateli(jméno firmy, adresa atd.). Flexibee ale umožňuje tento proces zjednodušit kdy si firmu zadefiunuju v adresáři a přiřadím ji nějaký unikátní kód. Poté pouze při vytváření faktury uvedu 'firma':'code:<kodfirmy>' a ostatní položky se automaticky doplní z adresáře. Takových to položek je ve Flexibee více a snahou při vývoji flexipy bylo začlenit toto usnadnění do knihovny. Proto v flexipy.conf se nachází několik listů, které je třeba doplnit o Vámi vytvořené typy dokladů, firem atd. Komentáře nad každým tímto seznamem Vám napoví o kterou položku se jedná a jak ji vyplnit. V config-example.py se nachází pouze u každé položky defaultní hodnoty které najdete v čisté instalaci Flexibee serveru(například pouze základní faktura), zbytek je třeba doplnit dle Vašich konkrétních potřeb a stavu Flexibee.
 
 Jak použit config soubor::
 
 
 	>>> import flexipy
 	>>> from flexipy import config
-	>>> flexipy.create_vydana_faktura(kod='flex11', var_sym='11235484', datum_vyst='2013-02-28', zdroj_pro_sklad=False, typ_dokl=config.get_typy_faktury_vydane()[0], dalsi_param=dalsi_param)
+	>>> c = config.Config('mojeKonfigurace.conf') #vlozim vlastni conf soubor
+	>>> faktura = flexipy.Faktura(c) #objekt faktura nainicializuji svym konfiguracnim souborem
+	>>> #faktura nyni obsahuje instanci tridy Config a muzu k ni pristupovat prez faktura.conf
+	>>> faktura.create_vydana_faktura(kod='flex11', var_sym='11235484', datum_vyst='2013-02-28', zdroj_pro_sklad=False, typ_dokl=faktura.conf.get_typy_faktury_vydane()[0], dalsi_param=dalsi_param)

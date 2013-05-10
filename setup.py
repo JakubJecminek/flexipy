@@ -9,7 +9,7 @@ setup(
     author='Jakub Jecminek',
     author_email='jecmijak@gmail.com',
     keywords='flexibee accounting invoices',
-    url='https://www.assembla.com/code/flexipy/git/nodes',
+    url='https://github.com/JakubJecminek/flexipy',
     include_package_data=True,
     package_data={'flexipy':['flexipy.conf','test_flexipy.conf','demo_flexibee.conf']},
     install_requires=(
@@ -19,7 +19,7 @@ setup(
      ),
 
     classifiers=[
-        'Development Status :: Alpha',
+        'Development Status :: 3 - Alpha',
         'Intended Audience :: Developers',        
         'Operating System :: OS Independent',
         'Programming Language :: Python :: 2',        

@@ -106,14 +106,14 @@ využíváte):</p>
 <div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>python setup.py develop
 </pre></div>
 </div>
-<p>A nainstalujte další závislosti:</p>
+<p>A nainstalujte další závislosti(tyto závislosti nejsou nutné pro používání knihovny ale jsou určeny pro vývoj a testování a dokumentaci):</p>
 <div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>paver install_dependencies
 </pre></div>
 </div>
 </div>
 <div class="section" id="update-your-development-settings">
 <h2>4. Update your development settings<a class="headerlink" href="#update-your-development-settings" title="Permalink to this headline">¶</a></h2>
-<p>Ve složce flexipy se nachazi soubor flexipy.conf. Tento soubor je slouží konfigurační soubor, je nutné soubor upravit dle Vaších potřeb, defaultně je tento soubor nastaven na demo instalaci Flexibee. Konfigurační soubor se dá upravit buď textovým editorem(je ve stadartním formátu ini), nebo lze interaktivně upravit pomocí metod, které nabízí třída ConfigParser. Více se dočtete v <a class="reference internal" href="usage.html#config-file"><em>Nastavení konfiguračního souboru flexipy</em></a>.
+<p>Ve složce flexipy se nachazi soubor flexipy.conf. Tento soubor slouží jako ukázkový a zároveň defaultní konfigurační soubor(pokud nespecifikujete jinak načte se tento soubor), tento soubor si skopírujte a vytvořte podle něj svůj vlastní konfigurační soubor dle svých potřeb. Konfigurační soubor se dá upravit buď textovým editorem(je ve stadartním formátu ini), nebo lze interaktivně upravit pomocí metod, které nabízí třída ConfigParser. Více se dočtete v <a class="reference internal" href="usage.html#config-file"><em>Nastavení konfiguračního souboru flexipy</em></a>.
 Především je nutné nastavit proměnné host, firma, username a password, díky tomu bude knihovna schopn komunikovat s Vaším Flexibee serverem.</p>
 </div>
 <div class="section" id="run-the-tests">

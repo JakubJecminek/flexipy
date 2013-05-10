@@ -34,18 +34,3 @@ Getting started
   * :ref:`Testování <contributing-testing>`
 
 
-Full contents
-=============
-
-.. toctree::
-    :maxdepth: 1
-
-    index
-    about
-
-.. toctree::
-    :maxdepth: 3
-
-    overview/index
-    gettingstarted/index
-    howto/index
