@@ -88,3 +88,11 @@ class TestingConfig(Config):
 
 	def __init__(self):
 		Config.__init__(self, config_name="flexipy/test_flexipy.conf")
+
+class DemoConfig(Config):
+	"""
+	Pouzijte tento config pro praci s demo instalaci Flexibee na demo.flexibee.eu
+	Vhodne pro testovani nejnovejsich verzi systemu Flexibee.
+	"""		
+	def __init__(self):
+		Config.__init__(self, config_name="flexipy/demo_flexibee.conf")	
