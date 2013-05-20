@@ -79,6 +79,12 @@ class Config(object):
 	def get_typ_ucetni_operace(self):
 		return self.get_section_list('typ_ucetni_operace')	
 
+	def get_typ_pokladni_pohyb(self):
+		return self.get_section_list('typ_pokladni_pohyb')		
+
+	def get_typ_pokladna(self):
+		return self.get_section_list('typ_pokladna')				
+
 
 
 class TestingConfig(Config):

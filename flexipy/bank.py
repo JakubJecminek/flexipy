@@ -11,7 +11,7 @@ class Banka(Flexipy):
 	def __init__(self, conf=Config()):
 		Flexipy.__init__(self, config=conf)
 
-	def create_bank_doklad(self, kod, dat_vyst, typ_dokl=None, typ_pohybu=None, 
+	def create_bank_doklad(self, kod, datum_vyst, typ_dokl=None, typ_pohybu=None, 
 		bank_ucet=None, dalsi_param=None):
 		"""Metoda vytvori novy bankovni doklad.
 		:param kod: cislo dokladu
@@ -48,7 +48,7 @@ class Banka(Flexipy):
 		return self.get_evidence_item(id, 'banka', detail)
 
 	def get_bank_doklad_by_code(self, code, detail='summary'):
-		return self.get_evidence_item_by_code(code, 'banka', detail)		
+		return self.get_evidence_item_by_code(str(code), 'banka', detail)		
 
 	def delete_bank_doklad(self, id):
 		self.delete_item(id, 'banka')

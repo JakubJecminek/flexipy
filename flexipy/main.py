@@ -228,7 +228,7 @@ class Flexipy(object):
 		:param complete: if True return dict with all params
 		"""
 		if evidence not in self.conf.get_evidence_list():
-			raise ValueError('evidence arg is valid only for' +str(self.conf.get_evidence_list().evidence_list))
+			raise ValueError('evidence arg is valid only for' +str(self.conf.get_evidence_list()))
 		#start parsing properties
 		property_list = self.get_evidence_property_list(evidence)
 		result={}
